@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 
+import com.baidu.mapapi.SDKInitializer;
 import com.toprunner.ubii.toprunner.R;
 import com.toprunner.ubii.toprunner.base.BaseFragment;
 import com.toprunner.ubii.toprunner.factory.SporrtdetailsFragmentFactory;

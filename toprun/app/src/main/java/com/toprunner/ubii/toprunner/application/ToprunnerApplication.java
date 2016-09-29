@@ -4,6 +4,8 @@ import android.app.Application;
 import android.content.Context;
 import android.os.Handler;
 
+import com.baidu.mapapi.SDKInitializer;
+
 /**
  * Created by ${赵鼎} on 2016/9/19 0019.
  */
@@ -14,6 +16,7 @@ public class ToprunnerApplication extends Application {
     private static Thread mainThread;
     @Override
     public void onCreate() {
+        SDKInitializer.initialize(getApplicationContext());
         super.onCreate();
         //Handler对象
         handler = new Handler();

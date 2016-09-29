@@ -19,12 +19,13 @@ import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.toprunner.ubii.toprunner.base.BaseActivity;
 import com.toprunner.ubii.toprunner.utils.FastBlur;
 import com.toprunner.ubii.toprunner.R;
 import com.toprunner.ubii.toprunner.running.RunActivity;
 
 
-public class choose_run extends Activity implements View.OnClickListener {
+public class choose_run extends BaseActivity implements View.OnClickListener {
     private ImageView image,v1,v4,s1,s4;
     public Button quweipao,shiwaipao,backbutton;
 

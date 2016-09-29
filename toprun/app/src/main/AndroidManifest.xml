@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.toprunner.ubii.toprunner"
-          xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.toprunner.ubii.toprunner">
 
-    <uses-permission android:name="android.permission.VIBRATE"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS"/>
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     >
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-    <uses-permission android:name="android.permission.BLUETOOTH"/>
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
 
     <receiver android:name=".BluetoothConnectActivityReceiver">
         <intent-filter>
-            <action android:name="android.bluetooth.device.action.PAIRING_REQUEST"/>
+            <action android:name="android.bluetooth.device.action.PAIRING_REQUEST" />
         </intent-filter>
     </receiver>
 
@@ -37,34 +37,30 @@
         <!-- BaiduSDK Key -->
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="i7SdcMR6fnRz0V2xVodIsLmek94ZndxU"/>
+            android:value="ZNbwRnpZfuTiAmt1Mkn5HSZzFIvRb5ES" />
 
         <!-- 定位服务 -->
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
-            android:process=":remote"/>
+            android:process=":remote" />
 
-        <activity android:name=".activivty.MainActivity">
-
-        </activity>
-        <activity android:name=".activivty.DengluActivity"/>
-        <activity android:name=".activivty.User"/>
+        <activity android:name=".activivty.MainActivity"></activity>
+        <activity android:name=".activivty.DengluActivity" />
+        <activity android:name=".activivty.User" />
         <activity
             android:name=".activivty.choose_run"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
-        <activity android:name=".activivty.run"/>
-
-
-
-        <activity android:name=".running.RunActivity"/>
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity android:name=".activivty.run" />
+        <activity android:name=".running.RunActivity" />
         <activity android:name=".activivty.SportdetailsActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activivty.SplashActivity"></activity>
     </application>
 
 </manifest>

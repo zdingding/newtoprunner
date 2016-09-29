@@ -123,11 +123,9 @@ public class run extends AppCompatActivity implements twobutton.onTestListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        SDKInitializer.initialize(getApplicationContext());
         /* 初始化百度地图SDK
          必须在setContentView() 之前调用*/
-        SDKInitializer.initialize(getApplicationContext());
-
         setContentView(R.layout.fragment_run);
 
         Message msg = new Message();

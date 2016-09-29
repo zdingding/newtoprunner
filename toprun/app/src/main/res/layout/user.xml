@@ -54,7 +54,6 @@
                 android:layout_width="65dp"
                 android:layout_height="65dp"
                 android:layout_gravity="center"
-                android:singleLine="false"
                 android:text="Start"
                 android:id="@+id/start"
                 android:textSize="15sp"
