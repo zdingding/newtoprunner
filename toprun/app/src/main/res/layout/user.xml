@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="1"
+    android:id="@+id/userActivity"
+    android:background="#21242E"
+    >
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_top"
+        android:layout_height="48dp"
+        android:layout_width="match_parent"
+        android:minHeight="?attr/actionBarSize">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="用户"
+            android:layout_gravity="center"
+            android:textSize="20dp"
+            android:textColor="#f4f4f4"
+            android:id="@+id/toolbar_title" />
+
+    </android.support.v7.widget.Toolbar>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/context">
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/id_title"
+            android:layout_weight="0.8">
+
+
+        </FrameLayout>
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/id_bottom"
+            android:layout_gravity="center_horizontal|bottom">
+            <ImageView
+                android:background="#6C718D"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="center_horizontal|bottom"
+                android:layout_marginBottom="0dp"
+                />
+
+            <Button
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:layout_gravity="center"
+                android:singleLine="false"
+                android:text="Start"
+                android:id="@+id/start"
+                android:textSize="15sp"
+                android:textColor="#ffffff"
+                android:background="@mipmap/start01"/>
+
+            <Button
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:id="@+id/discover"
+                android:background="@mipmap/faxian"
+                android:layout_gravity="right|bottom"
+                android:layout_marginRight="30dp"
+                android:layout_marginBottom="5dp"/>
+
+            <Button
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:id="@+id/ME"
+                android:background="@mipmap/wo01"
+                android:layout_gravity="left|bottom"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="30dp" />
+
+
+
+        </FrameLayout>
+    </FrameLayout>
+
+</LinearLayout>

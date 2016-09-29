@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#2c323d"
+    android:orientation="vertical">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_top"
+        android:layout_height="50dp"
+        android:layout_width="match_parent"
+        android:minHeight="?attr/actionBarSize"
+        android:background="#21242E">
+          <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+              android:orientation="horizontal">
+            <Button
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:text="＜"
+                android:textSize="50dp"
+                android:background="#21242E"
+                android:textColor="#ffff"
+                android:layout_gravity="center" />
+            <Button
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@mipmap/iconcamera"
+                android:layout_gravity="center"
+                android:layout_marginLeft="105dp" />
+            <Button
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@mipmap/iconshare"
+                android:layout_gravity="center"
+                android:layout_marginLeft="105dp" />
+        </LinearLayout>
+
+    </android.support.v7.widget.Toolbar>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <Button
+            android:layout_width="150px"
+            android:layout_height="150px"
+            android:background="@mipmap/touxiang"
+            android:enabled="false"
+            android:layout_gravity="center_horizontal" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="myname"
+            android:textColor="#fff"
+            android:textSize="36px"
+            android:layout_gravity="center_horizontal" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2016-02-13  15:04"
+            android:textColor="#666666"
+            android:textSize="24px"
+            android:layout_gravity="center_horizontal" />
+    </LinearLayout>
+</LinearLayout>

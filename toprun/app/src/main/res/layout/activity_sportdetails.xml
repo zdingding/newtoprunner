@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/activity_sportdetails"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.toprunner.ubii.toprunner.activivty.SportdetailsActivity">
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+    </android.support.v4.view.ViewPager>
+
+    <RadioGroup
+        android:id="@+id/rg_content_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/sportstrack"
+            style="@style/bottom_style_tag"
+            android:layout_height="wrap_content"
+            android:text="运动轨迹"/>
+
+        <RadioButton
+            android:id="@+id/detailsfragment"
+            style="@style/bottom_style_tag"
+            android:text="记录详情"/>
+
+        <RadioButton
+            android:id="@+id/roadfragment"
+            style="@style/bottom_style_tag"
+            android:text="路段信息"/>
+
+        <RadioButton
+            android:id="@+id/chartfragment"
+            style="@style/bottom_style_tag"
+            android:text="详细图表"/>
+
+    </RadioGroup>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="3dp">
+
+        <ImageView
+            android:id="@+id/id_iv_tabline"
+            android:layout_width="100dp"
+            android:layout_height="3dp"
+            android:background="#943A0A"/>
+    </LinearLayout>
+</LinearLayout>

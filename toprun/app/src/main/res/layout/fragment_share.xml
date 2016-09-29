@@ -1,0 +1,216 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.Share"
+    android:orientation="vertical"
+    >
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_top"
+        android:layout_height="65dp"
+        android:layout_width="match_parent"
+        android:minHeight="?attr/actionBarSize"
+        android:background="#21242E">
+
+
+
+    </android.support.v7.widget.Toolbar>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="121dp"
+                android:src="@mipmap/sharehengfu"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="56px"
+                android:text="时间"
+                android:textColor="#788394"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="40dp"
+                android:layout_marginTop="15dp"
+                android:id="@+id/textView21" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="70px"
+                android:text="00:37:25"
+                android:layout_below="@+id/textView21"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="8dp"
+                android:id="@+id/textView22" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="最慢 8'09''"
+                android:textSize="45px"
+                android:layout_below="@+id/textView22"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="13dp"
+                android:id="@+id/textView24" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="平均配速"
+                android:textColor="#788394"
+                android:textSize="56px"
+                android:layout_above="@+id/textView22"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/textView23" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="70px"
+                android:text="7' 36''"
+                android:id="@+id/run_speed"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="距离"
+                android:textSize="56px"
+                android:textColor="#788394"
+                android:layout_alignTop="@+id/textView23"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="40dp"
+                android:layout_marginEnd="38dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5.12KM"
+                android:textSize="70px"
+                android:id="@+id/run_distance"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="16dp"
+                android:layout_marginEnd="16dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="最快 5'12''"
+                android:textSize="45px"
+                android:layout_alignTop="@+id/textView24"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="10dp" />
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="29dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="5dp">
+            <ImageView
+                android:layout_width="157dp"
+                android:layout_height="25dp"
+                android:src="@mipmap/time"
+                android:layout_alignParentTop="false"
+                android:layout_alignParentLeft="false"
+                android:layout_alignParentStart="false"
+                android:layout_gravity="center_horizontal|top"
+                android:id="@+id/imageView14" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" 7月13日 6:35 "
+                android:textSize="55px"
+                android:layout_marginLeft="5dp"
+                android:id="@+id/textView25" />
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@mipmap/logox"
+                android:layout_alignParentTop="true"
+                android:layout_alignRight="@+id/imageView14"
+                android:layout_alignEnd="@+id/imageView14" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="260dp"
+            android:layout_height="130dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="50dp"
+            android:background="#fff">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="分享到"
+                android:textSize="50px"
+                android:layout_marginTop="20px"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/textView26" />
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@mipmap/iconshare02"
+                android:layout_alignTop="@+id/imageView15"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="20dp"
+                android:id="@+id/imageView16" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="微信好友"
+                android:layout_below="@+id/imageView16"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="20px"
+                android:layout_marginLeft="10dp"
+                android:id="@+id/textView27" />
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@mipmap/iconshare03"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/imageView15" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="40px"
+                android:text="朋友圈"
+                android:layout_alignTop="@+id/textView27"
+                android:layout_alignLeft="@+id/textView26"
+                android:layout_alignStart="@+id/textView26"
+                android:layout_marginLeft="5dp"
+                android:id="@+id/textView28" />
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@mipmap/iconshare01"
+                android:layout_alignTop="@+id/imageView15"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="20dp"
+                android:id="@+id/imageView17" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="领跑圈"
+                android:layout_alignTop="@+id/textView28"
+                android:layout_alignLeft="@+id/imageView17"
+                android:layout_alignStart="@+id/imageView17" />
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>
