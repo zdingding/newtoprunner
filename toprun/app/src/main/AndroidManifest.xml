@@ -45,7 +45,7 @@
             android:enabled="true"
             android:process=":remote" />
 
-        <activity android:name=".activivty.MainActivity"></activity>
+        <activity android:name=".activivty.MainActivity" />
         <activity android:name=".activivty.DengluActivity" />
         <activity android:name=".activivty.User" />
         <activity
@@ -60,7 +60,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activivty.SplashActivity"></activity>
+        <activity android:name=".activivty.SplashActivity" >
+
+        </activity>
+        <activity android:name=".activivty.GuideActivity"></activity>
     </application>
 
 </manifest>

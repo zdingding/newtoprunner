@@ -100,6 +100,15 @@ public class SportstrackFragment extends BaseFragment {
         option.setOpenGps(true);
         option.setScanSpan(1000);
         mlocationClient.setLocOption(option);
+        //
+        myOrientationListener = new MyOrientationListener(UIUtils.getContext());
+        myOrientationListener.setOnOrientationListener(new MyOrientationListener.OnOrientationListener() {
+            @Override
+            public void onOrientationChanged(float x) {
+                mCurrentX = x;
+            }
+        });
+
     }
 
     @Override
@@ -114,7 +123,7 @@ public class SportstrackFragment extends BaseFragment {
         if (!mlocationClient.isStarted())
             mlocationClient.start();
         // 开启方向传感器
-       // myOrientationListener.start();
+        myOrientationListener.start();
     }
 
     @Override
@@ -136,7 +145,7 @@ public class SportstrackFragment extends BaseFragment {
         mBaiduMap.setMyLocationEnabled(false);
         mlocationClient.stop();
         // 停止方向传感器
-     //   myOrientationListener.stop();
+       myOrientationListener.stop();
     }
 
     @Override
@@ -148,7 +157,7 @@ public class SportstrackFragment extends BaseFragment {
         @Override
         public void onReceiveLocation(BDLocation bdLocation) {
             MyLocationData data = new MyLocationData.Builder()//
-                //    .direction(mCurrentX)//
+                    .direction(mCurrentX)//
                     .accuracy(bdLocation.getRadius())//
                     .latitude(bdLocation.getLatitude())//
                     .longitude(bdLocation.getLongitude())//

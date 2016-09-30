@@ -16,6 +16,7 @@ import com.toprunner.ubii.toprunner.base.BaseFragment;
 import com.toprunner.ubii.toprunner.factory.SporrtdetailsFragmentFactory;
 import com.toprunner.ubii.toprunner.utils.ScreenUtils;
 import com.toprunner.ubii.toprunner.utils.UIUtils;
+import com.toprunner.ubii.toprunner.view.NoScrollViewPager;
 
 public class SportdetailsActivity extends AppCompatActivity {
     private ViewPager viewpager;

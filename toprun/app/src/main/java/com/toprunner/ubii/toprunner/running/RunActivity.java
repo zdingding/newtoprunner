@@ -35,7 +35,7 @@ import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.map.PolylineOptions;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.utils.DistanceUtil;
-import com.toprunner.ubii.toprunner.Log4j;
+import com.toprunner.ubii.toprunner.utils.Log4j;
 import com.toprunner.ubii.toprunner.R;
 
 import org.apache.log4j.Logger;

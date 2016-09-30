@@ -5,6 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.toprunner.ubii.toprunner.R;
+import com.toprunner.ubii.toprunner.common.Constants;
+import com.toprunner.ubii.toprunner.common.PreferencesManager;
+import com.toprunner.ubii.toprunner.utils.UIUtils;
 
 public class SplashActivity extends AppCompatActivity {
     private final String tag = SplashActivity.class.getSimpleName();
@@ -21,8 +24,17 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void intoMainPage() {
-
-
-
+        boolean isFirstRun = PreferencesManager.getInstance(UIUtils.getContext()).get(Constants.IS_FIRST_RUN, true);
+        if(isFirstRun){
+            Intent intent = new Intent(UIUtils.getContext(), GuideActivity.class);
+            startActivity(intent);
+            finish();
+        }else{
+            Intent intent = new Intent(UIUtils.getContext(), MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
     }
+
 }
+

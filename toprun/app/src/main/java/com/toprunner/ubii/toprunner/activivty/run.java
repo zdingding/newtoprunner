@@ -39,7 +39,7 @@ import com.baidu.mapapi.utils.DistanceUtil;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.toprunner.ubii.toprunner.Log4j;
+import com.toprunner.ubii.toprunner.utils.Log4j;
 import com.toprunner.ubii.toprunner.R;
 import com.toprunner.ubii.toprunner.fragment.Share;
 import com.toprunner.ubii.toprunner.running.BaiduLocation;
