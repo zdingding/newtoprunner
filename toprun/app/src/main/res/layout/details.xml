@@ -10,5 +10,5 @@
     <com.test.sign_calender.DatePicker2
         android:id="@+id/main_dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="wrap_content"></com.test.sign_calender.DatePicker2>
 </LinearLayout>
