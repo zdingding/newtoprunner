@@ -58,14 +58,13 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <action android:name="com.toprunner.ubii.toprunner.MainAction"/>
+
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
-
         </activity>
         <activity android:name=".activivty.SplashActivity">
-
         </activity>
-        <activity android:name=".activivty.GuideActivity"></activity>
+        <activity android:name=".activivty.GuideActivity"/>
     </application>
 
 </manifest>

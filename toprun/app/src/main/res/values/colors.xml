@@ -6,4 +6,7 @@
     <color name="primary_text_default_material_dark">#5a6277</color>
     <color name="primary_text_default_material_light">#5a6277</color>
     <color name="primary_text_material_light">#5a6277</color>
+    <color name="griditems_bg">#ffe8ecef</color>
+    <color name="commo_text_color">#ff333333</color>
+    <color name="line">#ffd3dde6</color>
 </resources>
