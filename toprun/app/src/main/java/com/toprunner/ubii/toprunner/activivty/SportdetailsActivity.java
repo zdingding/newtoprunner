@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 
-import com.baidu.mapapi.SDKInitializer;
 import com.toprunner.ubii.toprunner.R;
 import com.toprunner.ubii.toprunner.base.BaseFragment;
 import com.toprunner.ubii.toprunner.factory.SporrtdetailsFragmentFactory;
@@ -19,7 +18,7 @@ import com.toprunner.ubii.toprunner.utils.UIUtils;
 import com.toprunner.ubii.toprunner.view.NoScrollViewPager;
 
 public class SportdetailsActivity extends AppCompatActivity {
-    private ViewPager viewpager;
+    private NoScrollViewPager viewpager;
     private ImageView mTabline;//指示线
     private int mScreen1_4;//屏幕的1/4
     private int mCurrentPageIndex;
@@ -29,7 +28,7 @@ public class SportdetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sportdetails);
-        viewpager = (ViewPager) findViewById(R.id.viewpager);
+        viewpager = (NoScrollViewPager) findViewById(R.id.viewpager);
         rg_content_fragment = (RadioGroup) findViewById(R.id.rg_content_fragment);
         initTabLine();
         initView();
