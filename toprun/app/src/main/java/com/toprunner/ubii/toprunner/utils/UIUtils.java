@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.view.View;
 
+import com.baidu.trace.LBSTraceClient;
 import com.toprunner.ubii.toprunner.application.ToprunnerApplication;
 
 public class UIUtils {

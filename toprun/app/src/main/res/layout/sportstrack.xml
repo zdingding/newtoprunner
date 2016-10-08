@@ -11,7 +11,31 @@ android:orientation="vertical"  >
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="我得位置"/>
-</LinearLayout><com.baidu.mapapi.map.MapView
+    <Button
+        android:id="@+id/btn_startTrace"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="轨迹记录"/>
+    <Button
+        android:id="@+id/btn_stopTrace"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="軌跡停止"/>
+
+</LinearLayout>
+    <EditText
+        android:id="@+id/etMLCityPoi"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/merchants_service_comment_edit_bg"
+        android:drawableLeft="@mipmap/circle_icon_box"
+        android:drawablePadding="5dp"
+        android:gravity="center_vertical"
+        android:hint="搜索"
+        android:padding="5dp"
+        android:textSize="16sp" />
+    <com.baidu.mapapi.map.MapView
         android:id="@+id/run_baidu_map"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

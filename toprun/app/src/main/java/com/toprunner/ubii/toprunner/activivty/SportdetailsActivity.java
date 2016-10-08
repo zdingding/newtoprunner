@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 
 import com.toprunner.ubii.toprunner.R;
+import com.toprunner.ubii.toprunner.application.ToprunnerApplication;
 import com.toprunner.ubii.toprunner.base.BaseFragment;
 import com.toprunner.ubii.toprunner.factory.SporrtdetailsFragmentFactory;
 import com.toprunner.ubii.toprunner.utils.ScreenUtils;
@@ -23,11 +24,12 @@ public class SportdetailsActivity extends AppCompatActivity {
     private int mScreen1_4;//屏幕的1/4
     private int mCurrentPageIndex;
     private RadioGroup rg_content_fragment;
-
+    private ToprunnerApplication trackApp = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sportdetails);
+        trackApp = (ToprunnerApplication) getApplicationContext();
         viewpager = (NoScrollViewPager) findViewById(R.id.viewpager);
         rg_content_fragment = (RadioGroup) findViewById(R.id.rg_content_fragment);
         initTabLine();
