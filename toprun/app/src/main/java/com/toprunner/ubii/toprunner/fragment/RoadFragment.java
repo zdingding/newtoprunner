@@ -28,6 +28,11 @@ public class RoadFragment extends BaseFragment {
 
 
     @Override
+    protected void initData() {
+
+    }
+
+    @Override
     public void setListener() {
 
     }

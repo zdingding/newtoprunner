@@ -7,7 +7,9 @@ import android.os.Message;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.baidu.location.BDLocation;
@@ -28,11 +30,10 @@ import com.baidu.trace.LBSTraceClient;
 import com.baidu.trace.OnStartTraceListener;
 import com.baidu.trace.Trace;
 import com.toprunner.ubii.toprunner.R;
-import com.toprunner.ubii.toprunner.activivty.GuideActivity;
-import com.toprunner.ubii.toprunner.activivty.MainActivity;
 import com.toprunner.ubii.toprunner.application.ToprunnerApplication;
 import com.toprunner.ubii.toprunner.base.BaseFragment;
 import com.toprunner.ubii.toprunner.listener.MyOrientationListener;
+import com.toprunner.ubii.toprunner.service.MonitorService;
 import com.toprunner.ubii.toprunner.utils.UIUtils;
 
 import java.util.ArrayList;
@@ -42,8 +43,10 @@ import java.util.List;
  * Created by ${赵鼎} on 2016/9/27 0027.
  */
 
-public class SportstrackFragment extends BaseFragment {
-   private MapView mMapView = null; // 地图View
+public class SportstrackFragment extends BaseFragment implements View.OnClickListener {
+    private static final int REQUESTLOCATING = 1;
+    private static final int SAVEDATA = 2;
+    private MapView mMapView = null; // 地图View
     private BaiduMap mBaiduMap;
     private double mLatitude;//定位的做标
     private double mLongtitude;//定位的做标
@@ -71,17 +74,52 @@ public class SportstrackFragment extends BaseFragment {
      * 开启轨迹服务监听器
      */
     private  OnStartTraceListener startTraceListener = null;
-
+    private boolean isComplete =false;
+    private Intent serviceIntent = null;
+//运动状态
+private boolean isRunning =false;
+    //运动的时间
+    private long timeCount;//
+    private TextView tv_run_time;
     private Handler handler = new Handler() {
         public void handleMessage(android.os.Message msg) {
             switch (msg.what) {
-
+                case REQUESTLOCATING: // 处理重复定位 定时定位 一秒定位一次
+                    if(isRunning){
+                        //秒表跑的实现方法
+                        updatetime();
+                        //运动距离
+                        //平均速度
+                        //消耗卡路里
+                        handler.sendEmptyMessage(REQUESTLOCATING);
+                    }
+                    break;
+                case SAVEDATA://保存运动数据
+                    Toast.makeText(getActivity(), "正在结束轨迹服务，请稍候", Toast.LENGTH_LONG).show();
+                    //结束轨迹
+                    stopTrace();
+                   tv_run_start.setText("开始运动");
+                    break;
             }
         }
     };
+
+        //秒表
+    private void updatetime() {
+        timeCount = timeCount + 1000;
+        tv_run_time.setText(timeCount+"");
+
+    }
+
     private LBSTraceClient client;
     private Trace trace;
     private Button btn_stopTrace;
+    private Button start_run;
+    private Button stop_run;
+    private TextView tv_run_start;
+    private LinearLayout ll_bottom;
+    private TextView tv_run_countinue;
+    private TextView tv_run_stop;
 
     @Override
     public void setListener() {
@@ -118,22 +156,60 @@ public class SportstrackFragment extends BaseFragment {
             }
         };
     }
-    class TrackUploadHandler extends Handler {
 
-        public void handleMessage(Message msg) {
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.tv_run_start://点击了開始跑步
+                Toast.makeText(getActivity(), "正在开启轨迹服务，请稍候", Toast.LENGTH_LONG).show();
+                //开启轨迹
+                startTrace();
+                //正在跑
+                isRunning = true;
+                sendRequestLocation();
+                tv_run_start.setVisibility(View.GONE);
+                ll_bottom.setVisibility(View.VISIBLE);
+                tv_run_countinue.setText(R.string.run_pause);
+                break;
+            case R.id.tv_run_countinue://点击暂停/继续
+                String text = tv_run_countinue.getText().toString();
+                if ("继续".equals(text)) {
+                    isRunning = true;
 
+                    sendRequestLocation();
 
+                    tv_run_countinue.setText(R.string.run_pause);
+                } else {
+                    tv_run_countinue.setText(R.string.run_countinue);
+                    isRunning = false;
+                }
+                break;
+            case R.id.tv_run_stop:
+                isRunning = false;
+                isComplete = true;
+                ll_bottom.setVisibility(View.GONE);
+                tv_run_start.setText("保存数据");
+                tv_run_start.setVisibility(View.VISIBLE);
+                handler.sendEmptyMessage(SAVEDATA);
+                break;
         }
-
     }
+
+
     @Override
     protected void initView(View view, Bundle savedInstanceState) {
         mMapView = (MapView) findViewById(R.id.run_baidu_map);
         btn_mylocation = (Button)findViewById(R.id.btn_mylocation);
         btnStartTrace = (Button) view.findViewById(R.id.btn_startTrace);
         btn_stopTrace = (Button) view.findViewById(R.id.btn_stopTrace);
+        start_run = (Button) view.findViewById(R.id.start_run);
+        stop_run = (Button) view.findViewById(R.id.stop_run);
+        tv_run_start = (TextView) view.findViewById(R.id.tv_run_start);
+        ll_bottom = findViewById(R.id.ll_bottom);
+        tv_run_countinue = (TextView) findViewById(R.id.tv_run_countinue);
+        tv_run_stop = (TextView) findViewById(R.id.tv_run_stop);
+        tv_run_time = (TextView) findViewById(R.id.tv_run_time);
         mBaiduMap = mMapView.getMap();
-        initTrack();
         // 设置采集周期
         setInterval();
         // 设置http请求协议类型
@@ -142,54 +218,51 @@ public class SportstrackFragment extends BaseFragment {
         initLocation();
         initMarker();
 
+
+    }
+
+    protected void initData() {
+        //开始运动
+        tv_run_start.setOnClickListener(this);
+        tv_run_countinue.setOnClickListener(this);
+        tv_run_stop.setOnClickListener(this);
+        client = ((ToprunnerApplication) getActivity().getApplication()).getClient();
+        trace = ((ToprunnerApplication) getActivity().getApplication()).getTrace();
+    }
+//发送消息
+    private void sendRequestLocation() {
+        handler.sendEmptyMessage(REQUESTLOCATING);
     }
 
     private void setRequestType() {
     }
 
     private void setInterval() {
+
     }
-//开启关闭轨迹
-    private void initTrack() {
-        btnStartTrace.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getActivity(), "正在开启轨迹服务，请稍候", Toast.LENGTH_LONG).show();
 
-                //开启轨迹
-                startTrace();
-            }
-
-
-        });
-        btn_stopTrace.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getActivity(), "正在结束轨迹服务，请稍候", Toast.LENGTH_LONG).show();
-                //结束轨迹
-                stopTrace();
-            }
-
-
-        });
-    }
 
     private void stopTrace() {
     }
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        client = ((ToprunnerApplication) getActivity().getApplication()).getClient();
-        trace = ((ToprunnerApplication) getActivity().getApplication()).getTrace();
-    }
-
     private void startTrace() {
         if (null == startTraceListener) {
             initOnStartTraceListener();
         }
         client.startTrace(trace, startTraceListener);
-
+        if (!MonitorService.isRunning) {
+            // 开启监听service
+            MonitorService.isCheck = true;
+            MonitorService.isRunning = true;
+            startMonitorService();
+        }
     }
+
+    private void startMonitorService() {
+        serviceIntent = new Intent(getActivity().getApplication(),
+                MonitorService.class);
+        getActivity().getApplication().startService(serviceIntent);
+    }
+
     private void initMarker() {
     }
 
@@ -258,6 +331,7 @@ public class SportstrackFragment extends BaseFragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        handler.removeCallbacksAndMessages(null);
     }
     private class MyLocationListener implements BDLocationListener {
 

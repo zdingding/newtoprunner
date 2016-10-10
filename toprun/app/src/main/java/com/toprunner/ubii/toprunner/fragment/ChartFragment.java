@@ -16,6 +16,11 @@ public class ChartFragment extends BaseFragment {
     private MyGridView gridview;
 
     @Override
+    protected void initData() {
+
+    }
+
+    @Override
     public void setListener() {
 
     }

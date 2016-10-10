@@ -43,6 +43,14 @@ public abstract class BaseFragment extends Fragment {
 
     }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        initData();
+    }
+
+    protected abstract void initData();
+
 
     final protected <T extends View> T findViewById(int id) {
         if (mRootView == null) {

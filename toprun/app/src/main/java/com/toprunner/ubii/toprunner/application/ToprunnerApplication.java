@@ -19,16 +19,20 @@ import java.lang.ref.WeakReference;
  * Created by ${赵鼎} on 2016/9/19 0019.
  */
 public class ToprunnerApplication extends Application {
-    private static Handler handler;
+    private static TrackHandler handler;
     private static Context context;
     private static int mainThreadId;
     private static Thread mainThread;
-    private LBSTraceClient client;
+
     private Context mContext = null;
     /**
      * 轨迹服务
      */
     private Trace trace = null;
+    /**
+     * 轨迹服务客户端
+     */
+    private LBSTraceClient client =null;
     /**
      * 鹰眼服务ID，开发者创建的鹰眼服务对应的服务ID
      */
@@ -44,14 +48,13 @@ public class ToprunnerApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        SDKInitializer.initialize(getApplicationContext());
-        client = new LBSTraceClient(UIUtils.getContext());
+        mContext = getApplicationContext();
+        SDKInitializer.initialize(mContext);
+        // 初始化轨迹服务
+        client = new LBSTraceClient(mContext);
+        trace = new Trace(mContext, serviceId, entityName, traceType);
         // 设置定位模式
         client.setLocationMode(LocationMode.High_Accuracy);
-        mContext = getApplicationContext();
-        // 初始化轨迹服务
-        entityName = getImei(mContext);
-        trace = new Trace(mContext, serviceId, entityName, traceType);
         //Handler对象
         handler = new TrackHandler(this);
         //Context
@@ -62,15 +65,15 @@ public class ToprunnerApplication extends Application {
         mainThread = Thread.currentThread();
     }
     static class TrackHandler extends Handler {
-        WeakReference<ToprunnerApplication> toprunnerApp;
+        WeakReference<ToprunnerApplication> trackApp;
 
         TrackHandler(ToprunnerApplication trackApplication) {
-            toprunnerApp = new WeakReference<ToprunnerApplication>(trackApplication);
+            trackApp = new WeakReference<ToprunnerApplication>(trackApplication);
         }
 
         @Override
         public void handleMessage(Message msg) {
-            Toast.makeText(toprunnerApp.get().mContext, (String) msg.obj, Toast.LENGTH_SHORT).show();
+            Toast.makeText(trackApp.get().mContext, (String) msg.obj, Toast.LENGTH_SHORT).show();
         }
     }
     public Trace getTrace() {
@@ -78,6 +81,12 @@ public class ToprunnerApplication extends Application {
     }
     public LBSTraceClient getClient() {
         return client;
+    }
+    public int getServiceId() {
+        return serviceId;
+    }
+    public String getEntityName() {
+        return entityName;
     }
     public static Handler getHandler() {
         return handler;
@@ -91,21 +100,5 @@ public class ToprunnerApplication extends Application {
     public static Thread getMainThread() {
         return mainThread;
     }
-    /**
-     * 获取设备IMEI码
-     *
-     * @param context
-     * @return
-     */
-    protected static String getImei(Context context) {
-        String mImei = "NULL";
-        try {
-            mImei = ((TelephonyManager) context
-                    .getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();
-        } catch (Exception e) {
-            System.out.println("获取IMEI码失败");
-            mImei = "NULL";
-        }
-        return mImei;
-    }
+
 }

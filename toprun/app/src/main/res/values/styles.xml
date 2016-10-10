@@ -26,4 +26,7 @@
         <item name="android:button">@android:color/transparent</item>
     </style>
 
+    <style name="TitleAndContentTextStyle"><item name="android:textSize">14sp</item>
+        <item name="android:textColor">#ff333333</item></style>
+
 </resources>

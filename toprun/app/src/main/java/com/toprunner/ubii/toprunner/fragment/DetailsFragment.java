@@ -21,6 +21,11 @@ public class DetailsFragment extends BaseFragment {
     private DatePicker2 picker;
 
     @Override
+    protected void initData() {
+
+    }
+
+    @Override
     public void setListener() {
 
     }
