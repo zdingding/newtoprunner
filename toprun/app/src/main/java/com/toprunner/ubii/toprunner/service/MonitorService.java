@@ -48,7 +48,7 @@ public class MonitorService extends Service {
                     if (!isServiceWork(getApplicationContext(), SERVICE_NAME)) {
                         System.out.println("轨迹服务已停止，重启轨迹服务");
                         if (null != trackApp.getClient() && null != trackApp.getTrace()) {
-//                            trackApp.getClient().startTrace(trackApp.getTrace());
+                           trackApp.getClient().startTrace(trackApp.getTrace());
                         }
                     } else {
                         System.out.println("轨迹服务正在运行");

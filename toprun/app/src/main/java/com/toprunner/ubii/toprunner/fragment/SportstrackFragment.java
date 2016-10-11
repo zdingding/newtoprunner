@@ -1,6 +1,7 @@
 package com.toprunner.ubii.toprunner.fragment;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -19,22 +20,31 @@ import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
+import com.baidu.mapapi.map.MapStatus;
 import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
 
 import com.baidu.mapapi.map.MyLocationConfiguration;
 import com.baidu.mapapi.map.MyLocationData;
+import com.baidu.mapapi.map.Overlay;
+import com.baidu.mapapi.map.PolylineOptions;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.trace.LBSTraceClient;
+import com.baidu.trace.OnEntityListener;
 import com.baidu.trace.OnStartTraceListener;
 import com.baidu.trace.Trace;
+import com.baidu.trace.TraceLocation;
 import com.toprunner.ubii.toprunner.R;
 import com.toprunner.ubii.toprunner.application.ToprunnerApplication;
 import com.toprunner.ubii.toprunner.base.BaseFragment;
 import com.toprunner.ubii.toprunner.listener.MyOrientationListener;
 import com.toprunner.ubii.toprunner.service.MonitorService;
 import com.toprunner.ubii.toprunner.utils.UIUtils;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,19 +71,31 @@ public class SportstrackFragment extends BaseFragment implements View.OnClickLis
     private BitmapDescriptor mMarker;
     private RelativeLayout mMarkerLy;
     // 定位相关
-
+    private static List<LatLng> pointList = new ArrayList<LatLng>();
     private LocationClient mlocationClient;
     private MyLocationListener mLocationListener;
     private Button btn_mylocation;
     // 自定义定位图标
-
-
+    private static Overlay overlay = null;
+    /**
+     * 刷新地图线程(获取实时点)
+     */
+    protected static MapStatusUpdate msUpdate = null;
+    // 路线覆盖物
+    private static PolylineOptions polyline = null;
     //轨迹相关
     private Button btnStartTrace = null;
     /**
      * 开启轨迹服务监听器
      */
     private  OnStartTraceListener startTraceListener = null;
+    /**
+     * Entity监听器
+     */
+    private static OnEntityListener entityListener = null;
+    /**
+     * 刷新地图线程(获取实时点)
+     */
     private boolean isComplete =false;
     private Intent serviceIntent = null;
 //运动状态
@@ -114,8 +136,7 @@ private boolean isRunning =false;
     private LBSTraceClient client;
     private Trace trace;
     private Button btn_stopTrace;
-    private Button start_run;
-    private Button stop_run;
+
     private TextView tv_run_start;
     private LinearLayout ll_bottom;
     private TextView tv_run_countinue;
@@ -146,8 +167,10 @@ private boolean isRunning =false;
             // 开启轨迹服务回调接口（arg0 : 消息编码，arg1 : 消息内容，详情查看类参考）
             @Override
             public void onTraceCallback(int i, String s) {
+                if(i == 0 || i == 10006){
 
-    Toast.makeText(UIUtils.getContext(),i+""+s,Toast.LENGTH_SHORT).show();
+                }
+                Toast.makeText(UIUtils.getContext(),i+""+s,Toast.LENGTH_SHORT).show();
             }
             // 轨迹服务推送接口（用于接收服务端推送消息，arg0 : 消息类型，arg1 : 消息内容，详情查看类参考）
             @Override
@@ -156,6 +179,8 @@ private boolean isRunning =false;
             }
         };
     }
+
+
 
     @Override
     public void onClick(View view) {
@@ -202,8 +227,6 @@ private boolean isRunning =false;
         btn_mylocation = (Button)findViewById(R.id.btn_mylocation);
         btnStartTrace = (Button) view.findViewById(R.id.btn_startTrace);
         btn_stopTrace = (Button) view.findViewById(R.id.btn_stopTrace);
-        start_run = (Button) view.findViewById(R.id.start_run);
-        stop_run = (Button) view.findViewById(R.id.stop_run);
         tv_run_start = (TextView) view.findViewById(R.id.tv_run_start);
         ll_bottom = findViewById(R.id.ll_bottom);
         tv_run_countinue = (TextView) findViewById(R.id.tv_run_countinue);
@@ -255,7 +278,72 @@ private boolean isRunning =false;
             MonitorService.isRunning = true;
             startMonitorService();
         }
+ // 初始化entity监听器
+
+        if (null == entityListener) {
+            initOnEntityListener();
+        }
+        /**
+         * 查询实时轨迹
+         */
+        client.queryRealtimeLoc(126470,entityListener);
     }
+
+    private void initOnEntityListener() {
+        entityListener = new OnEntityListener() {
+                //失败地1回调接口
+            @Override
+            public void onRequestFailedCallback(String s) {
+                Toast.makeText(UIUtils.getContext(),"初始化entity失败",Toast.LENGTH_SHORT).show();
+            }
+            // 添加entity回调接口
+            @Override
+            public void onAddEntityCallback(String s) {
+                super.onAddEntityCallback(s);
+                Toast.makeText(UIUtils.getContext(),"初始化entity回调"+s,Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onQueryEntityListCallback(String s) {
+                super.onQueryEntityListCallback(s);
+                Toast.makeText(UIUtils.getContext(),"成功entity"+s,Toast.LENGTH_SHORT).show();
+                TraceLocation entityLocation = new TraceLocation();
+                try {
+                    JSONObject dataJson =new JSONObject(s);
+                    if(null != dataJson && dataJson.has("status") && dataJson.getInt("status") == 0
+                            && dataJson.has("size") && dataJson.getInt("size") > 0){
+                        JSONArray entities = dataJson.getJSONArray("entities");
+                        JSONObject entity = entities.getJSONObject(0);
+                        JSONObject point = entity.getJSONObject("realtime_point");
+                        JSONArray location = point.getJSONArray("location");
+                        entityLocation.setLongitude(location.getDouble(0));
+                        entityLocation.setLatitude(location.getDouble(1));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(UIUtils.getContext(),"解析失败",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                showRealtimeTrack(entityLocation);
+            }
+
+            @Override
+            public void onReceiveLocation(TraceLocation traceLocation) {
+                super.onReceiveLocation(traceLocation);
+                showRealtimeTrack(traceLocation);
+            }
+        };
+    }
+    /**
+     * 查询实体集合回调函数，此时调用实时轨迹方法
+     */
+    private void showRealtimeTrack(TraceLocation entityLocation) {
+        double latitude = entityLocation.getLatitude();
+        double longitude = entityLocation.getLongitude();
+        Toast.makeText(UIUtils.getContext(),""+latitude,Toast.LENGTH_SHORT).show();
+
+    }
+
 
     private void startMonitorService() {
         serviceIntent = new Intent(getActivity().getApplication(),
@@ -369,7 +457,23 @@ private boolean isRunning =false;
     private void cebterToMyLocation() {
         LatLng latLng = new LatLng(mLatitude,
                 mLongtitude);
+        pointList.add(latLng);
+        // 绘制实时点
+        drawRealtimePoint(latLng);
         MapStatusUpdate msu = MapStatusUpdateFactory.newLatLng(latLng);
         mBaiduMap.animateMapStatus(msu);
+    }
+
+    private void drawRealtimePoint(LatLng latLng) {
+        if (null != overlay) {
+            overlay.remove();
+        }
+
+        if (pointList.size() >= 2 && pointList.size() <= 10000) {
+            // 添加路线（轨迹）
+            polyline = new PolylineOptions().width(10)
+                    .color(Color.RED).points(pointList);
+        }
+
     }
 }
