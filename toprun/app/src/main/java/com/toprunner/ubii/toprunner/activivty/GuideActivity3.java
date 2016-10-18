@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 
+
 public class GuideActivity3 extends Activity implements OnClickListener {
 	private Button btn_guide3_next;
 	private GridView gv_guide;
@@ -38,14 +39,12 @@ public class GuideActivity3 extends Activity implements OnClickListener {
 
 		gv_guide = (GridView) findViewById(R.id.gv_guide);
 		// 名称
-				String[] tabs = { "电台", "北京", "小说", "音乐", "新闻", "相声小品", "脱口秀", "情感",
-						"健康", "军事", "历史", "儿童", "娱乐", "女性", "搞笑", "教育", "外语", "公开课",
-						"评书", "戏曲", "财经", "科技", "汽车", "体育", "校园", "游戏", "动漫", "广播剧",
-						"主播", "电影", "宝石电台", "声价百万", "旅游", "互动" };
+				String[] tabs = { "跑步", "羽毛球", "骑行", "滑冰", "新闻", "户外跑步", "室内跑步", "走路",
+						"健康", "运动圈", "赛事", "运动技巧",  "马拉松",  "教育","减肥燃脂"};
 
 				// 准备要添加的数据条目
 				items = new ArrayList<Map<String, Object>>();
-				for (int i = 0; i < 34; i++) {
+				for (int i = 0; i < tabs.length; i++) {
 					Map<String, Object> item = new HashMap<String, Object>();
 					item.put("btnItem", tabs[i]);
 					items.add(item);
