@@ -56,19 +56,27 @@
         <activity android:name=".activivty.run"/>
         <activity android:name=".running.RunActivity"/>
         <activity android:name=".activivty.SportdetailsActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <action android:name="com.toprunner.ubii.toprunner.MainAction"/>
 
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
 
         </activity>
         <activity android:name=".activivty.SplashActivity">
-
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
-        <activity android:name=".activivty.GuideActivity"/>
-
+        <activity
+            android:name="com.toprunner.ubii.toprunner.activivty.Guide1Activity"
+        >
+        </activity>
+        <activity
+            android:name="com.toprunner.ubii.toprunner.activivty.GuideActivity2"
+            >
+        </activity>
+        <activity
+            android:name="com.toprunner.ubii.toprunner.activivty.GuideActivity3"
+            >
+        </activity>
         <service
             android:name="com.baidu.trace.LBSTraceService"
             android:enabled="true"

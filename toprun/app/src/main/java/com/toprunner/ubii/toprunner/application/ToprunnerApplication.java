@@ -4,14 +4,12 @@ import android.app.Application;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
-import android.telephony.TelephonyManager;
 import android.widget.Toast;
 
 import com.baidu.mapapi.SDKInitializer;
 import com.baidu.trace.LBSTraceClient;
 import com.baidu.trace.LocationMode;
 import com.baidu.trace.Trace;
-import com.toprunner.ubii.toprunner.utils.UIUtils;
 
 import java.lang.ref.WeakReference;
 
@@ -64,7 +62,7 @@ public class ToprunnerApplication extends Application {
         //主线程对象
         mainThread = Thread.currentThread();
     }
-    static class TrackHandler extends Handler {
+     class TrackHandler extends Handler {
         WeakReference<ToprunnerApplication> trackApp;
 
         TrackHandler(ToprunnerApplication trackApplication) {

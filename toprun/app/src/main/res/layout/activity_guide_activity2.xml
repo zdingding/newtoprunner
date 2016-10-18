@@ -1,0 +1,150 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activivty.GuideActivity2" >
+
+  <Button
+        android:id="@+id/btn_guide2_next"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginRight="18dp"
+        android:background="@drawable/shape_search_style"
+        android:text="下一步"
+        android:textColor="#ffffff" />
+
+    <TextView
+        android:id="@+id/tv_guide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btn_guide2_next"
+        android:layout_centerHorizontal="true"
+        android:text="2/3"
+        android:layout_marginBottom="4dp"
+        android:textColor="#55000000"
+        android:textSize="13sp" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="50dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="请您选择"
+            android:textSize="20sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="为您推荐更合适的内容"
+            android:textColor="#77000000"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/ib_guide_worker"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginRight="18dp"
+        android:layout_marginTop="110dp"
+        android:layout_toLeftOf="@+id/tv_guide"
+        android:background="@mipmap/pop_alarm"
+        android:src="@mipmap/ug_people_worker" />
+
+    <ImageView
+        android:id="@+id/ib_guide_else"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignLeft="@+id/ib_guide_student"
+        android:layout_alignTop="@+id/ib_guide_older"
+        android:background="@mipmap/pop_alarm"
+        android:src="@mipmap/ug_people_else" />
+
+    <ImageView
+        android:id="@+id/ib_guide_student"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignTop="@+id/ib_guide_worker"
+        android:layout_marginLeft="18dp"
+        android:layout_toRightOf="@+id/tv_guide"
+        android:background="@mipmap/pop_alarm"
+        android:src="@mipmap/ug_people_student" />
+
+    <ImageView
+        android:id="@+id/ib_guide_older"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignLeft="@+id/ib_guide_worker"
+        android:layout_below="@id/ib_guide_worker"
+        android:layout_marginTop="30dp"
+        android:background="@mipmap/pop_alarm"
+        android:src="@mipmap/ug_people_older" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/tv_guide"
+        android:layout_alignBottom="@+id/tv_guide"
+        android:layout_marginLeft="30dp"
+        android:background="@android:color/transparent"
+        android:onClick="pre"
+        android:text="上一步"
+        android:textColor="#77000000"
+        android:textSize="15sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/ib_guide_worker"
+        android:layout_below="@+id/ib_guide_worker"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="8dp"
+        android:text="上班族" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/ib_guide_student"
+        android:layout_below="@+id/ib_guide_student"
+        android:layout_marginRight="28dp"
+        android:layout_marginTop="8dp"
+        android:text="学生" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/ib_guide_older"
+        android:layout_below="@+id/ib_guide_older"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="8dp"
+        android:text="中老年" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/ib_guide_else"
+        android:layout_below="@+id/ib_guide_else"
+        android:layout_marginRight="28dp"
+        android:layout_marginTop="8dp"
+        android:text="其他" />
+
+    <ImageView
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_alignLeft="@+id/btn_guide2_next"
+        android:layout_alignTop="@+id/tv_guide"
+        android:src="@mipmap/ug_arrow" />
+
+</RelativeLayout>

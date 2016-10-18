@@ -1,0 +1,89 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" tools:context=".activivty.Guide1Activity">
+
+  <Button
+        android:id="@+id/btn_guide1_next"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="17dp"
+        android:layout_marginRight="17dp"
+        android:background="@drawable/shape_search_style"
+        android:text="下一步"
+        android:textColor="#ffffff" />
+
+    <TextView
+        android:id="@+id/tv_guide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btn_guide1_next"
+        android:layout_centerHorizontal="true"
+        android:text="1/3"
+        android:layout_marginBottom="4dp"
+        android:textColor="#55000000"
+        android:textSize="13sp" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="60dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="请选择您的性别"
+            android:textSize="20sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="为您推荐更合适的内容"
+            android:textColor="#77000000"
+            android:textSize="13sp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/ib_guide_girl"
+        android:layout_below="@+id/ib_guide_girl"
+        android:layout_marginRight="39dp"
+        android:layout_marginTop="10dp"
+        android:text="女" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textView1"
+        android:layout_alignLeft="@+id/ib_guide_boy"
+        android:layout_marginLeft="39dp"
+        android:text="男" />
+
+    <ImageView
+        android:id="@+id/ib_guide_boy"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:layout_alignLeft="@+id/btn_guide1_next"
+        android:layout_alignTop="@+id/ib_guide_girl"
+        android:layout_marginLeft="30dp"
+        android:background="@mipmap/pop_alarm"
+        android:src="@mipmap/ug_gender_boy" />
+
+    <ImageView
+        android:id="@+id/ib_guide_girl"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:layout_alignRight="@+id/btn_guide1_next"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="30dp"
+        android:background="@mipmap/pop_alarm"
+        android:src="@mipmap/ug_gender_girl" />
+</RelativeLayout>

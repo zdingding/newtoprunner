@@ -1,25 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:id="@+id/activity_splash"
+<RelativeLayout
               xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:background="@mipmap/photolong"
+              android:id="@+id/rl_splash_root"
               android:orientation="vertical"
               android:gravity="center_horizontal|bottom"
               tools:context="com.toprunner.ubii.toprunner.activivty.SplashActivity">
 
-    <TextView
-        android:gravity="center_vertical"
-        android:id="@+id/tv_welcome_version"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="版本号:未知"
-        android:textSize="20sp"/>
-    <ProgressBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="50dp"
-        android:indeterminateDrawable="@anim/anim_loading"
-        android:indeterminateDuration="700"/>
-</LinearLayout>
+
+</RelativeLayout>
