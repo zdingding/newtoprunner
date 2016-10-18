@@ -1,12 +1,27 @@
 package com.toprunner.ubii.toprunner.fragment;
 
-import android.app.Application;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.baidu.mapapi.map.BaiduMap;
+import com.baidu.mapapi.map.BitmapDescriptor;
+import com.baidu.mapapi.map.BitmapDescriptorFactory;
+import com.baidu.mapapi.map.MapStatus;
+import com.baidu.mapapi.map.MapStatusUpdateFactory;
+import com.baidu.mapapi.map.MapView;
+import com.baidu.mapapi.map.MarkerOptions;
+import com.baidu.mapapi.map.Overlay;
+import com.baidu.mapapi.map.OverlayOptions;
+import com.baidu.mapapi.map.PolylineOptions;
+import com.baidu.mapapi.model.LatLng;
+import com.baidu.mapapi.utils.CoordinateConverter;
 import com.baidu.trace.LBSTraceClient;
 import com.baidu.trace.OnEntityListener;
 import com.baidu.trace.OnStartTraceListener;
@@ -17,20 +32,29 @@ import com.toprunner.ubii.toprunner.R;
 import com.toprunner.ubii.toprunner.application.ToprunnerApplication;
 import com.toprunner.ubii.toprunner.base.BaseFragment;
 import com.toprunner.ubii.toprunner.service.MonitorService;
-import com.toprunner.ubii.toprunner.utils.UIUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.toprunner.ubii.toprunner.fragment.SportstrackFragment.msUpdate;
+
 
 /**
  * Created by ${赵鼎} on 2016/9/27 0027.
  */
 
 public class RoadFragment extends BaseFragment implements View.OnClickListener {
+    private MapView mMapView = null; // 地图View
+    private BaiduMap mBaiduMap;
     private Button btnStartTrace = null;
     private Intent serviceIntent = null;
     private Button btnStopTrace = null;
+    private TrackUploadHandler mHandler = null;
     /**
      * 开启轨迹服务监听器
      */
@@ -43,11 +67,35 @@ public class RoadFragment extends BaseFragment implements View.OnClickListener {
      * Entity监听器
      */
     private static OnEntityListener entityListener = null;
+    //轨迹点的集合
+    private static List<LatLng> pointList = new ArrayList<LatLng>();
     private LBSTraceClient client;
     private Trace trace;
     private ToprunnerApplication trackApp;
+    // 覆盖物
+    private static OverlayOptions overlayOptions;
+    //是否开启轨迹
+    private boolean isTraceStarted = false;
+    /**
+     * 刷新地图线程(获取实时点)
+     */
+    protected RefreshThread refreshThread = null;
+    /**
+     * 图标
+     */
+    private static Overlay overlay = null;
+    private static BitmapDescriptor realtimeBitmap;
 
-
+    // 路线覆盖物
+    private static PolylineOptions polyline = null;
+    /**
+     * 打包周期（单位 : 秒）
+     */
+    private int packInterval = 15;
+    /**
+     * 采集周期（单位 : 秒）
+     */
+    private int gatherInterval = 5;
     @Override
     public void setListener() {
 
@@ -59,13 +107,26 @@ public class RoadFragment extends BaseFragment implements View.OnClickListener {
         initView();
 
         // 初始化监听器
-           initListener();
+        initListener();
 
-        // 设置采集周期
-        // setInterval();
+        client = ((ToprunnerApplication) getActivity().getApplication()).getClient();
 
         // 设置http请求协议类型
-        //setRequestType();
+        setRequestType();
+        mHandler = new TrackUploadHandler(this);
+    }
+
+    private void setRequestType() {
+        int type = 0;
+        client.setProtocolType(type);
+
+
+        // 设置采集周期
+        setInterval();
+    }
+
+    private void setInterval() {
+        client.setInterval(gatherInterval, packInterval);
     }
 
     private void initListener() {
@@ -126,7 +187,6 @@ public class RoadFragment extends BaseFragment implements View.OnClickListener {
             }
 
 
-
             @Override
             public void onReceiveLocation(TraceLocation location) {
                 // TODO Auto-generated method stub
@@ -135,15 +195,76 @@ public class RoadFragment extends BaseFragment implements View.OnClickListener {
 
         };
     }
+
     private void showRealtimeTrack(TraceLocation entityLocation) {
+        if (null == refreshThread || !refreshThread.refresh) {
+            return;
+        }
+        double latitude = entityLocation.getLatitude();
+        double longitude = entityLocation.getLongitude();
+        if (Math.abs(latitude - 0.0) < 0.000001 && Math.abs(longitude - 0.0) < 0.000001) {
+            mHandler.obtainMessage(-1, "当前查询无轨迹点").sendToTarget();
+        } else {
+            LatLng latLng = new LatLng(latitude, longitude);
+            if (1 == entityLocation.getCoordType()) {
+                LatLng sourceLatLng = latLng;
+                CoordinateConverter converter = new
+                        CoordinateConverter();
+                converter.from(CoordinateConverter.CoordType.GPS);
+                converter.coord(sourceLatLng);
+                latLng = converter.convert();
+            }
+            pointList.add(latLng);
+                // 绘制实时点
+                drawRealtimePoint(latLng);
+        }
+
+
     }
+
+    private void drawRealtimePoint(LatLng point) {
+        if (null != overlay) {
+            overlay.remove();
+        }
+        MapStatus mMapStatus = new MapStatus.Builder().target(point).zoom(19).build();
+        msUpdate = MapStatusUpdateFactory.newMapStatus(mMapStatus);
+        if (null == realtimeBitmap) {
+            realtimeBitmap = BitmapDescriptorFactory
+                    .fromResource(R.mipmap.navi_map_gps_locked);
+        }
+        overlayOptions = new MarkerOptions().position(point)
+                .icon(realtimeBitmap).zIndex(9).draggable(true);
+        if (pointList.size() >= 2 && pointList.size() <= 10000) {
+            // 添加路线（轨迹）
+            polyline = new PolylineOptions().width(10)
+                    .color(Color.RED).points(pointList);
+        }
+        addMarker();
+    }
+
+    private void addMarker() {
+        if (null != msUpdate) {
+            mBaiduMap.setMapStatus(msUpdate);
+        }
+        // 路线覆盖物
+        if (null != polyline) {
+            mBaiduMap.addOverlay(polyline);
+        }
+
+        // 实时点覆盖物
+        if (null != overlayOptions) {
+            mBaiduMap.addOverlay(overlayOptions);
+        }
+    }
+
     private void initOnStopTraceListener() {
         stopTraceListener = new OnStopTraceListener() {
 
             // 轨迹服务停止成功
             public void onStopTraceSuccess() {
                 // TODO Auto-generated method stub
-                Toast.makeText(UIUtils.getContext(), "停止", Toast.LENGTH_SHORT).show();
+                mHandler.obtainMessage(1, "停止轨迹服务成功").sendToTarget();
+                startRefreshThread(false);
                 trackApp.getClient().onDestroy();
             }
 
@@ -154,23 +275,42 @@ public class RoadFragment extends BaseFragment implements View.OnClickListener {
         };
     }
 
-    private void initOnStartTraceListener() {
-            startTraceListener = new OnStartTraceListener() {
-                @Override
-                public void onTraceCallback(int i, String s) {
-                    Toast.makeText(UIUtils.getContext(), i+s, Toast.LENGTH_LONG).show();
-                }
-
-                @Override
-                public void onTracePushCallback(byte b, String s) {
-
-                }
-            };
+    private void startRefreshThread(boolean isStart) {
+        if (null == refreshThread) {
+            refreshThread = new RefreshThread();
         }
+        refreshThread.refresh = isStart;
+        if (isStart) {
+            if (!refreshThread.isAlive()) {
+                refreshThread.start();
+            }
+        } else {
+            refreshThread = null;
+        }
+    }
+
+    private void initOnStartTraceListener() {
+        startTraceListener = new OnStartTraceListener() {
+            @Override
+            public void onTraceCallback(int i, String s) {
+                mHandler.obtainMessage(i, "开启轨迹服务回调接口消息 [消息编码 : " + i + "，消息内容 : " + s + "]").sendToTarget();
+            }
+
+            // 轨迹服务推送接口（用于接收服务端推送消息
+            @Override
+            public void onTracePushCallback(byte b, String s) {
+                if (0x03 == b || 0x04 == b) {
+
+                }
+            }
+        };
+    }
 
 
     //初始化
-    private void initView() {
+    private void initView() {  
+        mMapView = (MapView) findViewById(R.id.road_baidu_map);
+         mBaiduMap = mMapView.getMap();
         btnStartTrace = (Button) findViewById(R.id.btn_startTrace);
         btnStopTrace = (Button) findViewById(R.id.btn_stopTrace);
     }
@@ -226,4 +366,87 @@ public class RoadFragment extends BaseFragment implements View.OnClickListener {
         }
     }
 
+    static class TrackUploadHandler extends Handler {
+        WeakReference<RoadFragment> roadUpload;
+
+        TrackUploadHandler(RoadFragment trackUploadFragment) {
+            roadUpload = new WeakReference<RoadFragment>(trackUploadFragment);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            RoadFragment tu = roadUpload.get();
+            Toast.makeText(tu.trackApp, (String) msg.obj, Toast.LENGTH_LONG).show();
+            switch (msg.what) {
+                case 0:
+                case 10006:
+                case 10008:
+                case 10009:
+                    tu.isTraceStarted = true;
+                    tu.btnStartTrace.setBackgroundColor(Color.rgb(0x99, 0xcc, 0xff));
+                    tu.btnStartTrace.setTextColor(Color.rgb(0x00, 0x00, 0xd8));
+                    break;
+
+                case 1:
+                case 10004:
+                    tu.isTraceStarted = false;
+                    tu.btnStartTrace.setBackgroundColor(Color.rgb(0xff, 0xff, 0xff));
+                    tu.btnStartTrace.setTextColor(Color.rgb(0x00, 0x00, 0x00));
+                    break;
+
+                default:
+                    break;
+            }
+        }
+    }
+
+    //开启分线程
+    protected class RefreshThread extends Thread {
+
+        protected boolean refresh = true;
+
+        @Override
+        public void run() {
+            // TODO Auto-generated method stub
+            Looper.prepare();
+            while (refresh) {
+                // 轨迹服务开启成功后，调用queryEntityList()查询最新轨迹；
+                // 未开启轨迹服务时，调用queryRealtimeLoc()进行实时定位。
+                if (isTraceStarted) {
+                    queryEntityList();
+                } else {
+                    queryRealtimeLoc();
+                }
+
+            }
+            Looper.loop();
+        }
+    }
+
+    private void queryRealtimeLoc() {
+        trackApp.getClient().queryRealtimeLoc(trackApp.getServiceId(), entityListener);
+    }
+
+    /**
+     * 查询entityList
+     */
+    private void queryEntityList() {
+        // entity标识列表（多个entityName，以英文逗号"," 分割）
+        String entityNames = trackApp.getEntityName();
+        // 属性名称（格式为 : "key1=value1,key2=value2,....."）
+        String columnKey = "";
+        // 返回结果的类型（0 : 返回全部结果，1 : 只返回entityName的列表）
+        int returnType = 0;
+        // 活跃时间（指定该字段时，返回从该时间点之后仍有位置变动的entity的实时点集合）
+        int activeTime = (int) (System.currentTimeMillis() / 1000 - packInterval);
+        // 分页大小
+        int pageSize = 10;
+        // 分页索引
+        int pageIndex = 1;
+        trackApp.getClient().queryEntityList(trackApp.getServiceId(), entityNames, columnKey, returnType, activeTime,
+                pageSize,
+                pageIndex, entityListener);
+
+
+    }
 }

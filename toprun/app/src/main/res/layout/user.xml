@@ -23,6 +23,7 @@
             android:id="@+id/toolbar_title" />
 
     </android.support.v7.widget.Toolbar>
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -51,16 +52,6 @@
                 />
 
             <Button
-                android:layout_width="65dp"
-                android:layout_height="65dp"
-                android:layout_gravity="center"
-                android:text="Start"
-                android:id="@+id/start"
-                android:textSize="15sp"
-                android:textColor="#ffffff"
-                android:background="@mipmap/start01"/>
-
-            <Button
                 android:layout_width="36dp"
                 android:layout_height="36dp"
                 android:id="@+id/discover"
@@ -78,6 +69,15 @@
                 android:layout_marginBottom="5dp"
                 android:layout_marginLeft="30dp" />
 
+            <Button
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:layout_gravity="center"
+                android:text="Start"
+                android:id="@+id/start"
+                android:textSize="15sp"
+                android:textColor="#ffffff"
+                android:background="@mipmap/start01"/>
 
 
         </FrameLayout>

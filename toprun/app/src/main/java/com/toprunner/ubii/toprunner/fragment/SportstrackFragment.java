@@ -4,8 +4,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Message;
-import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -20,11 +18,9 @@ import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
-import com.baidu.mapapi.map.MapStatus;
 import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
-
 import com.baidu.mapapi.map.MyLocationConfiguration;
 import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.map.Overlay;
@@ -103,6 +99,15 @@ private boolean isRunning =false;
     //运动的时间
     private long timeCount;//
     private TextView tv_run_time;
+    /**
+     * 采集周期（单位 : 秒）
+     */
+    private int gatherInterval = 5;
+
+    /**
+     * 打包周期（单位 : 秒）
+     */
+    private int packInterval = 15;
     private Handler handler = new Handler() {
         public void handleMessage(android.os.Message msg) {
             switch (msg.what) {
@@ -234,7 +239,7 @@ private boolean isRunning =false;
         tv_run_time = (TextView) findViewById(R.id.tv_run_time);
         mBaiduMap = mMapView.getMap();
         // 设置采集周期
-        setInterval();
+
         // 设置http请求协议类型
         setRequestType();
         //使用消息处理机制处理消息
@@ -250,6 +255,7 @@ private boolean isRunning =false;
         tv_run_countinue.setOnClickListener(this);
         tv_run_stop.setOnClickListener(this);
         client = ((ToprunnerApplication) getActivity().getApplication()).getClient();
+        setInterval();
         trace = ((ToprunnerApplication) getActivity().getApplication()).getTrace();
     }
 //发送消息
@@ -261,7 +267,7 @@ private boolean isRunning =false;
     }
 
     private void setInterval() {
-
+        client.setInterval(gatherInterval, packInterval);
     }
 
 

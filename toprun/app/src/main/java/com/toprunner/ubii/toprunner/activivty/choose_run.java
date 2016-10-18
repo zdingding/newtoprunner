@@ -1,7 +1,6 @@
 package com.toprunner.ubii.toprunner.activivty;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -19,10 +18,10 @@ import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import com.toprunner.ubii.toprunner.base.BaseActivity;
-import com.toprunner.ubii.toprunner.utils.FastBlur;
 import com.toprunner.ubii.toprunner.R;
+import com.toprunner.ubii.toprunner.base.BaseActivity;
 import com.toprunner.ubii.toprunner.running.RunActivity;
+import com.toprunner.ubii.toprunner.utils.FastBlur;
 
 
 public class choose_run extends BaseActivity implements View.OnClickListener {
@@ -43,10 +42,10 @@ public class choose_run extends BaseActivity implements View.OnClickListener {
         v4 = (ImageView)findViewById(R.id.quwei4);
         s1 = (ImageView)findViewById(R.id.shiwai1);
         s4 = (ImageView)findViewById(R.id.shiwai4);
-                                                                    //0~360度旋转
-        final Animation operatingAnim = AnimationUtils.loadAnimation(this, R.animator.tip);
+                                                                    //0~360度旋转m
+        final Animation operatingAnim = AnimationUtils.loadAnimation(this, R.anim.tip);
                                                                     //360~0度旋转
-        final Animation operatingAnim2 = AnimationUtils.loadAnimation(this, R.animator.tip2);
+        final Animation operatingAnim2 = AnimationUtils.loadAnimation(this, R.anim.tip2);
         LinearInterpolator lin = new LinearInterpolator();
         operatingAnim.setInterpolator(lin);
         operatingAnim2.setInterpolator(lin);

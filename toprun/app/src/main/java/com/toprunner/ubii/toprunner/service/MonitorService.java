@@ -43,8 +43,6 @@ public class MonitorService extends Service {
                 // TODO Auto-generated method stub
 
                 while (isCheck) {
-
-
                     if (!isServiceWork(getApplicationContext(), SERVICE_NAME)) {
                         System.out.println("轨迹服务已停止，重启轨迹服务");
                         if (null != trackApp.getClient() && null != trackApp.getTrace()) {
