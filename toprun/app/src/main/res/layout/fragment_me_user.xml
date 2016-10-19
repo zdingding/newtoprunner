@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/me_user"
-    tools:context=".fragment.me_user">
+    tools:context=".fragment.Me_User">
 
     <LinearLayout
         android:layout_width="match_parent"

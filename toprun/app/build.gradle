@@ -33,7 +33,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.2.1'
     compile 'com.android.support:support-v4:23.2.1'
-    compile 'com.google.android.gms:play-services-appindexing:8.1.0'
+    compile 'com.google.android.gms:play-services-appindexing:8.4.0'
     compile files('libs/baidumap/BaiduLBS_Android.jar')
     compile files('libs/log4j/android-logging-log4j-1.0.3.jar')
     compile files('libs/log4j/log4j-1.2.17.jar')
