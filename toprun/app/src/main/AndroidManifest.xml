@@ -56,7 +56,6 @@
         <activity android:name=".running.RunActivity"/>
         <activity android:name=".activivty.SportdetailsActivity">
 
-
         </activity>
         <activity android:name=".activivty.SplashActivity">
             <intent-filter>

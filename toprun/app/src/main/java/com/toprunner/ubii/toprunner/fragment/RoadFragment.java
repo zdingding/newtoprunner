@@ -1,14 +1,14 @@
 package com.toprunner.ubii.toprunner.fragment;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.Looper;
-import android.os.Message;
+import android.os.PowerManager;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptor;
@@ -29,6 +29,7 @@ import com.baidu.trace.OnStopTraceListener;
 import com.baidu.trace.Trace;
 import com.baidu.trace.TraceLocation;
 import com.toprunner.ubii.toprunner.R;
+import com.toprunner.ubii.toprunner.TrackReceiver;
 import com.toprunner.ubii.toprunner.application.ToprunnerApplication;
 import com.toprunner.ubii.toprunner.base.BaseFragment;
 import com.toprunner.ubii.toprunner.service.MonitorService;
@@ -37,7 +38,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,7 +54,6 @@ public class RoadFragment extends BaseFragment implements View.OnClickListener {
     private Button btnStartTrace = null;
     private Intent serviceIntent = null;
     private Button btnStopTrace = null;
-    private TrackUploadHandler mHandler = null;
     /**
      * 开启轨迹服务监听器
      */
@@ -100,7 +99,11 @@ public class RoadFragment extends BaseFragment implements View.OnClickListener {
     public void setListener() {
 
     }
+    private static boolean isRegister = false;
+    protected static PowerManager pm = null;
 
+    public static PowerManager.WakeLock wakeLock = null;
+    private TrackReceiver trackReceiver = new TrackReceiver();
     @Override
     protected void initView(View view, Bundle savedInstanceState) {
         // 初始化
@@ -109,20 +112,18 @@ public class RoadFragment extends BaseFragment implements View.OnClickListener {
         // 初始化监听器
         initListener();
 
-        client = ((ToprunnerApplication) getActivity().getApplication()).getClient();
 
+        client = ((ToprunnerApplication) getActivity().getApplication()).getClient();
+        // 设置采集周期
+        setInterval();
         // 设置http请求协议类型
         setRequestType();
-        mHandler = new TrackUploadHandler(this);
+
     }
 
     private void setRequestType() {
         int type = 0;
         client.setProtocolType(type);
-
-
-        // 设置采集周期
-        setInterval();
     }
 
     private void setInterval() {
@@ -203,7 +204,6 @@ public class RoadFragment extends BaseFragment implements View.OnClickListener {
         double latitude = entityLocation.getLatitude();
         double longitude = entityLocation.getLongitude();
         if (Math.abs(latitude - 0.0) < 0.000001 && Math.abs(longitude - 0.0) < 0.000001) {
-            mHandler.obtainMessage(-1, "当前查询无轨迹点").sendToTarget();
         } else {
             LatLng latLng = new LatLng(latitude, longitude);
             if (1 == entityLocation.getCoordType()) {
@@ -263,7 +263,6 @@ public class RoadFragment extends BaseFragment implements View.OnClickListener {
             // 轨迹服务停止成功
             public void onStopTraceSuccess() {
                 // TODO Auto-generated method stub
-                mHandler.obtainMessage(1, "停止轨迹服务成功").sendToTarget();
                 startRefreshThread(false);
                 trackApp.getClient().onDestroy();
             }
@@ -293,7 +292,7 @@ public class RoadFragment extends BaseFragment implements View.OnClickListener {
         startTraceListener = new OnStartTraceListener() {
             @Override
             public void onTraceCallback(int i, String s) {
-                mHandler.obtainMessage(i, "开启轨迹服务回调接口消息 [消息编码 : " + i + "，消息内容 : " + s + "]").sendToTarget();
+
             }
 
             // 轨迹服务推送接口（用于接收服务端推送消息
@@ -334,6 +333,21 @@ public class RoadFragment extends BaseFragment implements View.OnClickListener {
         switch (view.getId()) {
             case R.id.btn_startTrace:
                 startTrace();
+                if (!isRegister) {
+                    if (null == pm) {
+                        pm = (PowerManager) trackApp.getSystemService(Context.POWER_SERVICE);
+                    }
+                    if (null == wakeLock) {
+                        wakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "track upload");
+                    }
+                    IntentFilter filter = new IntentFilter();
+                    filter.addAction(Intent.ACTION_SCREEN_OFF);
+                    filter.addAction(Intent.ACTION_SCREEN_ON);
+                    filter.addAction("com.baidu.trace.action.GPS_STATUS");
+                    trackApp.registerReceiver(trackReceiver, filter);
+                    isRegister = true;
+                }
+
                 break;
             case R.id.btn_stopTrace:
                 stopTrace();
@@ -346,10 +360,8 @@ public class RoadFragment extends BaseFragment implements View.OnClickListener {
         // 停止监听service
         MonitorService.isCheck = false;
         MonitorService.isRunning = false;
-
         // 通过轨迹服务客户端client停止轨迹服务
         client.stopTrace(trackApp.getTrace(), stopTraceListener);
-
         if (null != serviceIntent) {
             trackApp.stopService(serviceIntent);
         }
@@ -366,39 +378,6 @@ public class RoadFragment extends BaseFragment implements View.OnClickListener {
         }
     }
 
-    static class TrackUploadHandler extends Handler {
-        WeakReference<RoadFragment> roadUpload;
-
-        TrackUploadHandler(RoadFragment trackUploadFragment) {
-            roadUpload = new WeakReference<RoadFragment>(trackUploadFragment);
-        }
-
-        @Override
-        public void handleMessage(Message msg) {
-            RoadFragment tu = roadUpload.get();
-            Toast.makeText(tu.trackApp, (String) msg.obj, Toast.LENGTH_LONG).show();
-            switch (msg.what) {
-                case 0:
-                case 10006:
-                case 10008:
-                case 10009:
-                    tu.isTraceStarted = true;
-                    tu.btnStartTrace.setBackgroundColor(Color.rgb(0x99, 0xcc, 0xff));
-                    tu.btnStartTrace.setTextColor(Color.rgb(0x00, 0x00, 0xd8));
-                    break;
-
-                case 1:
-                case 10004:
-                    tu.isTraceStarted = false;
-                    tu.btnStartTrace.setBackgroundColor(Color.rgb(0xff, 0xff, 0xff));
-                    tu.btnStartTrace.setTextColor(Color.rgb(0x00, 0x00, 0x00));
-                    break;
-
-                default:
-                    break;
-            }
-        }
-    }
 
     //开启分线程
     protected class RefreshThread extends Thread {

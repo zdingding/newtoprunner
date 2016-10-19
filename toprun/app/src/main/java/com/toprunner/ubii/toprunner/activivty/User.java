@@ -14,7 +14,7 @@ import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.toprunner.ubii.toprunner.R;
-import com.toprunner.ubii.toprunner.fragment.discover;
+import com.toprunner.ubii.toprunner.fragment.DiscoverFragment;
 import com.toprunner.ubii.toprunner.fragment.me_user;
 
 /**
@@ -23,7 +23,7 @@ import com.toprunner.ubii.toprunner.fragment.me_user;
 public class User extends Activity {
 
     private com.toprunner.ubii.toprunner.fragment.me_user me_user;
-    private com.toprunner.ubii.toprunner.fragment.discover discover;
+    private DiscoverFragment DiscoverFragment;
     private FragmentManager fragmentManager;
     private TextView me;
     private TextView start;
@@ -120,12 +120,12 @@ public class User extends Activity {
                 }
                 break;
             case 2:
-                if (discover == null) {
+                if (DiscoverFragment == null) {
                                                                                      // 如果more_fragment为空，则创建一个并添加到界面上
-                    discover = new discover();
-                    transaction.add(R.id.id_title, discover);
+                    DiscoverFragment = new DiscoverFragment();
+                    transaction.add(R.id.id_title, DiscoverFragment);
                 } else {                                                                                     // 如果more_fragment不为空，则直接将它显示出来
-                    transaction.show(discover);
+                    transaction.show(DiscoverFragment);
                 }
                 break;
             default:
@@ -151,8 +151,8 @@ public class User extends Activity {
         if (me_user != null) {
             transaction.hide(me_user);
         }
-        if (discover != null) {
-            transaction.hide(discover);
+        if (DiscoverFragment != null) {
+            transaction.hide(DiscoverFragment);
         }
     }
 

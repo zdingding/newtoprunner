@@ -37,10 +37,9 @@ public class SportdetailsActivity extends AppCompatActivity {
     }
 
     private void initView() {
-
         rg_content_fragment.setOnCheckedChangeListener(new MyOnCheckedChangeListener());
         viewpager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
-
+        viewpager.setOffscreenPageLimit(3);//缓存多页
         viewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {

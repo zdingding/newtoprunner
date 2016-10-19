@@ -237,16 +237,14 @@ private boolean isRunning =false;
         tv_run_countinue = (TextView) findViewById(R.id.tv_run_countinue);
         tv_run_stop = (TextView) findViewById(R.id.tv_run_stop);
         tv_run_time = (TextView) findViewById(R.id.tv_run_time);
+        mMapView.showZoomControls(false);
         mBaiduMap = mMapView.getMap();
         // 设置采集周期
-
         // 设置http请求协议类型
         setRequestType();
         //使用消息处理机制处理消息
         initLocation();
         initMarker();
-
-
     }
 
     protected void initData() {
@@ -254,6 +252,7 @@ private boolean isRunning =false;
         tv_run_start.setOnClickListener(this);
         tv_run_countinue.setOnClickListener(this);
         tv_run_stop.setOnClickListener(this);
+
         client = ((ToprunnerApplication) getActivity().getApplication()).getClient();
         setInterval();
         trace = ((ToprunnerApplication) getActivity().getApplication()).getTrace();

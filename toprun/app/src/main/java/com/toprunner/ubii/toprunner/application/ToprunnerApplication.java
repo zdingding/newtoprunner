@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
+import android.telephony.TelephonyManager;
 import android.widget.Toast;
 
 import com.baidu.mapapi.SDKInitializer;
@@ -50,6 +51,11 @@ public class ToprunnerApplication extends Application {
         SDKInitializer.initialize(mContext);
         // 初始化轨迹服务
         client = new LBSTraceClient(mContext);
+        if(null!=getImei(mContext)){
+            entityName=getImei(mContext);
+        }else{
+            Toast.makeText(mContext,"无法获取Imei码",Toast.LENGTH_SHORT).show();
+        }
         trace = new Trace(mContext, serviceId, entityName, traceType);
         // 设置定位模式
         client.setLocationMode(LocationMode.High_Accuracy);
@@ -98,5 +104,15 @@ public class ToprunnerApplication extends Application {
     public static Thread getMainThread() {
         return mainThread;
     }
-
+    protected static String getImei(Context context) {
+        String mImei = "NULL";
+        try {
+            mImei = ((TelephonyManager) context
+                    .getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();
+        } catch (Exception e) {
+            System.out.println("获取IMEI码失败");
+            mImei = "NULL";
+        }
+        return mImei;
+    }
 }
