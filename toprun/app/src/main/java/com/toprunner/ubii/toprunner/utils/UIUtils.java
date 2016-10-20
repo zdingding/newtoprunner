@@ -3,12 +3,16 @@ package com.toprunner.ubii.toprunner.utils;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.view.View;
 
-import com.baidu.trace.LBSTraceClient;
 import com.toprunner.ubii.toprunner.application.ToprunnerApplication;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 public class UIUtils {
 	//先将BaseApplication中提供出来的所有的变量提供相应的一种获取方式
@@ -72,4 +76,18 @@ public class UIUtils {
 	public static View inflate(int layoutId) {
 		return View.inflate(getContext(), layoutId, null);
 	}
+	/**
+	 * @param url
+	 * @return
+	 */
+	public static Bitmap getLoacalBitmap(String url) {
+		try {
+			FileInputStream fis = new FileInputStream(url);
+			return BitmapFactory.decodeStream(fis);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 }
