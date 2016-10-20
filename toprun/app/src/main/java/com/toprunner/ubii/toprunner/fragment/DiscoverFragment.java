@@ -1,23 +1,27 @@
 package com.toprunner.ubii.toprunner.fragment;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v7.app.AlertDialog;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
-import com.toprunner.ubii.toprunner.activivty.ClipActivity;
 import com.toprunner.ubii.toprunner.R;
+import com.toprunner.ubii.toprunner.activivty.ClipActivity;
 import com.toprunner.ubii.toprunner.base.BaseFragment;
+import com.toprunner.ubii.toprunner.utils.SpUtils;
 import com.toprunner.ubii.toprunner.utils.UIUtils;
 import com.toprunner.ubii.toprunner.view.CircleImageView;
 
@@ -40,9 +44,13 @@ public class DiscoverFragment extends BaseFragment implements View.OnClickListen
     private String photoSavePath;//保存路径
     private String photoSaveName;//图pian名
     private String path;//图片全路径
+    private TextView nickname;
+
     @Override
     protected void initData() {
+
         headimage.setOnClickListener(this);
+        nickname.setOnClickListener(this);
     }
     @Override
     public void setListener() {
@@ -52,6 +60,7 @@ public class DiscoverFragment extends BaseFragment implements View.OnClickListen
     @Override
     protected void initView(View view, Bundle savedInstanceState) {
         headimage = findViewById(R.id.headimage);
+        nickname = findViewById(R.id.nickname);
 
     }
 
@@ -66,6 +75,26 @@ public class DiscoverFragment extends BaseFragment implements View.OnClickListen
         switch (v.getId()){
             case  R.id.headimage:
                 showPopupWindow(headimage);
+            break;
+            case  R.id.nickname:
+                final EditText editText = new EditText(getActivity());
+                editText.setHint(nickname.getText().toString());
+                new AlertDialog.Builder(getActivity())
+                        .setTitle("修改昵称")
+                        .setView(editText)
+                        .setPositiveButton("确定", new DialogInterface.OnClickListener(){
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                //得到新名称
+                                String newName = editText.getText().toString();
+                                //显示输入的名称
+                                nickname.setText(newName);
+                                //保存新名称(sp中)
+                                //sp.edit().putString("lost_name", newName).commit();
+                                SpUtils.getInstance(UIUtils.getContext()).save(SpUtils.LOST_NAME, newName);
+                            }})
+                        .setNegativeButton("取消", null)
+                        .show();
             break;
 
         }

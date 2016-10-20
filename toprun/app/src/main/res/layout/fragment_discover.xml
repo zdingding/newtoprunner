@@ -21,8 +21,10 @@
             android:src="@mipmap/logox"/>
 
         <RelativeLayout
+            android:padding="5dp"
             android:layout_width="match_parent"
             android:layout_height="35dp"
+            android:gravity="center_horizontal"
             android:layout_marginTop="10dp">
 
     <TextView
@@ -31,8 +33,9 @@
         android:layout_width="wrap_content"
         android:layout_centerVertical="true"
         android:textSize="16sp"
+        android:textColor="#FFFFFF"
         android:text="昵称"
-        android:layout_marginLeft="15dp"/>
+       />
         </RelativeLayout>
 
         <RelativeLayout
@@ -113,6 +116,18 @@
             android:text="身高"
             android:layout_marginLeft="15dp"/>
         </RelativeLayout>
+        <com.toprunner.ubii.toprunner.view.MTextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="marquee"
+            android:textSize="18sp"
+            android:background="#ffffff"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:scrollHorizontally="true"
+            android:singleLine="true"
+            android:text="站得更高才可以看的更远，懂得的越多就会得到的越多，所以唯有不断的兖实自己，让自己能像巨人一样拥有强大的体魄，像阿凡提拥有过人的智慧，才能让自己处于不败之地。" />
+
     </LinearLayout>
 
 </FrameLayout>
