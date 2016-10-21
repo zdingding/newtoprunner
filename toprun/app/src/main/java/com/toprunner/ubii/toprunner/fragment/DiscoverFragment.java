@@ -15,12 +15,14 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.NumberPicker;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.toprunner.ubii.toprunner.R;
 import com.toprunner.ubii.toprunner.activivty.ClipActivity;
 import com.toprunner.ubii.toprunner.base.BaseFragment;
+import com.toprunner.ubii.toprunner.utils.CacheUtils;
 import com.toprunner.ubii.toprunner.utils.SpUtils;
 import com.toprunner.ubii.toprunner.utils.UIUtils;
 import com.toprunner.ubii.toprunner.view.CircleImageView;
@@ -45,12 +47,33 @@ public class DiscoverFragment extends BaseFragment implements View.OnClickListen
     private String photoSaveName;//图pian名
     private String path;//图片全路径
     private TextView nickname;
+    private TextView sex_text;
+    private TextView sextext;
+    private String sex;
+    private TextView mHeight;
+    private NumberPicker numberPicker;
+    private float height;//身高
+    private float weight;//体重
+    private int age;//年龄
+    private TextView tv_mHeight;
+    private TextView tv_weight;
+    private TextView num_weight;
+    private TextView tv_age;
+    private TextView text_age;
 
     @Override
     protected void initData() {
-
+          sex = CacheUtils.getString(getActivity(), "sex");
+          sex = CacheUtils.getString(getActivity(), "sex");
+        if(null!=sex){
+            sextext.setText(sex);
+        }
         headimage.setOnClickListener(this);
         nickname.setOnClickListener(this);
+        sex_text.setOnClickListener(this);
+        tv_mHeight.setOnClickListener(this);
+        tv_weight.setOnClickListener(this);
+        tv_age.setOnClickListener(this);
     }
     @Override
     public void setListener() {
@@ -61,6 +84,14 @@ public class DiscoverFragment extends BaseFragment implements View.OnClickListen
     protected void initView(View view, Bundle savedInstanceState) {
         headimage = findViewById(R.id.headimage);
         nickname = findViewById(R.id.nickname);
+        sex_text = findViewById(R.id.sex_text);
+        sextext = findViewById(R.id.sextext);
+        mHeight = findViewById(R.id.mHeight);
+        tv_mHeight = findViewById(R.id.tv_mHeight);
+        tv_weight = findViewById(R.id.tv_weight);
+        num_weight = findViewById(R.id.num_weight);
+        tv_age = findViewById(R.id.tv_age);
+        text_age = findViewById(R.id.text_age);
 
     }
 
@@ -73,6 +104,85 @@ public class DiscoverFragment extends BaseFragment implements View.OnClickListen
     @Override
     public void onClick(View v) {
         switch (v.getId()){
+            case  R.id.tv_age:
+                // 设置年龄
+                numberPicker = new NumberPicker(getActivity());
+                numberPicker.setFocusable(true);
+                numberPicker.setFocusableInTouchMode(true);
+                numberPicker.setMaxValue(150);
+                numberPicker.setValue(Integer.parseInt(text_age.getText().toString()
+                        .trim()));
+                numberPicker.setMinValue(1);
+                new AlertDialog.Builder(getActivity())
+                        .setView(numberPicker)
+                        .setPositiveButton("确定",
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface arg0, int arg1) {
+                                        text_age.setText(numberPicker.getValue() + "");
+                                        age = numberPicker.getValue();
+                                        savePersonalData();
+                                    }
+                                }).show();
+
+
+                break;
+            case  R.id.tv_weight:
+                numberPicker = new NumberPicker(getActivity());
+                numberPicker.setFocusable(true);
+                numberPicker.setFocusableInTouchMode(true);
+                numberPicker.setMaxValue(200);
+                numberPicker.setValue((int) Float.parseFloat(num_weight.getText()
+                        .toString().trim()));
+                numberPicker.setMinValue(20);
+                new AlertDialog.Builder(getActivity())
+                        .setView(numberPicker)
+                        .setPositiveButton("确定",
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface arg0, int arg1) {
+                                        num_weight.setText(numberPicker.getValue() + "");
+                                        weight = numberPicker.getValue();
+                                        savePersonalData();
+                                    }
+                                }).show();
+
+                break;
+            case  R.id.tv_mHeight:
+                numberPicker = new NumberPicker(getActivity());
+                numberPicker.setFocusable(true);
+                numberPicker.setFocusableInTouchMode(true);
+                numberPicker.setMaxValue(200);
+                numberPicker.setValue((int) Float.parseFloat(mHeight.getText()
+                        .toString().trim()));
+                numberPicker.setMinValue(20);
+                new AlertDialog
+                        .Builder(getActivity())
+                        .setView(numberPicker)
+                        .setPositiveButton("确定",
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface arg0, int arg1) {
+                                        mHeight.setText(numberPicker.getValue() + "");
+                                        height = numberPicker.getValue();
+                                        savePersonalData();
+                                    }
+                                }).show();
+
+
+                break;
+            case  R.id.sex_text:
+                // 设置性别
+                final String[] sexlist = { "男", "女" };
+                new AlertDialog.Builder(getActivity()).setItems(sexlist, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        sextext.setText(sexlist[which]);
+                        sex = sexlist[which];
+                        savePersonalData();
+                    }
+                }).show();
+            break;
             case  R.id.headimage:
                 showPopupWindow(headimage);
             break;
@@ -98,6 +208,10 @@ public class DiscoverFragment extends BaseFragment implements View.OnClickListen
             break;
 
         }
+    }
+
+    private void savePersonalData() {
+        CacheUtils.putString(getActivity(),"sex",sex);//保存性别
     }
 
     private void showPopupWindow(View parent) {

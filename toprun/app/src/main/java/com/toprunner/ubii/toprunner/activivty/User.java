@@ -3,11 +3,13 @@ package com.toprunner.ubii.toprunner.activivty;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.toprunner.ubii.toprunner.R;
@@ -33,6 +35,12 @@ public class User extends FragmentActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            //透明状态栏
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            //透明导航栏
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+        }
         setContentView(R.layout.user);
         me = (TextView) findViewById(R.id.ME);
         start = (TextView) findViewById(R.id.start);
@@ -49,18 +57,16 @@ public class User extends FragmentActivity {
             @Override
             public void onClick(View v) {
                 setTabSelection(1);
-
                 Intent intent = new Intent();
-                intent.setClass(User.this, choose_run.class);                   //起始进入user界面
+                intent.setClass(User.this, SportdetailsActivity.class);                   //起始进入user界面
                 startActivity(intent);
+                finish();
             }
         });
         dc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 setTabSelection(2);
-                System.out.println("点击了discover");
-
             }
         });
 
@@ -143,7 +149,7 @@ public class User extends FragmentActivity {
 
     @Override
     public void onStart() {
-        super.onStart();// ATTENTION: This was auto-generated to implement the App Indexing API.
+        super.onStart();
 
 
 

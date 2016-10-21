@@ -53,7 +53,7 @@
         <activity
             android:name=".activivty.choose_run"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
-        <activity android:name=".activivty.run"/>
+        <activity android:name=".activivty.RunningActivity"/>
         <activity android:name=".running.RunActivity"/>
         <activity android:name=".activivty.SportdetailsActivity">
 

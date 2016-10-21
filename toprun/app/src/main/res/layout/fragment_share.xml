@@ -64,15 +64,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="13dp"
                 android:id="@+id/textView24" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="平均配速"
-                android:textColor="#788394"
-                android:textSize="56px"
-                android:layout_above="@+id/textView22"
-                android:layout_centerHorizontal="true"
-                android:id="@+id/textView23" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -112,6 +104,17 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginRight="10dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="平均配速"
+                android:textColor="#788394"
+                android:textSize="56px"
+                android:id="@+id/textView23"
+                android:layout_above="@+id/run_speed"
+                android:layout_toLeftOf="@+id/run_distance"
+                android:layout_toStartOf="@+id/run_distance"/>
 
         </RelativeLayout>
         <RelativeLayout

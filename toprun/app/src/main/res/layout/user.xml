@@ -76,8 +76,6 @@
                 android:textSize="15sp"
                 android:textColor="#ffffff"
                 android:background="@mipmap/start01"/>
-
-
         </FrameLayout>
     </FrameLayout>
 

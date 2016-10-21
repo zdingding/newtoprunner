@@ -16,6 +16,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -39,12 +40,12 @@ import com.baidu.mapapi.utils.DistanceUtil;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.toprunner.ubii.toprunner.utils.Log4j;
 import com.toprunner.ubii.toprunner.R;
 import com.toprunner.ubii.toprunner.fragment.Share;
+import com.toprunner.ubii.toprunner.fragment.twobutton;
 import com.toprunner.ubii.toprunner.running.BaiduLocation;
 import com.toprunner.ubii.toprunner.running.IOnBaiduReceivedLocationCallback;
-import com.toprunner.ubii.toprunner.fragment.twobutton;
+import com.toprunner.ubii.toprunner.utils.Log4j;
 
 import org.apache.log4j.Logger;
 
@@ -52,7 +53,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class run extends AppCompatActivity implements twobutton.onTestListener {
+public class RunningActivity extends AppCompatActivity implements twobutton.onTestListener {
     public int dy = 0;
     public int jaintou_long = 0;
     Button greendrag, share, myback;
@@ -123,6 +124,12 @@ public class run extends AppCompatActivity implements twobutton.onTestListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            //透明状态栏
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            //透明导航栏
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+        }
         SDKInitializer.initialize(getApplicationContext());
         /* 初始化百度地图SDK
          必须在setContentView() 之前调用*/
@@ -285,22 +292,22 @@ public class run extends AppCompatActivity implements twobutton.onTestListener {
         }
         else
         {
-            int hasWriteContactsPermission = ContextCompat.checkSelfPermission(run.this,
+            int hasWriteContactsPermission = ContextCompat.checkSelfPermission(RunningActivity.this,
                     Manifest.permission.ACCESS_FINE_LOCATION);
             if (hasWriteContactsPermission != PackageManager.PERMISSION_GRANTED) {
-                if (!ActivityCompat.shouldShowRequestPermissionRationale(run.this,
+                if (!ActivityCompat.shouldShowRequestPermissionRationale(RunningActivity.this,
                         Manifest.permission.ACCESS_FINE_LOCATION)) {
                     new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            ActivityCompat.requestPermissions(run.this,
+                            ActivityCompat.requestPermissions(RunningActivity.this,
                                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                                     REQUEST_CODE_ASK_PERMISSIONS);
                         }
                     };
                     return;
                 }
-                ActivityCompat.requestPermissions(run.this,
+                ActivityCompat.requestPermissions(RunningActivity.this,
                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                         REQUEST_CODE_ASK_PERMISSIONS);
                 return;
@@ -615,7 +622,7 @@ public class run extends AppCompatActivity implements twobutton.onTestListener {
         client.connect();
         Action viewAction = Action.newAction(
                 Action.TYPE_VIEW, // TODO: choose an action type.
-                "run Page", // TODO: Define a title for the content shown.
+                "RunningActivity Page", // TODO: Define a title for the content shown.
                 // TODO: If you have web page content that matches this app activity's content,
                 // make sure this auto-generated web page URL is correct.
                 // Otherwise, set the URL to null.
@@ -634,7 +641,7 @@ public class run extends AppCompatActivity implements twobutton.onTestListener {
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         Action viewAction = Action.newAction(
                 Action.TYPE_VIEW, // TODO: choose an action type.
-                "run Page", // TODO: Define a title for the content shown.
+                "RunningActivity Page", // TODO: Define a title for the content shown.
                 // TODO: If you have web page content that matches this app activity's content,
                 // make sure this auto-generated web page URL is correct.
                 // Otherwise, set the URL to null.
