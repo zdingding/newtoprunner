@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest package="com.toprunner.ubii.toprunner"
           xmlns:android="http://schemas.android.com/apk/res/android">
+
     <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.READ_LOGS"/>
@@ -31,7 +32,7 @@
     <application
         android:name=".application.ToprunnerApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/logox"
+        android:icon="@mipmap/icon"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -56,35 +57,33 @@
         <activity android:name=".activivty.RunningActivity"/>
         <activity android:name=".running.RunActivity"/>
         <activity android:name=".activivty.SportdetailsActivity">
-
         </activity>
         <activity android:name=".activivty.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
+
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity
-            android:name="com.toprunner.ubii.toprunner.activivty.Guide1Activity"
-        >
+        <activity android:name=".activivty.Guide1Activity">
         </activity>
-        <activity
-            android:name="com.toprunner.ubii.toprunner.activivty.GuideActivity2"
-            >
+        <activity android:name=".activivty.GuideActivity2">
         </activity>
-        <activity
-            android:name="com.toprunner.ubii.toprunner.activivty.GuideActivity3"
-            >
+        <activity android:name=".activivty.GuideActivity3">
         </activity>
-        <activity android:name=".activivty.ClipActivity"></activity>
+        <activity android:name=".activivty.ClipActivity"/>
+
         <service
             android:name="com.baidu.trace.LBSTraceService"
             android:enabled="true"
             android:exported="true"/>
+
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version"/>
 
+        <activity android:name=".activivty.ScanActivity">
+        </activity>
     </application>
 
 </manifest>

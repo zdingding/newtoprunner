@@ -1,5 +1,6 @@
 package com.toprunner.ubii.toprunner.fragment;
 
+import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -7,7 +8,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.v7.app.AlertDialog;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +21,7 @@ import android.widget.TextView;
 
 import com.toprunner.ubii.toprunner.R;
 import com.toprunner.ubii.toprunner.activivty.ClipActivity;
+import com.toprunner.ubii.toprunner.activivty.ScanActivity;
 import com.toprunner.ubii.toprunner.base.BaseFragment;
 import com.toprunner.ubii.toprunner.utils.CacheUtils;
 import com.toprunner.ubii.toprunner.utils.SpUtils;
@@ -60,6 +61,8 @@ public class DiscoverFragment extends BaseFragment implements View.OnClickListen
     private TextView num_weight;
     private TextView tv_age;
     private TextView text_age;
+    private TextView test_scan_qrcode;
+
 
     @Override
     protected void initData() {
@@ -74,6 +77,8 @@ public class DiscoverFragment extends BaseFragment implements View.OnClickListen
         tv_mHeight.setOnClickListener(this);
         tv_weight.setOnClickListener(this);
         tv_age.setOnClickListener(this);
+        test_scan_qrcode.setOnClickListener(this);
+
     }
     @Override
     public void setListener() {
@@ -92,6 +97,7 @@ public class DiscoverFragment extends BaseFragment implements View.OnClickListen
         num_weight = findViewById(R.id.num_weight);
         tv_age = findViewById(R.id.tv_age);
         text_age = findViewById(R.id.text_age);
+        test_scan_qrcode = findViewById(R.id.test_scan_qrcode);
 
     }
 
@@ -104,6 +110,9 @@ public class DiscoverFragment extends BaseFragment implements View.OnClickListen
     @Override
     public void onClick(View v) {
         switch (v.getId()){
+            case  R.id.test_scan_qrcode:
+                startActivity(new Intent(getActivity(), ScanActivity.class));
+                break;
             case  R.id.tv_age:
                 // 设置年龄
                 numberPicker = new NumberPicker(getActivity());

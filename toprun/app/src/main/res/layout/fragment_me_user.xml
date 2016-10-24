@@ -30,7 +30,7 @@
                 android:layout_height="48dp"
                 android:src="@mipmap/massage"
                 android:layout_above="@+id/textView"
-                android:layout_toRightOf="@+id/headimage"
+                android:layout_toRightOf="@id/headimage"
                 android:id="@+id/imageView4"
                 android:layout_marginLeft="10dp" />
             <TextView
@@ -181,7 +181,7 @@
                    app:string_unit="Km"
                    app:is_need_title="true"
                    app:string_title="总长度"
-                   app:is_need_dial="true"
+                   app:is_need_dial="false"
                    android:background="@mipmap/p02"
                    />
            </LinearLayout>

@@ -29,7 +29,7 @@ public class Me_User extends BaseFragment {
         sudu =  findViewById(R.id.sudu);
         bushu =  findViewById(R.id.bushu);
         sudu.setCurrentValues(77);
-        bushu.setCurrentValues(77);
+        bushu.setCurrentValues(33);
     }
 
     @Override

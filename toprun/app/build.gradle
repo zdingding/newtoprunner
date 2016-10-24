@@ -3,7 +3,6 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.3"
-
     defaultConfig {
         applicationId "com.toprunner.ubii.toprunner"
         minSdkVersion 16
@@ -28,6 +27,12 @@ android {
     }
 }
 
+repositories{
+    flatDir{
+        dirs 'libs' //就是你放aar的目录地址
+    }
+}
+
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
@@ -40,4 +45,8 @@ dependencies {
     compile files('libs/fastjson-1.2.5.jar')
     compile project(':sign_calender')
     compile files('libs/BaiduTraceSDK_v2_1_15.jar')
+    compile project(path: ':zxing')
+    compile files('libs/MobCommons-2016.0714.1402.jar')
+    compile name:'SMSSDK-2.1.1',ext:'aar'
+    compile name:'SMSSDKGUI-2.1.1',ext:'aar'
 }

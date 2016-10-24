@@ -1,26 +1,19 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             tools:context=".fragment.DiscoverFragment" android:background="#2C303C"
+              android:orientation="vertical"
+              android:layout_marginTop="50dp"
+              android:background="@mipmap/kapian"
+             tools:context=".fragment.DiscoverFragment"
              android:id="@+id/discover">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:background="#3C3F41"></RelativeLayout>
-
-    <LinearLayout
-        android:layout_marginTop="100dp"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
         <com.toprunner.ubii.toprunner.view.CircleImageView
             android:layout_width="96dp"
             android:layout_height="96dp"
             android:id="@+id/headimage"
             android:layout_gravity="center_horizontal"
-            android:src="@mipmap/logox"/>
+            android:src="@mipmap/icon"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -103,6 +96,9 @@
             android:layout_width="match_parent"
             android:layout_height="35dp"
             android:layout_marginTop="10dp">
+            <com.toprunner.ubii.toprunner.view.CircleImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
         <TextView
             android:id="@+id/tv_weight"
             android:layout_height="wrap_content"
@@ -157,11 +153,10 @@
             android:scrollHorizontally="true"
             android:singleLine="true"
             android:text="站得更高才可以看的更远，懂得的越多就会得到的越多，所以唯有不断的兖实自己，让自己能像巨人一样拥有强大的体魄，像阿凡提拥有过人的智慧，才能让自己处于不败之地。" />
-        <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:src="@mipmap/p02"
-            />
-    </LinearLayout>
+    <TextView
+        android:id="@+id/test_scan_qrcode"
+        style="@style/MatchWrapTv"
+        android:text="扫一扫" />
+</LinearLayout>
 
-</FrameLayout>
+

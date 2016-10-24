@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "D:\\toprun\\newtoprunner\\toprun\\zxing\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi-v4\\qrcode_default_scan_line.png",
+        "source": "D:\\toprun\\newtoprunner\\toprun\\zxing\\build\\intermediates\\exploded-aar\\toprun\\qrcodecore\\unspecified\\res\\mipmap-xxhdpi-v4\\qrcode_default_scan_line.png"
+    },
+    {
+        "merged": "G:\\BGAQRCode-Android-master\\zxing\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi-v4\\qrcode_default_scan_line.png",
+        "source": "G:\\BGAQRCode-Android-master\\zxing\\build\\intermediates\\exploded-aar\\BGAQRCode-Android-master\\qrcodecore\\unspecified\\res\\mipmap-xxhdpi-v4\\qrcode_default_scan_line.png"
+    },
+    {
+        "merged": "G:\\BGAQRCode-Android-master\\zxing\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi-v4\\qrcode_default_grid_scan_line.png",
+        "source": "G:\\BGAQRCode-Android-master\\zxing\\build\\intermediates\\exploded-aar\\BGAQRCode-Android-master\\qrcodecore\\unspecified\\res\\mipmap-xxhdpi-v4\\qrcode_default_grid_scan_line.png"
+    },
+    {
+        "merged": "D:\\toprun\\newtoprunner\\toprun\\zxing\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi-v4\\qrcode_default_grid_scan_line.png",
+        "source": "D:\\toprun\\newtoprunner\\toprun\\zxing\\build\\intermediates\\exploded-aar\\toprun\\qrcodecore\\unspecified\\res\\mipmap-xxhdpi-v4\\qrcode_default_grid_scan_line.png"
+    }
+]

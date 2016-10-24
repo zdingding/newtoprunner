@@ -52,7 +52,7 @@ public class MainActivity extends Activity  {
                 Intent intent = new Intent();
                 intent.setClass(MainActivity.this, DengluActivity.class);//起始进入user界面
                 startActivity(intent);
-                MainActivity.this.finish();
+              //  MainActivity.this.finish();
             }
         });
         register.setOnClickListener(new View.OnClickListener() {

@@ -3,8 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/qrcodecore/qrcodecore.iml" filepath="$PROJECT_DIR$/qrcodecore/qrcodecore.iml" />
       <module fileurl="file://$PROJECT_DIR$/sign_calender/sign_calender.iml" filepath="$PROJECT_DIR$/sign_calender/sign_calender.iml" />
       <module fileurl="file://$PROJECT_DIR$/toprun.iml" filepath="$PROJECT_DIR$/toprun.iml" />
+      <module fileurl="file://$PROJECT_DIR$/zxing/zxing.iml" filepath="$PROJECT_DIR$/zxing/zxing.iml" />
     </modules>
   </component>
 </project>
