@@ -61,7 +61,7 @@
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:src="@mipmap/setting"
-                android:id="@+id/imageView5"
+                android:id="@+id/setting"
                 android:layout_marginRight="20dp"
                 android:layout_alignBottom="@+id/headimage"
                 android:layout_toLeftOf="@+id/headimage"

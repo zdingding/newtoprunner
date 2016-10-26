@@ -132,7 +132,7 @@
             android:src="@mipmap/iconeye"
             android:layout_below="@+id/imageView9"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="20px"
+            android:layout_marginTop="10dp"
             android:id="@+id/imageView10" />
         <ImageView
             android:layout_width="wrap_content"
@@ -158,7 +158,7 @@
             android:textColor="#ffff"
             android:layout_below="@+id/imageView10"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="60px"
+            android:layout_marginTop="30dp"
             android:id="@+id/textView19" />
         <TextView
             android:layout_width="wrap_content"
@@ -172,22 +172,22 @@
             android:id="@+id/textView20" />
         <FrameLayout
             android:layout_width="300dp"
-            android:layout_height="150dp"
+            android:layout_height="130dp"
             android:gravity="bottom"
             android:layout_below="@+id/textView20"
             android:id="@+id/buttonlayout"
             android:layout_centerHorizontal="true">
             <RelativeLayout
                 android:layout_width="300dp"
-                android:layout_height="150dp"
+                android:layout_height="130dp"
                 android:gravity="bottom"
                 android:layout_below="@+id/textView20"
                 android:id="@+id/newrelativelayout"
                 android:layout_centerHorizontal="true">
 
                 <Button
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
                     android:background="@mipmap/goon"
 
                     android:layout_centerHorizontal="true"
@@ -197,7 +197,7 @@
                     android:gravity="center" />
                 <ImageView
                     android:layout_width="wrap_content"
-                    android:layout_height="50dp"
+                    android:layout_height="48dp"
                     android:src="@mipmap/sangejiantou"
                     android:paddingTop="0dp"
                     android:layout_below="@+id/greendrag"
@@ -206,12 +206,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="48px"
+                    android:textSize="18sp"
                     android:text="暂停"
                     android:textColor="#ffff"
                     android:layout_below="@+id/jiantou_long"
-
-                    android:layout_marginLeft="-40dp"
                     android:layout_centerHorizontal="true" />
             </RelativeLayout>
         </FrameLayout>

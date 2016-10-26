@@ -50,7 +50,12 @@
 
         <activity android:name=".activivty.MainActivity"/>
         <activity android:name=".activivty.DengluActivity"/>
-        <activity android:name=".activivty.User"/>
+        <activity android:name=".activivty.User">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
         <activity
             android:name=".activivty.choose_run"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
@@ -59,11 +64,6 @@
         <activity android:name=".activivty.SportdetailsActivity">
         </activity>
         <activity android:name=".activivty.SplashActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
         <activity android:name=".activivty.Guide1Activity">
         </activity>
@@ -83,6 +83,13 @@
             android:value="@integer/google_play_services_version"/>
 
         <activity android:name=".activivty.ScanActivity">
+        </activity>
+        <activity android:name=".activivty.LoginActivity">
+        </activity>
+        <activity android:name=".activivty.SettingActivity">
+
+        </activity>
+        <activity android:name=".activivty.QuanActivity">
         </activity>
     </application>
 

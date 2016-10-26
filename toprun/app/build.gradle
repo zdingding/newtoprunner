@@ -47,6 +47,7 @@ dependencies {
     compile files('libs/BaiduTraceSDK_v2_1_15.jar')
     compile project(path: ':zxing')
     compile files('libs/MobCommons-2016.0714.1402.jar')
-    compile name:'SMSSDK-2.1.1',ext:'aar'
-    compile name:'SMSSDKGUI-2.1.1',ext:'aar'
+    compile name: 'SMSSDK-2.1.1', ext: 'aar'
+    compile name: 'SMSSDKGUI-2.1.1', ext: 'aar'
+    compile 'com.malinskiy:superrecyclerview:1.1.4'
 }
