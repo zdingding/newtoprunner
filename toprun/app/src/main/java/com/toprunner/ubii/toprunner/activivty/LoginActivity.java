@@ -39,7 +39,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 case 1:
                     //获取验证码成功
                     Toast.makeText(LoginActivity.this, msg.obj.toString(), Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(LoginActivity.this, User.class);
+                    Intent intent = new Intent(LoginActivity.this, UserActivity.class);
                     startActivity(intent);
                     finish();
                     break;

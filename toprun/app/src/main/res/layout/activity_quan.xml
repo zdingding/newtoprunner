@@ -14,4 +14,11 @@
         app:mainLayoutId="@layout/layout_recyclerview_verticalscroll"
         app:layout_moreProgress="@layout/view_more_progress"
         ></com.malinskiy.superrecyclerview.SuperRecyclerView>
+
+      <!--  评论框-->
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        layout="@layout/layout_editview"/>
 </RelativeLayout>

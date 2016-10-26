@@ -71,14 +71,14 @@ public class DengluActivity extends Activity {
 
                                 public void onClick(DialogInterface arg0, int arg1) {
                                     Intent intent = new Intent();
-                                    intent.setClass(denglu.this, User.class);
+                                    intent.setClass(denglu.this, UserActivity.class);
                                     startActivity(intent);
                                     denglu.this.finish();
                                 }
                             }).create();
                     dialog1.show();*/
                     Intent intent = new Intent();
-                    intent.setClass(DengluActivity.this, User.class);
+                    intent.setClass(DengluActivity.this, UserActivity.class);
                     startActivity(intent);
                     DengluActivity.this.finish();
                 } else {

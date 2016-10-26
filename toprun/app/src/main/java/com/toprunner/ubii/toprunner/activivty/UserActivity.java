@@ -21,7 +21,7 @@ import com.toprunner.ubii.toprunner.fragment.Me_User;
 /**
  * Created by ly on 2016/4/25.
  */
-public class User extends FragmentActivity {
+public class UserActivity extends FragmentActivity {
 
     private BaseFragment Me_User;
     private BaseFragment DiscoverFragment;
@@ -58,7 +58,7 @@ public class User extends FragmentActivity {
             public void onClick(View v) {
                 setTabSelection(1);
                 Intent intent = new Intent();
-                intent.setClass(User.this, SportdetailsActivity.class);                   //起始进入user界面
+                intent.setClass(UserActivity.this, SportdetailsActivity.class);                   //起始进入user界面
                 startActivity(intent);
                 finish();
             }
