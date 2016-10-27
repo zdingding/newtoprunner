@@ -27,6 +27,7 @@ public class QuanActivity extends AppCompatActivity {
     private EditText editText;
     private ImageView sendIv;
     private SwipeRefreshLayout.OnRefreshListener refreshListener;
+    private CircleAdapter circleAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,8 +74,8 @@ public class QuanActivity extends AppCompatActivity {
             }
         };
         recyclerView.setRefreshListener(refreshListener);
-
-        recyclerView.setAdapter(null);
+        circleAdapter = new CircleAdapter(this);
+        recyclerView.setAdapter(circleAdapter);
     }
 //设置评论框的显示
     private void updateEditTextBodyVisible(int visibility, CommentConfig commentConfig) {

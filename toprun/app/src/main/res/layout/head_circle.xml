@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="240dp"
+                android:background="@mipmap/dingtu">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/rl_bg"
+        android:background="@mipmap/zongji"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/headimage"
+        android:layout_toEndOf="@+id/headimage">
+        <TextView
+            android:id="@+id/pathlenght"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="累计360.5KM"
+            android:layout_centerInParent="true"/>
+    </RelativeLayout>
+
+    <com.toprunner.ubii.toprunner.view.CircleImageView
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:id="@+id/headimage"
+        android:layout_marginLeft="15dp"
+        android:src="@mipmap/icon"
+        android:layout_marginStart="15dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
+</RelativeLayout>

@@ -14,6 +14,7 @@
         app:mainLayoutId="@layout/layout_recyclerview_verticalscroll"
         app:layout_moreProgress="@layout/view_more_progress"
         ></com.malinskiy.superrecyclerview.SuperRecyclerView>
+    <!-- 不同的地方 -->
 
       <!--  评论框-->
     <include
