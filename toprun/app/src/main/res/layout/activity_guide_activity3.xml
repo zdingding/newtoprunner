@@ -3,72 +3,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activivty.GuideActivity3" >
+ <android.support.v4.view.ViewPager
+     android:id="@+id/viewpager"
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+      />
    <Button
         android:id="@+id/btn_guide3_next"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="8dp"
-        android:layout_marginLeft="17dp"
-        android:layout_marginRight="17dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
         android:background="@drawable/shape_search_style"
         android:text="下一步"
+        android:visibility="gone"
         android:textColor="#ffffff" />
 
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/tv_guide"
-        android:layout_alignBottom="@+id/tv_guide"
-        android:layout_marginLeft="30dp"
-        android:background="@android:color/transparent"
-        android:onClick="pre"
-        android:text="上一步"
-        android:textColor="#77000000"
-        android:textSize="15sp" />
 
-    <TextView
-        android:id="@+id/tv_guide"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/btn_guide3_next"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="4dp"
-        android:text="3/3"
-        android:textColor="#55000000"
-        android:textSize="13sp" />
 
-    <TextView
-        android:id="@+id/tv_guide_textview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp"
-        android:text="请您选择感兴趣的内容"
-        android:textSize="20sp" />
 
-    <ImageView
-        android:layout_width="16dp"
-        android:layout_height="16dp"
-        android:layout_alignLeft="@+id/btn_guide3_next"
-        android:layout_alignTop="@+id/tv_guide"
-        android:src="@mipmap/ug_arrow" />
 
-    <GridView
-        android:id="@+id/gv_guide"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/tv_guide"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/tv_guide_textview"
-        android:layout_marginTop="16dp"
-        android:horizontalSpacing="13dp"
-        android:numColumns="4"
-        android:padding="10dp"
-        android:stretchMode="columnWidth"
-        android:verticalSpacing="7dp" >
-    </GridView>
+
+
 
 </RelativeLayout>

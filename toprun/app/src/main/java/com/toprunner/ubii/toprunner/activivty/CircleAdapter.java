@@ -5,6 +5,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.toprunner.ubii.toprunner.R;
 import com.toprunner.ubii.toprunner.activivty.viewholder.CircleViewHolder;
 import com.toprunner.ubii.toprunner.activivty.viewholder.HeaderViewHolder;
@@ -17,9 +19,13 @@ import com.toprunner.ubii.toprunner.utils.UIUtils;
  */
 public class CircleAdapter extends BaseRecycleViewAdapter {
     private Context context;
+    private CirclePresenter presenter;//更新数据
     public final static int TYPE_HEAD = 0;
     public CircleAdapter(Context context){
         this.context = context;
+    }
+    public void setCirclePresenter(CirclePresenter presenter){
+        this.presenter = presenter;
     }
     public int getItemViewType(int position) {
         if(position == 0){
@@ -50,9 +56,12 @@ public class CircleAdapter extends BaseRecycleViewAdapter {
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
         if(getItemViewType(position)==TYPE_HEAD){
-            //HeaderViewHolder holder = (HeaderViewHolder) viewHolder;
+            HeaderViewHolder holder = (HeaderViewHolder) viewHolder;
+            holder.pathlenght.setText("0");
+            Glide.with(context).load(R.mipmap.icon).diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.headimage);
+
         }else {
 
         }

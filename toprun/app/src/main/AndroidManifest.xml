@@ -51,10 +51,6 @@
         <activity android:name=".activivty.MainActivity"/>
         <activity android:name=".activivty.DengluActivity"/>
         <activity android:name=".activivty.UserActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
         <activity
             android:name=".activivty.choose_run"
@@ -64,6 +60,10 @@
         <activity android:name=".activivty.SportdetailsActivity">
         </activity>
         <activity android:name=".activivty.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
         <activity android:name=".activivty.Guide1Activity">
         </activity>

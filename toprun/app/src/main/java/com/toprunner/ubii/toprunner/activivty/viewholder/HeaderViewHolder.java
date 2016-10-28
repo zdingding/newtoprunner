@@ -14,9 +14,9 @@ import com.toprunner.ubii.toprunner.view.CircleImageView;
  */
 
 public class HeaderViewHolder extends RecyclerView.ViewHolder{
-    private final TextView pathlenght;//路长
-    private final CircleImageView headimage;//头像
-    private final RelativeLayout rl_bg;//背景
+    public final TextView pathlenght;//路长
+    public final CircleImageView headimage;//头像
+    public final RelativeLayout rl_bg;//背景
 
     public HeaderViewHolder(View itemView) {
         super(itemView);

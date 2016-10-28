@@ -15,10 +15,11 @@ import android.widget.LinearLayout;
 import com.malinskiy.superrecyclerview.SuperRecyclerView;
 import com.toprunner.ubii.toprunner.R;
 import com.toprunner.ubii.toprunner.bean.CommentConfig;
+import com.toprunner.ubii.toprunner.mvp.contract.CircleContract;
 import com.toprunner.ubii.toprunner.utils.CommonUtils;
 import com.toprunner.ubii.toprunner.widgets.DivItemDecoration;
 
-public class QuanActivity extends AppCompatActivity {
+public class QuanActivity extends AppCompatActivity implements CircleContract.View {
     protected static final String TAG = MainActivity.class.getSimpleName();
     private SuperRecyclerView recyclerView;
     private LinearLayoutManager layoutManager;
@@ -28,10 +29,12 @@ public class QuanActivity extends AppCompatActivity {
     private ImageView sendIv;
     private SwipeRefreshLayout.OnRefreshListener refreshListener;
     private CircleAdapter circleAdapter;
+    private CirclePresenter presenter;//数据
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quan);
+        presenter = new CirclePresenter(this);//设置数据
         initView();
         //实现自动下拉刷新功能
         recyclerView.getSwipeToRefresh().post(new Runnable(){
@@ -73,12 +76,14 @@ public class QuanActivity extends AppCompatActivity {
                 }, 2000);
             }
         };
+
         recyclerView.setRefreshListener(refreshListener);
         circleAdapter = new CircleAdapter(this);
+        circleAdapter.setCirclePresenter(presenter);
         recyclerView.setAdapter(circleAdapter);
     }
 //设置评论框的显示
-    private void updateEditTextBodyVisible(int visibility, CommentConfig commentConfig) {
+    public void updateEditTextBodyVisible(int visibility, CommentConfig commentConfig) {
         this.commentConfig = commentConfig;
         edittextbody.setVisibility(visibility);
         measureCircleItemHighAndCommentItemOffset(commentConfig);
