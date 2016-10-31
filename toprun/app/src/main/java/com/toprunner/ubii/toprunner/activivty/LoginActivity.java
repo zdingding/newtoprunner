@@ -39,9 +39,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 case 1:
                     //获取验证码成功
                     Toast.makeText(LoginActivity.this, msg.obj.toString(), Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(LoginActivity.this, UserActivity.class);
-                    startActivity(intent);
-                    finish();
                     break;
                 case 2:
                     //返回支持发送验证码的国家列表
@@ -84,6 +81,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         msg.obj = data;
                         handler.sendMessage(msg);
                         Log.d(TAG, "提交验证码成功");
+                        Toast.makeText(LoginActivity.this,"注册成功",Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(LoginActivity.this, UserActivity.class);
+                        startActivity(intent);
+                        finish();
                     } else if (event == SMSSDK.EVENT_GET_VERIFICATION_CODE) {
                         Message msg = new Message();
                         //获取验证码成功

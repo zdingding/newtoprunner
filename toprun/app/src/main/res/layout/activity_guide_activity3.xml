@@ -9,6 +9,7 @@
      android:layout_height="wrap_content"
       />
    <Button
+       android:visibility="gone"
         android:id="@+id/btn_guide3_next"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -18,7 +19,6 @@
         android:layout_marginRight="16dp"
         android:background="@drawable/shape_search_style"
         android:text="下一步"
-        android:visibility="gone"
         android:textColor="#ffffff" />
 
 

@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
@@ -13,16 +12,18 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.toprunner.ubii.toprunner.R;
+import com.toprunner.ubii.toprunner.base.BaseActivity;
 import com.toprunner.ubii.toprunner.base.BaseFragment;
 import com.toprunner.ubii.toprunner.fragment.DiscoverFragment;
 import com.toprunner.ubii.toprunner.fragment.Me_User;
 
 
+
 /**
  * Created by ly on 2016/4/25.
  */
-public class UserActivity extends FragmentActivity {
-
+public class UserActivity extends BaseActivity {
+    private static final int SPORTDETAIL = 1;
     private BaseFragment Me_User;
     private BaseFragment DiscoverFragment;
     private TextView me;
@@ -59,7 +60,7 @@ public class UserActivity extends FragmentActivity {
                 setTabSelection(1);
                 Intent intent = new Intent();
                 intent.setClass(UserActivity.this, SportdetailsActivity.class);                   //起始进入user界面
-                startActivity(intent);
+                startActivityForResult(intent,SPORTDETAIL);
                 finish();
             }
         });
@@ -69,7 +70,6 @@ public class UserActivity extends FragmentActivity {
                 setTabSelection(2);
             }
         });
-
     }
 
 
@@ -148,11 +148,18 @@ public class UserActivity extends FragmentActivity {
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode){
+            case  SPORTDETAIL:
+             int i=0  ;
+        }
+
+    }
+
+    @Override
     public void onStart() {
         super.onStart();
-
-
-
     }
 
     @Override
