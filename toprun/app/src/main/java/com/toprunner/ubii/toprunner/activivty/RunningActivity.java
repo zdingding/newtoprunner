@@ -29,7 +29,6 @@ import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
 import com.baidu.mapapi.map.MapPoi;
-import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.MyLocationConfiguration;
 import com.baidu.mapapi.map.MyLocationData;
@@ -43,8 +42,6 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.toprunner.ubii.toprunner.R;
 import com.toprunner.ubii.toprunner.fragment.Share;
 import com.toprunner.ubii.toprunner.fragment.twobutton;
-import com.toprunner.ubii.toprunner.running.BaiduLocation;
-import com.toprunner.ubii.toprunner.running.IOnBaiduReceivedLocationCallback;
 import com.toprunner.ubii.toprunner.utils.Log4j;
 
 import org.apache.log4j.Logger;
@@ -63,7 +60,6 @@ public class RunningActivity extends AppCompatActivity implements twobutton.onTe
     private BaiduMap mBaiduMap = null;
 
     private TextView tvTitle;
-    private BaiduLocation locationClient; // 百度地图定位变量
     private float distanceComplete = 0f; // 跑过的里程
     private long startTime = 0; // 开跑时间 单位：ms
     private long timePast = 0; // 已经跑过的时间 单位：s
@@ -82,7 +78,6 @@ public class RunningActivity extends AppCompatActivity implements twobutton.onTe
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
     private GoogleApiClient client;
-
     private void startTimer() {
         if (startTime == 0) {
             startTime = System.currentTimeMillis();
@@ -111,7 +106,6 @@ public class RunningActivity extends AppCompatActivity implements twobutton.onTe
         handler.postDelayed(timer, 1000);
         logger.debug("Timer Started");
     }
-
     private void stopTimer() {
         if (timer != null) {
             handler.removeCallbacks(timer);
@@ -120,7 +114,6 @@ public class RunningActivity extends AppCompatActivity implements twobutton.onTe
         susTime = System.currentTimeMillis();
         logger.debug("Timer Stopped.");
     }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -151,16 +144,9 @@ public class RunningActivity extends AppCompatActivity implements twobutton.onTe
         tvTimer = (TextView) findViewById(R.id.textView16);
         tvspeed = (TextView) findViewById(R.id.textView18);
 
-        initLog(); // 开启Log系统
         insertDummyContactWrapper();
-        //   initMapView(); // 定位
-        locationClient.startLocate();
-        logger.debug("OnCreate");
-
         final ImageView l = (ImageView) findViewById(R.id.jiantou_long);
         final RelativeLayout.LayoutParams linearParams = (RelativeLayout.LayoutParams) l.getLayoutParams(); // 取控件mGrid当前的布局参数
-
-
         myback = (Button) findViewById(R.id.myback);
         myback.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -168,15 +154,12 @@ public class RunningActivity extends AppCompatActivity implements twobutton.onTe
                 onBackPressed();
             }
         });
-
         greendrag = (Button) findViewById(R.id.greendrag);
         greendrag.setOnTouchListener(new View.OnTouchListener() {
             //private float startX = 0;
             private float startY = 0;
-
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN: {
                         // startX = event.getRawX();
@@ -258,14 +241,6 @@ public class RunningActivity extends AppCompatActivity implements twobutton.onTe
     }
 
 
-    private void initLog() {
-        log4j = new Log4j();
-        log4j.configLog();
-        logger = log4j.logger;
-        logger.debug("——————————————————————————————————————————————————————————————————");
-        logger.debug("日志系统初始化完毕");
-    }
-
 
     final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
 
@@ -280,18 +255,7 @@ public class RunningActivity extends AppCompatActivity implements twobutton.onTe
        }
    */
     private void insertDummyContactWrapper() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-        {
-            int hasWriteContactPermission = checkSelfPermission(android.Manifest.permission.ACCESS_FINE_LOCATION);
-            if(hasWriteContactPermission != PackageManager.PERMISSION_GRANTED)
-            {
-                requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION},REQUEST_CODE_ASK_PERMISSIONS);
-                return;
-            }
-            initMapView();
-        }
-        else
-        {
+
             int hasWriteContactsPermission = ContextCompat.checkSelfPermission(RunningActivity.this,
                     Manifest.permission.ACCESS_FINE_LOCATION);
             if (hasWriteContactsPermission != PackageManager.PERMISSION_GRANTED) {
@@ -312,50 +276,9 @@ public class RunningActivity extends AppCompatActivity implements twobutton.onTe
                         REQUEST_CODE_ASK_PERMISSIONS);
                 return;
             }
-            initMapView();
         }
 
-    }
 
-    // 定位信息
-    private void initMapView() {
-
-        locationClient = new BaiduLocation(this);
-        // 设置定位数据回调
-        locationClient.initLocate(new IOnBaiduReceivedLocationCallback() {
-            @Override
-            public void onReceivedLocation(BDLocation bdLocation) {
-                System.out.println("进入步骤2");
-                logger.debug("进入步骤2");
-                try {
-                    // 更新地图
-
-                    updatePlayerAvatar(bdLocation);
-                    drawTrace(bdLocation);
-                    String debugString = String.format("Loc(%d):(%f, %f) dir:%d\n",
-                            bdLocation.getLocType(),
-                            bdLocation.getLatitude(),
-                            bdLocation.getLongitude(),
-                            ((int) bdLocation.getDirection()));
-                    // GPS定位时显示移动速度（仅在GPS定位下可用）和连接的卫星数量
-                    if (bdLocation.getLocType() == BDLocation.TypeGpsLocation) {
-                        debugString += String.format("GpsSpeed:%s SatelliteNum:%d\n", bdLocation.getSpeed(), bdLocation.getSatelliteNumber());
-                    }
-                    logger.trace(debugString);
-                    logger.debug("更新定位数据");
-                } catch (Exception e) {
-                    logger.error(e);
-                    logger.debug("更新定位数据失败");
-                }
-            }
-
-        });
-        setOnClickMap();
-
-        mBaiduMap.animateMapStatus(MapStatusUpdateFactory.zoomTo(17));
-        mMapView.showZoomControls(false);
-        logger.debug("地图View初始化完毕");
-    }
 
     // 单击事件
     private void setOnClickMap() {
@@ -514,9 +437,8 @@ public class RunningActivity extends AppCompatActivity implements twobutton.onTe
         // randomDistance = new Random(startTime);
         prePosition = null;
         isDrawingTrace = true;
-        locationClient.startLocate();
         startTimer();
-        logger.debug("开始定位，绘制Trace。");
+
     }
 
     private void stopDrawTrace() {
@@ -595,7 +517,6 @@ public class RunningActivity extends AppCompatActivity implements twobutton.onTe
         super.onDestroy();
         mMapView.onDestroy();
         mMapView = null;
-        locationClient.stopLocate();
         logger.debug("OnDestroy");
     }
 

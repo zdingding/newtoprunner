@@ -8,11 +8,18 @@ import android.telephony.TelephonyManager;
 import android.widget.Toast;
 
 import com.baidu.mapapi.SDKInitializer;
+import com.baidu.mapapi.map.MapView;
 import com.baidu.trace.LBSTraceClient;
 import com.baidu.trace.LocationMode;
 import com.baidu.trace.Trace;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.lang.ref.WeakReference;
+
+import cn.sharesdk.framework.ShareSDK;
 
 /**
  * Created by ${赵鼎} on 2016/9/19 0019.
@@ -48,7 +55,10 @@ public class ToprunnerApplication extends Application {
     public void onCreate() {
         super.onCreate();
         mContext = getApplicationContext();
+        ShareSDK.initSDK(mContext,"18880eaf53a64");
         SDKInitializer.initialize(mContext);
+        MapView.setMapCustomEnable(true);
+        setMapCustomFile(mContext);//设置地图颜色 在文件中修改
         // 初始化轨迹服务
         client = new LBSTraceClient(mContext);
         if(null!=getImei(mContext)){
@@ -115,5 +125,41 @@ public class ToprunnerApplication extends Application {
         }
         return mImei;
     }
-    
+    //设置个性化
+    private void setMapCustomFile(Context context) {
+        // TODO Auto-generated method stub
+        FileOutputStream out = null;
+        InputStream inputStream = null;
+        String moduleName = null;
+        try {
+            inputStream = context.getAssets()
+                    .open("customConfigdir/custom_config.txt");
+            byte[] b = new byte[inputStream.available()];
+            inputStream.read(b);
+
+            moduleName = context.getFilesDir().getAbsolutePath();
+            File f = new File(moduleName + "/" + "custom_config.txt");
+            if (f.exists()) {
+                f.delete();
+            }
+            f.createNewFile();
+            out = new FileOutputStream(f);
+            out.write(b);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (inputStream != null) {
+                    inputStream.close();
+                }
+                if (out != null) {
+                    out.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        MapView.setCustomMapStylePath(moduleName + "/custom_config.txt");
+    }
 }

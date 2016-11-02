@@ -3,6 +3,7 @@ package com.toprunner.ubii.toprunner.fragment;
 import android.os.Bundle;
 import android.view.View;
 
+import com.baidu.mapapi.model.LatLng;
 import com.toprunner.ubii.toprunner.R;
 import com.toprunner.ubii.toprunner.base.BaseFragment;
 
@@ -12,8 +13,6 @@ import com.toprunner.ubii.toprunner.base.BaseFragment;
  */
 
 public class RoadFragment extends BaseFragment implements View.OnClickListener {
-
-
 
 
     @Override

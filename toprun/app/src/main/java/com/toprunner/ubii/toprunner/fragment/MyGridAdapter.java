@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import com.toprunner.ubii.toprunner.R;
 import com.toprunner.ubii.toprunner.base.BaseViewHolder;
+import com.toprunner.ubii.toprunner.utils.CacheUtils;
+import com.toprunner.ubii.toprunner.utils.UIUtils;
 
 /**
  * Created by ${赵鼎} on 2016/10/7 0007.
@@ -18,7 +20,7 @@ public class MyGridAdapter extends BaseAdapter {
     private Context mContext;
 
     public String[] img_text = {"全程距离：公里", "配速：分钟/公里", "全程耗时", "消耗大卡", "步频：分钟", "总步数"};
-    public String[] img_text2 = {"5公里", "07:01", "00:57:00", "374", "172", "6081"};
+    public String[] img_text2 = {"5公里", "07:01", CacheUtils.getString(UIUtils.getContext(),"time"), "374", "172", "81"};
     public int[] imgs = {R.mipmap.ren, R.mipmap.peisu,
             R.mipmap.daohang, R.mipmap.reliang,
             R.mipmap.bushu, R.mipmap.bupin

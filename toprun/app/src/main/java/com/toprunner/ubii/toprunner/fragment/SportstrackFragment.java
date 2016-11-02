@@ -4,9 +4,12 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.SystemClock;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Chronometer;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,6 +27,8 @@ import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.MyLocationConfiguration;
 import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.map.Overlay;
+import com.baidu.mapapi.map.OverlayOptions;
+import com.baidu.mapapi.map.Polyline;
 import com.baidu.mapapi.map.PolylineOptions;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.trace.LBSTraceClient;
@@ -32,10 +37,12 @@ import com.baidu.trace.OnStartTraceListener;
 import com.baidu.trace.Trace;
 import com.baidu.trace.TraceLocation;
 import com.toprunner.ubii.toprunner.R;
+import com.toprunner.ubii.toprunner.activivty.MultiMapAcitivity;
 import com.toprunner.ubii.toprunner.application.ToprunnerApplication;
 import com.toprunner.ubii.toprunner.base.BaseFragment;
 import com.toprunner.ubii.toprunner.listener.MyOrientationListener;
 import com.toprunner.ubii.toprunner.service.MonitorService;
+import com.toprunner.ubii.toprunner.utils.CacheUtils;
 import com.toprunner.ubii.toprunner.utils.UIUtils;
 
 import org.json.JSONArray;
@@ -58,12 +65,15 @@ public class SportstrackFragment extends BaseFragment implements View.OnClickLis
     private double mLongtitude;//定位的做标
     private boolean isFirstIn = true;
     List< LatLng > pointstwo = new ArrayList< LatLng >();
+
+    LatLng p1 = new LatLng(40.0554280000,116.3076540000);
+    LatLng p2 = new LatLng(40.0583690000,116.3064860000);
+    LatLng p3 = new LatLng(40.0589870000,116.3095670000);
+    LatLng p4 = new LatLng(40.0561740000,116.3109060000);
     // 自定义定位图标
     private BitmapDescriptor mIconLocation;
    private MyOrientationListener myOrientationListener;
     private float mCurrentX;
-    private MyLocationConfiguration.LocationMode mlocationMode;
-
     private BitmapDescriptor mMarker;
     private RelativeLayout mMarkerLy;
     // 定位相关
@@ -79,8 +89,8 @@ public class SportstrackFragment extends BaseFragment implements View.OnClickLis
     protected static MapStatusUpdate msUpdate = null;
     // 路线覆盖物
     private static PolylineOptions polyline = null;
-    //轨迹相关
-    private Button btnStartTrace = null;
+    //卫星
+    private RadioButton statellite = null;
     /**
      * 开启轨迹服务监听器
      */
@@ -94,11 +104,12 @@ public class SportstrackFragment extends BaseFragment implements View.OnClickLis
      */
     private boolean isComplete =false;
     private Intent serviceIntent = null;
+    private  long startTimer = 0;// 开始时间
 //运动状态
 private boolean isRunning =false;
     //运动的时间
     private long timeCount;//
-    private TextView tv_run_time;
+    private Chronometer tv_run_time;
     /**
      * 采集周期（单位 : 秒）
      */
@@ -114,7 +125,6 @@ private boolean isRunning =false;
                 case REQUESTLOCATING: // 处理重复定位 定时定位 一秒定位一次
                     if(isRunning){
                         //秒表跑的实现方法
-                        updatetime();
                         //运动距离
                         //平均速度
                         //消耗卡路里
@@ -131,12 +141,7 @@ private boolean isRunning =false;
         }
     };
 
-        //秒表
-    private void updatetime() {
-        timeCount = timeCount + 1000;
-        tv_run_time.setText(timeCount+"");
 
-    }
 
     private LBSTraceClient client;
     private Trace trace;
@@ -146,7 +151,8 @@ private boolean isRunning =false;
     private LinearLayout ll_bottom;
     private TextView tv_run_countinue;
     private TextView tv_run_stop;
-
+    // 普通折线，点击时改变宽度
+    Polyline mPolyline;
     @Override
     public void setListener() {
         mLocationListener = new MyLocationListener();//定位成功以后的回调
@@ -193,6 +199,9 @@ private boolean isRunning =false;
             case R.id.tv_run_start://点击了開始跑步
                 Toast.makeText(getActivity(), "正在开启轨迹服务，请稍候", Toast.LENGTH_LONG).show();
                 //开启轨迹
+               initfolling();
+                tv_run_time.setBase(SystemClock.elapsedRealtime());
+                tv_run_time.start();
                 startTrace();
                 //正在跑
                 isRunning = true;
@@ -205,24 +214,44 @@ private boolean isRunning =false;
                 String text = tv_run_countinue.getText().toString();
                 if ("继续".equals(text)) {
                     isRunning = true;
-
                     sendRequestLocation();
-
+                    tv_run_time.start();
                     tv_run_countinue.setText(R.string.run_pause);
                 } else {
                     tv_run_countinue.setText(R.string.run_countinue);
+                    tv_run_time.stop();
                     isRunning = false;
                 }
                 break;
             case R.id.tv_run_stop:
                 isRunning = false;
                 isComplete = true;
+                String format = tv_run_time.getFormat();
+                CacheUtils.putString(getActivity(),"time",format);
+                tv_run_time.stop();
+                tv_run_time.setBase(SystemClock.elapsedRealtime());
                 ll_bottom.setVisibility(View.GONE);
                 tv_run_start.setText("保存数据");
                 tv_run_start.setVisibility(View.VISIBLE);
                 handler.sendEmptyMessage(SAVEDATA);
                 break;
+            case R.id.statellite:
+              //  if (checked) {
+                    mBaiduMap.setMapType(BaiduMap.MAP_TYPE_SATELLITE);
+              //  }else{
+                    mBaiduMap.setMapType(BaiduMap.MAP_TYPE_NORMAL);
+              //  }
+                break;
+            case R.id.btn_stopTrace:
+                Intent intent =new Intent(getActivity(),MultiMapAcitivity.class);
+                startActivity(intent);
+                break;
         }
+    }
+
+    private void initfolling() {
+        mBaiduMap.setMyLocationConfigeration( new MyLocationConfiguration(
+                MyLocationConfiguration.LocationMode.FOLLOWING, true, mIconLocation));
     }
 
 
@@ -230,15 +259,16 @@ private boolean isRunning =false;
     protected void initView(View view, Bundle savedInstanceState) {
         mMapView = (MapView) findViewById(R.id.run_baidu_map);
         btn_mylocation = (Button)findViewById(R.id.btn_mylocation);
-        btnStartTrace = (Button) view.findViewById(R.id.btn_startTrace);
+        statellite = (RadioButton) view.findViewById(R.id.statellite);//卫星地图
         btn_stopTrace = (Button) view.findViewById(R.id.btn_stopTrace);
         tv_run_start = (TextView) view.findViewById(R.id.tv_run_start);
         ll_bottom = findViewById(R.id.ll_bottom);
         tv_run_countinue = (TextView) findViewById(R.id.tv_run_countinue);
         tv_run_stop = (TextView) findViewById(R.id.tv_run_stop);
-        tv_run_time = (TextView) findViewById(R.id.tv_run_time);
-        mMapView.showZoomControls(false);
+        tv_run_time = (Chronometer) findViewById(R.id.tv_run_time);
+        mMapView.showZoomControls(false);//不缩放
         mBaiduMap = mMapView.getMap();
+        drawline();
         // 设置采集周期
         // 设置http请求协议类型
         setRequestType();
@@ -247,12 +277,20 @@ private boolean isRunning =false;
         initMarker();
     }
 
+    private void drawline() {
+        //定义覆盖物
+        //设置覆盖物数据
+        //添加覆盖物
+        //刷新
+    }
+
     protected void initData() {
         //开始运动
         tv_run_start.setOnClickListener(this);
         tv_run_countinue.setOnClickListener(this);
         tv_run_stop.setOnClickListener(this);
-
+        statellite.setOnClickListener(this);
+        btn_stopTrace.setOnClickListener(this);
         client = ((ToprunnerApplication) getActivity().getApplication()).getClient();
         setInterval();
         trace = ((ToprunnerApplication) getActivity().getApplication()).getTrace();
@@ -357,13 +395,28 @@ private boolean isRunning =false;
     }
 
     private void initMarker() {
+        List<LatLng> points = new ArrayList<LatLng>();
+        points.add(p1);
+        points.add(p2);
+        points.add(p3);
+        points.add(p4);
+        points.add(p1);
+         int[] color = { 0xFFFBE01C, 0xFFE1E618, 0xFF7DFF00, 0xffDE2C00 };
+        List<Integer> colorList = new ArrayList<Integer>();
+        for(int i=0;i<points.size();i++){
+            colorList.add(color[i%4]);
+        }
+        colorList.add(color[0]);
+        OverlayOptions ooPolyline = new PolylineOptions().width(10)
+                .colorsValues(colorList).points(points);
+        mPolyline = (Polyline) mBaiduMap.addOverlay(ooPolyline);
+
     }
 
     private void initLocation() {
         // 初始化图标
         mIconLocation = BitmapDescriptorFactory
                 .fromResource(R.mipmap.navi_map_gps_locked);
-        mlocationMode = MyLocationConfiguration.LocationMode.NORMAL;
         mlocationClient = new LocationClient(UIUtils.getContext());
         mLocationListener = new MyLocationListener();
         mlocationClient.registerLocationListener(mLocationListener);
@@ -443,11 +496,9 @@ private boolean isRunning =false;
             // 更新经纬度
             mLatitude = bdLocation.getLatitude();
             mLongtitude = bdLocation.getLongitude();
-
+                initlocationMode();
             // 设置自定义图标
-            MyLocationConfiguration config = new MyLocationConfiguration(
-                    mlocationMode, true, mIconLocation);
-           mBaiduMap.setMyLocationConfigeration(config);
+
             if (isFirstIn)
             {
                 isFirstIn = false;
@@ -457,6 +508,11 @@ private boolean isRunning =false;
                         Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    private void initlocationMode() {
+        mBaiduMap.setMyLocationConfigeration( new MyLocationConfiguration(
+                MyLocationConfiguration.LocationMode.NORMAL, true, mIconLocation));
     }
 
     private void cebterToMyLocation() {
@@ -480,5 +536,32 @@ private boolean isRunning =false;
                     .color(Color.RED).points(pointList);
         }
 
+    }
+    /**
+     * 得到一个格式化的时间
+     *
+     * @param time
+     *            时间 毫秒
+     * @return 时：分：秒：毫秒
+     */
+    private String getFormatTime(long time) {
+        time = time / 1000;
+        long second = time % 60;
+        long minute = (time % 3600) / 60;
+        long hour = time / 3600;
+
+        // 毫秒秒显示两位
+        // String strMillisecond = "" + (millisecond / 10);
+        // 秒显示两位
+        String strSecond = ("00" + second)
+                .substring(("00" + second).length() - 2);
+        // 分显示两位
+        String strMinute = ("00" + minute)
+                .substring(("00" + minute).length() - 2);
+        // 时显示两位
+        String strHour = ("00" + hour).substring(("00" + hour).length() - 2);
+
+        return strHour + ":" + strMinute + ":" + strSecond;
+        // + strMillisecond;
     }
 }

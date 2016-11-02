@@ -53,5 +53,11 @@
         <item name="android:paddingBottom">8dp</item>
     </style>
 
+    <style name="TipsOrModerateTextStyle">
+        <item name="android:textSize">@dimen/text_tips_size</item>
+        <item name="android:textColor">@color/base_grey_moderate</item>
+    </style>
 
+
+    <dimen name="text_tips_size">12.0sp</dimen>
 </resources>

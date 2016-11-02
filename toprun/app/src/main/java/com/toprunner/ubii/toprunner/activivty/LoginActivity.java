@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -13,6 +12,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.toprunner.ubii.toprunner.R;
+import com.toprunner.ubii.toprunner.base.BaseActivity;
 import com.toprunner.ubii.toprunner.utils.CountDownTimerUtils;
 
 import cn.smssdk.EventHandler;
@@ -22,9 +22,8 @@ import static cn.smssdk.SMSSDK.getSupportedCountries;
 import static cn.smssdk.SMSSDK.getVerificationCode;
 import static cn.smssdk.SMSSDK.submitVerificationCode;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
-    private final String TAG="--MainActivity--";
-    //app key和app secret 需要填自己应用的对应的！这里只是我自己创建的应用。
+public class LoginActivity extends BaseActivity implements View.OnClickListener {
+    private final String TAG="--LoginActivity--";
     private final String appKey="1788306145140";
     private final String appSecret="8313e129f4f79ef64cf20cb02de98c3c";
     private EventHandler eh;

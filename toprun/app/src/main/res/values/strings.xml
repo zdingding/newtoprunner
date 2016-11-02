@@ -7,4 +7,15 @@
     <string name="run_pause">暂停</string>
     <string name="wt_time_yesterday">昨天</string>
     <string name="run_countinue">继续</string>
+    <string name="open_sound_title">是否打开语音提示</string>
+    <string name="open_sound_update">自动检查更新关闭</string>
+    <string name="open_sound_music">设置背景音乐</string>
+    <string name="open_sound_tip">语音提示开启</string>
+    <string name="logout_label">退出登陆</string>
+    <string name="about">关于领跑者</string>
+    <string name="open_daohang">导航</string>
+    <string name="open_daohangtishi">导航开启</string>
+    <string name="jiluguiji">记录轨迹</string>
+    <string name="open">开启</string>
+    <string name="close">关闭</string>
 </resources>

@@ -1,9 +1,8 @@
 package com.toprunner.ubii.toprunner.bean;
 
 /**
- * Created by ${赵鼎} on 2016/10/26 0026.
+ * 评论人的信息
  */
-
 public class CommentConfig {
     public static enum Type{
         PUBLIC("public"), REPLY("reply");

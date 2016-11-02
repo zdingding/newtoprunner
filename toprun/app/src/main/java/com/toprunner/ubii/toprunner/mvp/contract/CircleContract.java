@@ -14,6 +14,8 @@ public interface CircleContract {
     }
     interface Presenter{
         void loadData(int loadType);//加载数据
+
+
         //删除
         //评论
         //点赞

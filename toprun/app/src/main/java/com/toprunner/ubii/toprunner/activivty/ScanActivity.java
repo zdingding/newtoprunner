@@ -18,7 +18,9 @@ import cn.bingoogolapple.qrcode.core.QRCodeView;
 import cn.bingoogolapple.qrcode.zxing.QRCodeDecoder;
 import cn.bingoogolapple.qrcode.zxing.ZXingView;
 
-
+/**
+ * 扫描
+ */
 public class ScanActivity extends AppCompatActivity implements QRCodeView.Delegate, View.OnClickListener {
     private static final String TAG = ScanActivity.class.getSimpleName();
     private static final int REQUEST_CODE_CHOOSE_QRCODE_FROM_GALLERY = 666;

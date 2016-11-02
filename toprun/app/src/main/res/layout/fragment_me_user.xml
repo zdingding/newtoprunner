@@ -25,14 +25,7 @@
             android:layout_centerHorizontal="true"
             android:layout_gravity="center_horizontal|top"
             android:id="@+id/headimage" />
-            <ImageView
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:src="@mipmap/massage"
-                android:layout_above="@+id/textView"
-                android:layout_toRightOf="@id/headimage"
-                android:id="@+id/imageView4"
-                android:layout_marginLeft="10dp" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -56,16 +49,6 @@
                 android:layout_centerHorizontal="true"
                 android:text="站得更高才可以看的更远，懂得的越多就会得到的越多，所以唯有不断的兖实自己，让自己能像巨人一样拥有强大的体魄，像阿凡提拥有过人的智慧，才能让自己处于不败之地。" />
 
-
-            <ImageView
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:src="@mipmap/setting"
-                android:id="@+id/setting"
-                android:layout_marginRight="20dp"
-                android:layout_alignBottom="@+id/headimage"
-                android:layout_toLeftOf="@+id/headimage"
-                android:layout_marginEnd="20dp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -133,6 +116,26 @@
                     android:text="全马次数"/>
                 </LinearLayout>
             </LinearLayout>
+
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@mipmap/massage"
+                android:id="@+id/massage"
+                android:layout_alignBottom="@+id/headimage"
+                android:layout_toRightOf="@+id/headimage"
+                android:layout_toEndOf="@+id/headimage"/>
+
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@mipmap/setting"
+                android:id="@+id/setting"
+                android:layout_marginRight="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_alignBottom="@+id/headimage"
+                android:layout_toLeftOf="@+id/headimage"
+                android:layout_toStartOf="@+id/headimage"/>
         </RelativeLayout>
 
         <RelativeLayout

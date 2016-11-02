@@ -11,7 +11,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
-import com.baidu.mapapi.SDKInitializer;
+
 import com.toprunner.ubii.toprunner.R;
 import com.toprunner.ubii.toprunner.application.ToprunnerApplication;
 import com.toprunner.ubii.toprunner.base.BaseFragment;
@@ -36,7 +36,6 @@ public class SportdetailsActivity extends AppCompatActivity {
             //透明导航栏
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
         }
-        SDKInitializer.initialize(getApplicationContext());
         setContentView(R.layout.activity_sportdetails);
         trackApp = (ToprunnerApplication) getApplicationContext();
         viewpager = (NoScrollViewPager) findViewById(R.id.viewpager);

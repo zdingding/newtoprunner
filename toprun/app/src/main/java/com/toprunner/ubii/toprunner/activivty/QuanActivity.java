@@ -1,19 +1,24 @@
 package com.toprunner.ubii.toprunner.activivty;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.bumptech.glide.Glide;
 import com.malinskiy.superrecyclerview.SuperRecyclerView;
 import com.toprunner.ubii.toprunner.R;
+import com.toprunner.ubii.toprunner.activivty.adpter.CircleAdapter;
 import com.toprunner.ubii.toprunner.bean.CommentConfig;
 import com.toprunner.ubii.toprunner.mvp.contract.CircleContract;
 import com.toprunner.ubii.toprunner.utils.CommonUtils;
@@ -33,6 +38,9 @@ public class QuanActivity extends AppCompatActivity implements CircleContract.Vi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        }
         setContentView(R.layout.activity_quan);
         presenter = new CirclePresenter(this);//设置数据
         initView();
@@ -78,6 +86,18 @@ public class QuanActivity extends AppCompatActivity implements CircleContract.Vi
         };
 
         recyclerView.setRefreshListener(refreshListener);
+        recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if(newState == RecyclerView.SCROLL_STATE_IDLE){
+                    Glide.with(QuanActivity.this).resumeRequests();
+                }else{
+                    Glide.with(QuanActivity.this).pauseRequests();
+                }
+
+            }
+        });
         circleAdapter = new CircleAdapter(this);
         circleAdapter.setCirclePresenter(presenter);
         recyclerView.setAdapter(circleAdapter);

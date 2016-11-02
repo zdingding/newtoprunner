@@ -1,5 +1,8 @@
 package com.toprunner.ubii.toprunner.activivty;
 
+import android.view.View;
+
+import com.toprunner.ubii.toprunner.bean.CommentConfig;
 import com.toprunner.ubii.toprunner.mvp.contract.CircleContract;
 
 /**
@@ -23,5 +26,11 @@ public class CirclePresenter implements CircleContract.Presenter{
     @Override
     public void loadData(int loadType) {
 
+    }
+    //显示对画框
+    public void showEditTextBody(CommentConfig commentConfig){
+        if(view != null){
+            view.updateEditTextBodyVisible(View.VISIBLE, commentConfig);
+        }
     }
 }

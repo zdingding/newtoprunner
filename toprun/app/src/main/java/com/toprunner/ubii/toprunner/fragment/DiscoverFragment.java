@@ -24,15 +24,12 @@ import com.toprunner.ubii.toprunner.activivty.ClipActivity;
 import com.toprunner.ubii.toprunner.activivty.ScanActivity;
 import com.toprunner.ubii.toprunner.base.BaseFragment;
 import com.toprunner.ubii.toprunner.utils.CacheUtils;
-import com.toprunner.ubii.toprunner.utils.SpUtils;
 import com.toprunner.ubii.toprunner.utils.UIUtils;
 import com.toprunner.ubii.toprunner.view.CircleImageView;
 
 import java.io.File;
 
 import static android.app.Activity.RESULT_OK;
-import static com.toprunner.ubii.toprunner.R.layout.fragment_discover;
-
 
 public class DiscoverFragment extends BaseFragment implements View.OnClickListener {
     private PopupWindow popWindow;
@@ -67,7 +64,6 @@ public class DiscoverFragment extends BaseFragment implements View.OnClickListen
     @Override
     protected void initData() {
           sex = CacheUtils.getString(getActivity(), "sex");
-          sex = CacheUtils.getString(getActivity(), "sex");
         if(null!=sex){
             sextext.setText(sex);
         }
@@ -89,6 +85,7 @@ public class DiscoverFragment extends BaseFragment implements View.OnClickListen
     protected void initView(View view, Bundle savedInstanceState) {
         headimage = findViewById(R.id.headimage);
         nickname = findViewById(R.id.nickname);
+        nickname.setText(CacheUtils.getString(getActivity(),"name"));
         sex_text = findViewById(R.id.sex_text);
         sextext = findViewById(R.id.sextext);
         mHeight = findViewById(R.id.mHeight);
@@ -103,7 +100,7 @@ public class DiscoverFragment extends BaseFragment implements View.OnClickListen
 
     @Override
     public int getLayoutId() {
-        return fragment_discover;
+        return R.layout.fragment_discover;
     }
 
 
@@ -208,9 +205,9 @@ public class DiscoverFragment extends BaseFragment implements View.OnClickListen
                                 String newName = editText.getText().toString();
                                 //显示输入的名称
                                 nickname.setText(newName);
+                                CacheUtils.putString(getActivity(),"name",newName);
                                 //保存新名称(sp中)
-                                //sp.edit().putString("lost_name", newName).commit();
-                                SpUtils.getInstance(UIUtils.getContext()).save(SpUtils.LOST_NAME, newName);
+
                             }})
                         .setNegativeButton("取消", null)
                         .show();

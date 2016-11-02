@@ -3,142 +3,146 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
 android:orientation="vertical"  >
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="50dp"
-    android:orientation="horizontal">
-    <Button
-        android:id="@+id/btn_mylocation"
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"
-        android:text="我得位置"/>
-    <Button
-        android:id="@+id/btn_startTrace"
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"
-        android:text="轨迹记录"/>
-    <Button
-        android:id="@+id/btn_stopTrace"
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"
-        android:text="軌跡停止"/>
- </LinearLayout>
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:baselineAligned="false"
-    android:gravity="center_horizontal">
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/spacing_four"
-        android:layout_marginRight="@dimen/spacing_four"
-        android:layout_weight="1"
-        android:orientation="vertical" >
-
-        <TextView
-            android:layout_width="match_parent"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        >
+        <Button
+            android:id="@+id/btn_mylocation"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/spacing_four"
-            android:layout_marginTop="@dimen/spacing_four"
-            android:gravity="center"
-            android:text="运动时间" />
-
-        <TextView
-            android:id="@+id/tv_run_time"
-            android:layout_width="match_parent"
+            android:text="我得位置"/>
+        <RadioButton
+            android:id="@+id/statellite"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/spacing_four"
-            android:layout_marginTop="@dimen/spacing_four"
+            android:button="@null"
             android:gravity="center"
-            android:text="00:00:00" />
-    </LinearLayout>
+            android:text="卫星地图"/>
+        <Button
+            android:id="@+id/btn_stopTrace"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="軌跡停止"/>
+     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/spacing_four"
-        android:layout_marginRight="@dimen/spacing_four"
-        android:layout_weight="1"
-        android:orientation="vertical" >
+        android:orientation="horizontal"
+        android:baselineAligned="false"
+        android:gravity="center_horizontal">
 
-        <TextView
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/spacing_four"
-            android:layout_marginTop="@dimen/spacing_four"
-            android:gravity="center"
-            android:text="运动距离" />
+            android:layout_marginLeft="@dimen/spacing_four"
+            android:layout_marginRight="@dimen/spacing_four"
+            android:layout_weight="1"
+            android:orientation="vertical" >
 
-        <TextView
-            android:id="@+id/tv_run_distance"
-            android:layout_width="match_parent"
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_four"
+                android:layout_marginTop="@dimen/spacing_four"
+                android:gravity="center"
+                android:text="运动时间" />
+
+            <Chronometer
+                android:id="@+id/tv_run_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_four"
+                android:layout_marginTop="@dimen/spacing_four"
+                android:gravity="center"
+                android:format="%s"
+                 />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/spacing_four"
-            android:layout_marginTop="@dimen/spacing_four"
-            android:gravity="center"
-            android:text="0M" />
+            android:layout_marginLeft="@dimen/spacing_four"
+            android:layout_marginRight="@dimen/spacing_four"
+            android:layout_weight="1"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_four"
+                android:layout_marginTop="@dimen/spacing_four"
+                android:gravity="center"
+                android:text="运动距离" />
+
+            <TextView
+                android:id="@+id/tv_run_distance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_four"
+                android:layout_marginTop="@dimen/spacing_four"
+                android:gravity="center"
+                android:text="0M" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/spacing_four"
+            android:layout_marginRight="@dimen/spacing_four"
+            android:layout_weight="1"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_four"
+                android:layout_marginTop="@dimen/spacing_four"
+                android:gravity="center"
+                android:text="平均速度" />
+
+            <TextView
+                android:id="@+id/tv_run_spend"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_four"
+                android:layout_marginTop="@dimen/spacing_four"
+                android:gravity="center"
+                android:text="0m/s" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/spacing_four"
+            android:layout_marginRight="@dimen/spacing_four"
+            android:layout_weight="1"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_four"
+                android:layout_marginTop="@dimen/spacing_four"
+                android:gravity="center"
+                android:text="消耗卡路里" />
+
+            <TextView
+                android:id="@+id/tv_run_calorie"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_four"
+                android:layout_marginTop="@dimen/spacing_four"
+                android:gravity="center"
+                android:text="0千卡" />
+        </LinearLayout>
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/spacing_four"
-        android:layout_marginRight="@dimen/spacing_four"
-        android:layout_weight="1"
-        android:orientation="vertical" >
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/spacing_four"
-            android:layout_marginTop="@dimen/spacing_four"
-            android:gravity="center"
-            android:text="平均速度" />
-
-        <TextView
-            android:id="@+id/tv_run_spend"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/spacing_four"
-            android:layout_marginTop="@dimen/spacing_four"
-            android:gravity="center"
-            android:text="0m/s" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/spacing_four"
-        android:layout_marginRight="@dimen/spacing_four"
-        android:layout_weight="1"
-        android:orientation="vertical" >
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/spacing_four"
-            android:layout_marginTop="@dimen/spacing_four"
-            android:gravity="center"
-            android:text="消耗卡路里" />
-
-        <TextView
-            android:id="@+id/tv_run_calorie"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/spacing_four"
-            android:layout_marginTop="@dimen/spacing_four"
-            android:gravity="center"
-            android:text="0千卡" />
-    </LinearLayout>
-</LinearLayout>
-
-
 
 
     <EditText

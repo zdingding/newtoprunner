@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/item_height">
+        <TextView
+            android:id="@+id/tv_title"
+            style="@style/TitleAndContentTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/spacing_eight"
+            android:layout_marginTop="@dimen/spacing_eight"
+            android:text="@string/open_sound_title"
+            android:textColor="#000000" />
+        <TextView
+            android:id="@+id/tv_desc"
+            style="@style/TipsOrModerateTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_title"
+            android:layout_marginLeft="@dimen/spacing_eight"
+            android:text="@string/open_sound_tip"
+            android:textColor="#88000000" />
+
+        <com.toprunner.ubii.toprunner.view.SlideButton
+            android:id="@+id/sb_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/spacing_eight"
+            android:clickable="true"
+            />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/item_height">
+        <TextView
+            android:id="@+id/tv_daohang"
+            style="@style/TitleAndContentTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/spacing_eight"
+            android:layout_marginTop="@dimen/spacing_eight"
+            android:text="@string/open_daohang"
+            android:textColor="#000000" />
+        <TextView
+            android:id="@+id/tv_tishi"
+            style="@style/TipsOrModerateTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_daohang"
+            android:layout_marginLeft="@dimen/spacing_eight"
+            android:text="@string/open_daohangtishi"
+            android:textColor="#88000000" />
+
+        <com.toprunner.ubii.toprunner.view.SlideButton
+            android:id="@+id/sb_daohang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/spacing_eight"
+            android:clickable="true"
+            />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/item_height">
+        <TextView
+            android:id="@+id/tv_shangchuan"
+            style="@style/TitleAndContentTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/spacing_eight"
+            android:layout_marginTop="@dimen/spacing_eight"
+            android:text="@string/jiluguiji"
+            android:textColor="#000000" />
+        <TextView
+            android:id="@+id/tv_shanchuantishi"
+            style="@style/TipsOrModerateTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_shangchuan"
+            android:layout_marginLeft="@dimen/spacing_eight"
+            android:text="@string/open"
+            android:textColor="#88000000" />
+
+        <com.toprunner.ubii.toprunner.view.SlideButton
+            android:id="@+id/sb_shanchuan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/spacing_eight"
+            android:clickable="true"
+            />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/item_height"
+        android:paddingLeft="@dimen/spacing_eight"
+        android:paddingRight="@dimen/spacing_eight"
+        >
+
+        <ImageView
+            android:id="@+id/iv_right_about"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/jiantou" />
+
+        <TextView
+            style="@style/TitleAndContentTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/about"
+            android:layout_alignBottom="@+id/iv_right_about"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/rl_logout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/item_height"
+        android:layout_marginBottom="@dimen/persinalinfo_logout_vertial_space"
+        android:layout_marginLeft="@dimen/persinalinfo_logout_vertial_space"
+        android:layout_marginRight="@dimen/persinalinfo_logout_vertial_space"
+        android:layout_marginTop="@dimen/persinalinfo_logout_vertial_space"
+        android:background="@drawable/setting_logout_bg"
+        android:gravity="center_vertical" >
+
+        <TextView
+            android:id="@+id/logout_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="@string/logout_label"
+            android:textColor="@color/red"
+            android:clickable="false"
+            android:focusable="false"
+            android:textSize="@dimen/text_button_size" />
+    </RelativeLayout>
+</LinearLayout>

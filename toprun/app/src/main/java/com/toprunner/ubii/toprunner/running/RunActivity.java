@@ -51,16 +51,12 @@ import java.util.Random;
 public class RunActivity extends AppCompatActivity implements View.OnClickListener {
     private MapView mMapView = null; // 地图View
     private BaiduMap mBaiduMap = null;
-
     private TextView tvTitle;
-    private BaiduLocation locationClient; // 百度地图定位变量
     private float distanceComplete = 0f; // 跑过的里程
     private long startTime = 0; // 开跑时间 单位：ms
     private long timePast = 0; // 已经跑过的时间 单位：s
     private Log4j log4j; // 日志系统
     private Logger logger;
-
-
     LatLng[] notifyPoints = {
             new LatLng(40.042263, 116.316999),
             new LatLng(40.044362, 116.315984),
@@ -72,19 +68,13 @@ public class RunActivity extends AppCompatActivity implements View.OnClickListen
             new LatLng(40.043119, 116.319434),
             new LatLng(40.093119, 116.319434)
     };
-
     String[] notifyTexts = {
             "开始跑步，加油！",
             "左转",
             "右转",
             "右转",
-            "右转，就快到达终点了，加油！",
-            "右转",
-            "左转，胜利就在眼前！",
-            "右转，太棒了！",
-            "这是一个测试点"
+            "右转，就快到达终点了，加油！"
     };
-
     // 跑步计时器
     Runnable timer;
     Handler handler;
@@ -147,7 +137,6 @@ public class RunActivity extends AppCompatActivity implements View.OnClickListen
         initSpeech(); // 开启TTS
         insertDummyContactWrapper();
      //   initMapView(); // 定位
-        locationClient.startLocate();
         logger.debug("OnCreate");
     }
 
@@ -213,37 +202,6 @@ public class RunActivity extends AppCompatActivity implements View.OnClickListen
     // 定位信息
     private void initMapView() {
 
-        locationClient = new BaiduLocation(this);
-        // 设置定位数据回调
-        locationClient.initLocate(new IOnBaiduReceivedLocationCallback() {
-            @Override
-            public void onReceivedLocation(BDLocation bdLocation) {
-                System.out.println("进入步骤2");
-                logger.debug("进入步骤2");
-                try {
-                    // 更新地图
-
-                    updatePlayerAvatar(bdLocation);
-                    drawTrace(bdLocation);
-                    String debugString = String.format("Loc(%d):(%f, %f) dir:%d\n",
-                            bdLocation.getLocType(),
-                            bdLocation.getLatitude(),
-                            bdLocation.getLongitude(),
-                            ((int) bdLocation.getDirection()));
-                    // GPS定位时显示移动速度（仅在GPS定位下可用）和连接的卫星数量
-                    if(bdLocation.getLocType() == BDLocation.TypeGpsLocation) {
-                        debugString += String.format("GpsSpeed:%s SatelliteNum:%d\n", bdLocation.getSpeed(), bdLocation.getSatelliteNumber());
-                    }
-                    logger.trace(debugString);
-                    logger.debug("更新定位数据");
-                }
-                catch (Exception e) {
-                    logger.error(e);
-                    logger.debug("更新定位数据失败");
-                }
-            }
-
-        });
         setNotifyPoints();
         drawNotifyPoints();
         setOnClickMap();
@@ -276,15 +234,7 @@ public class RunActivity extends AppCompatActivity implements View.OnClickListen
         for(int i = 0; i < notifyPoints.length; i++) {
             final int finalI = i;
             LatLng notifyPoint = notifyPoints[i];
-            locationClient.setNotifyLocationWithFlag(notifyPoint.latitude, notifyPoint.longitude, 150, new IOnBaiduNotifyLocationCallback() {
-                @Override
-                public void onNotifyLocationWithFlag(BDLocation bdLocation, String flag) {
-                    String debugString = String.format("It's here.Point flag %s", flag);
-                    Toast.makeText(RunActivity.this, debugString, Toast.LENGTH_SHORT).show();
-                    logger.debug(debugString);
-                    tts.speak(flag, TextToSpeech.QUEUE_FLUSH, null);
-                }
-            }, notifyTexts[finalI]);
+
         }
         logger.debug("通知点设置完毕");
     }
@@ -477,7 +427,6 @@ public class RunActivity extends AppCompatActivity implements View.OnClickListen
         super.onDestroy();
         mMapView.onDestroy();
         mMapView = null;
-        locationClient.stopLocate();
         disposeSpeech();
         logger.debug("OnDestroy");
     }
@@ -502,7 +451,6 @@ public class RunActivity extends AppCompatActivity implements View.OnClickListen
         randomDistance = new Random(startTime);
         prePosition = null;
         isDrawingTrace = true;
-        locationClient.startLocate();
         startTimer();
         logger.debug("开始定位，绘制Trace。");
     }
@@ -510,7 +458,6 @@ public class RunActivity extends AppCompatActivity implements View.OnClickListen
     private void stopDrawTrace() {
         isDrawingTrace = false;
         stopTimer();
-        locationClient.stopLocate();
         logger.debug("停止定位，绘制Trace。");
     }
 
