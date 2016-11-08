@@ -21,14 +21,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-//            case R.id.tv_running:
-//                intent = new Intent(SettingActivity.this,RunningActivity.class);
-//                startActivity(intent);
-//            break;
-//            case R.id.run_quan:
-//                intent = new Intent(SettingActivity.this,QuanActivity.class);
-//                startActivity(intent);
-//            break;
+
 
         }
 

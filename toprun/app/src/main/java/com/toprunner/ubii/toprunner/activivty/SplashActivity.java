@@ -1,14 +1,11 @@
 package com.toprunner.ubii.toprunner.activivty;
 
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.Build;
 import android.os.Bundle;
-import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
@@ -16,10 +13,11 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.toprunner.ubii.toprunner.R;
+import com.toprunner.ubii.toprunner.base.BaseActivity;
 import com.toprunner.ubii.toprunner.utils.CacheUtils;
 
 
-public class SplashActivity extends Activity {
+public class SplashActivity extends BaseActivity {
 
 	private Context context;
 	private boolean connected;
@@ -30,12 +28,6 @@ public class SplashActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-			//透明状态栏
-			getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-			//透明导航栏
-			getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-		}
 		setContentView(R.layout.activity_splash);
 		context = this;
 		rl_splash_root = (RelativeLayout) findViewById(R.id.rl_splash_root);
@@ -67,7 +59,7 @@ public class SplashActivity extends Activity {
 				
 			} else {
 				Intent intent = new Intent(SplashActivity.this,
-						Guide1Activity.class);
+						GuideActivity3.class);
 				startActivity(intent);
 
 			}
@@ -90,7 +82,6 @@ public class SplashActivity extends Activity {
 	 */
 	private boolean isConnected() {
 		connected = false;
-		
 		ConnectivityManager manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 		NetworkInfo networkInfo = manager.getActiveNetworkInfo();
 		if(networkInfo!=null) {

@@ -18,4 +18,13 @@
     <string name="jiluguiji">记录轨迹</string>
     <string name="open">开启</string>
     <string name="close">关闭</string>
+    <string name="login_success">登陆成功</string>
+    <string name="login">登陆</string>
+    <string name="Username">用户名</string>
+    <string name="Password">密码</string>
+    <string name="forgot_your_password">Forgot your password ?</string>
+    <string name="go">GO</string>
+    <string name="repeat_password">Repeat Password</string>
+    <string name="next">注册</string>
+    <string name="register">REGISTER</string>
 </resources>

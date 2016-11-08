@@ -145,13 +145,14 @@ android:orientation="vertical"  >
     </LinearLayout>
 
 
-    <EditText
-        android:id="@+id/etMLCityPoi"
+    <AutoCompleteTextView
+        android:id="@+id/searchkey"
         android:layout_width="match_parent"
         android:layout_height="36dp"
         android:layout_margin="10dp"
         android:background="@drawable/merchants_service_comment_edit_bg"
         android:drawableLeft="@mipmap/circle_icon_box"
+        android:imeOptions="actionSearch"
         android:drawablePadding="5dp"
         android:gravity="center_vertical"
         android:hint="搜索"

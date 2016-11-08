@@ -18,13 +18,18 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.toprunner.ubii.toprunner.R;
+import com.toprunner.ubii.toprunner.utils.UIUtils;
+
+import butterknife.BindView;
+
 
 public class MainActivity extends Activity  {
-
     /***
      * 数据库相关内容
      */
     SQLiteDatabase mysql;
+    @BindView(R.id.btn1) Button denglu;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +42,7 @@ public class MainActivity extends Activity  {
         }
         setContentView(R.layout.activity_main);
         Button denglu = (Button) findViewById(R.id.btn1);
-        Button register = (Button) findViewById(R.id.btn2);
+        Button register = (Button) findViewById(R.id.zhuce);
 
         mysql = this.openOrCreateDatabase("student.db", MODE_PRIVATE, null);
         try                                                                               //防止第一次注册时不可以注册
@@ -60,11 +65,10 @@ public class MainActivity extends Activity  {
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                 builder.setTitle("用户注册");
-                View view = LayoutInflater.from(MainActivity.this).inflate(R.layout.register, null);
-                final EditText username = (EditText) view.findViewById(R.id.passnametext);
+                View view = UIUtils.inflate(R.layout.register);
+                final EditText username = (EditText) view.findViewById(R.id.et_username);
                 final EditText userpass = (EditText) view.findViewById(R.id.passwordtext);
                 builder.setView(view);
-                // Toast.makeText(TopRunner.this, "用户名或密码不能为空", Toast.LENGTH_LONG).show();
                 builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -133,7 +137,6 @@ public class MainActivity extends Activity  {
                 builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
                     }
                 });
                 builder.show();

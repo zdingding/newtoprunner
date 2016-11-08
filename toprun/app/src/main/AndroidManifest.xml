@@ -55,26 +55,28 @@
         <activity
             android:name=".activivty.MainActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:windowSoftInputMode="adjustPan|stateHidden"/>
+            android:windowSoftInputMode="adjustPan|stateHidden">
+
+        </activity>
         <activity android:name=".activivty.DengluActivity"/>
         <activity
             android:name=".activivty.UserActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:windowSoftInputMode="adjustPan|stateHidden">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
         <activity
             android:name=".activivty.choose_run"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
-        <activity android:name=".activivty.RunningActivity"/>
+        <activity android:name=".activivty.RunningActivity">
+        </activity>
         <activity android:name=".running.RunActivity"/>
         <activity android:name=".activivty.SportdetailsActivity">
         </activity>
         <activity android:name=".activivty.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
         <activity android:name=".activivty.Guide1Activity">
         </activity>
@@ -132,6 +134,9 @@
                   android:configChanges="orientation|keyboardHidden"
                   android:screenOrientation="portrait">
         </activity>
+        <uses-sdk
+            xmlns:tools="http://schemas.android.com/tools"
+            tools:node="replace" />
     </application>
 
 </manifest>

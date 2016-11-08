@@ -18,8 +18,10 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:background="@drawable/shape_search_style"
-        android:text="下一步"
-        android:textColor="#ffffff" />
+       android:stateListAnimator="@drawable/state_list_animator_z"
+        android:text="开始吧"
+        android:textColor="#ffffff"
+       />
 
 
 

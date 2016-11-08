@@ -1,222 +1,95 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+              android:orientation="vertical"
     tools:context=".activivty.RunningActivity"
     android:id="@+id/run"
     >
-
-
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar_top"
-        android:layout_height="65dp"
-        android:layout_width="match_parent"
-        android:minHeight="?attr/actionBarSize"
-        android:background="#21242E">
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:text="＜"
-            android:id="@+id/myback"
-            android:background="#21242E"
-            android:textColor="#ffff"
-            android:gravity="center_horizontal"
-            android:textSize="40sp"
-
-             />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="运动中"
-            android:textSize="25dp"
-            android:textColor="#f4f4f4"
-            android:id="@+id/toolbar_title"
-            android:gravity="center_horizontal"
-
-            android:layout_alignBaseline="@+id/myback"
-            android:layout_alignBottom="@+id/myback"
-
-            />
-        <Button
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:background="@mipmap/iconshare"
-            android:id="@+id/share"
-            android:gravity="center_horizontal"
-            android:layout_alignWithParentIfMissing="false"
-            android:layout_marginRight="0dp"
-            android:layout_alignBottom="@+id/toolbar_title"
-
-            />
-    </android.support.v7.widget.Toolbar>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/share_layout"
-        android:layout_marginBottom="300dp">
         <com.baidu.mapapi.map.MapView
-            android:id="@+id/run_baidu_map"
+            android:id="@+id/baidu_map"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="360dp"
             android:layout_alignParentTop="false">
-
         </com.baidu.mapapi.map.MapView>
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="411dp"
-        android:layout_gravity="center_horizontal|bottom"
-        android:id="@+id/xiangxishuju"
-        android:background="#21242E"
-
-        >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#393F4E"
+        android:gravity="center">
         <ImageView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:src="@mipmap/runhengfu"
-            android:id="@+id/imageView9" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="38px"
-            android:text="01:10:05            "
-            android:textColor="#ffff"
-
-            android:layout_marginRight="64dp"
-            android:layout_marginEnd="63dp"
-            android:id="@+id/textView16"
-            android:layout_marginTop="23dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="false"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="28px"
-            android:text="时长"
-            android:textColor="#5a6375"
-            android:layout_below="@+id/textView16"
-            android:layout_alignRight="@+id/textView16"
-            android:layout_alignEnd="@+id/textView16"
-            android:layout_marginRight="15dp"
-            android:layout_marginEnd="15dp"
-            android:layout_marginTop="15dp"
-            android:id="@+id/textView17" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="38px"
-            android:text="5 ' 30 ''"
-            android:textColor="#ffff"
-            android:layout_alignTop="@+id/textView16"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginLeft="64dp"
-            android:layout_marginStart="64dp"
-            android:id="@+id/textView18" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="28px"
-            android:text="平均配速"
-            android:textColor="#5a6375"
-            android:layout_alignTop="@+id/textView17"
-            android:layout_alignLeft="@+id/textView18"
-            android:layout_alignStart="@+id/textView18" />
+            android:layout_weight="1"
+            android:src="@mipmap/iconcamera"/>
         <ImageView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:src="@mipmap/iconeye"
-            android:layout_below="@+id/imageView9"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
-            android:id="@+id/imageView10" />
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/iconcamera"
-            android:layout_above="@+id/textView19"
-            android:layout_alignRight="@+id/textView18"
-            android:layout_alignEnd="@+id/textView18"
-            android:layout_marginRight="17dp"
-            android:layout_marginEnd="17dp" />
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:src="@mipmap/iconsetting"
-            android:layout_above="@+id/textView19"
-            android:layout_alignLeft="@+id/textView17"
-            android:layout_alignStart="@+id/textView17" />
-        <TextView
-            android:layout_width="wrap_content"
+            />
+        <ImageView
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textSize="48px"
-            android:text="12.45 KM"
-            android:textColor="#ffff"
-            android:layout_below="@+id/imageView10"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="30dp"
-            android:id="@+id/textView19" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="24sp"
-            android:text="距离"
-            android:textColor="#5a6576"
-            android:layout_below="@+id/textView19"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="50px"
-            android:id="@+id/textView20" />
-        <FrameLayout
-            android:layout_width="300dp"
-            android:layout_height="130dp"
-            android:gravity="bottom"
-            android:layout_below="@+id/textView20"
-            android:id="@+id/buttonlayout"
-            android:layout_centerHorizontal="true">
-            <RelativeLayout
-                android:layout_width="300dp"
-                android:layout_height="130dp"
-                android:gravity="bottom"
-                android:layout_below="@+id/textView20"
-                android:id="@+id/newrelativelayout"
-                android:layout_centerHorizontal="true">
-
-                <Button
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:background="@mipmap/goon"
-
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="18sp"
-                    android:id="@+id/greendrag"
-                    android:foregroundGravity="center"
-                    android:gravity="center" />
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="48dp"
-                    android:src="@mipmap/sangejiantou"
-                    android:paddingTop="0dp"
-                    android:layout_below="@+id/greendrag"
-                    android:layout_centerHorizontal="true"
-                    android:id="@+id/jiantou_long" />
+            android:layout_weight="1"
+            android:src="@mipmap/iconeye"/>
+    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@mipmap/runhengfu"
+            android:orientation="horizontal"
+            >
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
-                    android:text="暂停"
+                    android:text="01:10:05"
                     android:textColor="#ffff"
-                    android:layout_below="@+id/jiantou_long"
-                    android:layout_centerHorizontal="true" />
-            </RelativeLayout>
-        </FrameLayout>
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:text="时长"
+                    android:textColor="#5a6375"
+                    />
 
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:text="5 ' 30 ''"
+                    android:textColor="#ffff"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:text="平均配速"
+                    android:textColor="#5a6375"
+                    />
+            </LinearLayout>
+        </LinearLayout>
 
+        <com.toprunner.ubii.toprunner.view.MiSportButton
+            android:id="@+id/mi_btn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </com.toprunner.ubii.toprunner.view.MiSportButton>
+</LinearLayout>
 
-
-    </RelativeLayout>
-
-</FrameLayout>

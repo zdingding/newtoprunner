@@ -14,18 +14,13 @@ import android.widget.ImageView;
 
 import com.toprunner.ubii.toprunner.R;
 import com.toprunner.ubii.toprunner.utils.CacheUtils;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-
 public class GuideActivity3 extends Activity implements OnClickListener {
 	private Button btn_guide3_next;
 	private List<Map<String, Object>> items;
-
 	private Context context;
-
 	private Button btn_guide;
 	private ViewPager viewpager;
 	int ids[] = { R.mipmap.diagram_one, R.mipmap.diagram_two, R.mipmap.diagram_three};
@@ -42,16 +37,30 @@ public class GuideActivity3 extends Activity implements OnClickListener {
 			ImageView imageView = new ImageView(GuideActivity3.this);
 			imageView.setBackgroundResource(ids[i]);
 			imageViews.add(imageView);
-			if (i == ids.length - 1) {
-				btn_guide3_next.setVisibility(View.VISIBLE);
-				btn_guide3_next.setOnClickListener(this);
-			}else{
-				btn_guide3_next.setVisibility(View.GONE);
-			}
-		viewpager.setAdapter(new MyPagerAdapter());
-		// 名称
-
 		}
+		viewpager.setAdapter(new MyPagerAdapter());
+		btn_guide3_next.setOnClickListener(this);
+		viewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+			@Override
+			public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+			}
+
+			@Override
+			public void onPageSelected(int position) {
+				if(position==imageViews.size()-1){
+					btn_guide3_next.setVisibility(View.VISIBLE);
+
+				}else{
+					btn_guide3_next.setVisibility(View.GONE);
+				}
+			}
+
+			@Override
+			public void onPageScrollStateChanged(int state) {
+
+			}
+		});
 	}
 	public void pre(View v) {
 		overridePendingTransition(R.anim.left_in, R.anim.right_out);

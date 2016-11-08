@@ -266,7 +266,7 @@ public class RunActivity extends AppCompatActivity implements View.OnClickListen
             // 缩小图标
             Matrix matrix = new Matrix();
             matrix.postScale(0.3f, 0.3f);
-            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.player);
+            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.d);
             Bitmap resizeBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
 
             // 设置Player图标

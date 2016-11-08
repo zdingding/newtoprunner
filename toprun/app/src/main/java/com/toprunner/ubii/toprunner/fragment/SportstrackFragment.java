@@ -1,11 +1,12 @@
 package com.toprunner.ubii.toprunner.fragment;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.SystemClock;
 import android.view.View;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.LinearLayout;
@@ -24,12 +25,17 @@ import com.baidu.mapapi.map.BitmapDescriptorFactory;
 import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
+import com.baidu.mapapi.map.Marker;
+import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.MyLocationConfiguration;
 import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.map.Overlay;
 import com.baidu.mapapi.map.OverlayOptions;
+import com.baidu.mapapi.map.PolygonOptions;
 import com.baidu.mapapi.map.Polyline;
 import com.baidu.mapapi.map.PolylineOptions;
+import com.baidu.mapapi.map.Stroke;
+import com.baidu.mapapi.map.TextOptions;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.trace.LBSTraceClient;
 import com.baidu.trace.OnEntityListener;
@@ -51,30 +57,32 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-
 /**
  * Created by ${赵鼎} on 2016/9/27 0027.
  */
 
 public class SportstrackFragment extends BaseFragment implements View.OnClickListener {
     private static final int REQUESTLOCATING = 1;
+    // 通过设置间隔时间和距离可以控制速度和图标移动的距离
+    private static final int TIME_INTERVAL = 80;
+    private static final double DISTANCE = 0.00002;
     private static final int SAVEDATA = 2;
     private MapView mMapView = null; // 地图View
     private BaiduMap mBaiduMap;
+    private Marker mMoveMarker;//移动的坐标
     private double mLatitude;//定位的做标
     private double mLongtitude;//定位的做标
     private boolean isFirstIn = true;
     List< LatLng > pointstwo = new ArrayList< LatLng >();
-
-    LatLng p1 = new LatLng(40.0554280000,116.3076540000);
-    LatLng p2 = new LatLng(40.0583690000,116.3064860000);
-    LatLng p3 = new LatLng(40.0589870000,116.3095670000);
-    LatLng p4 = new LatLng(40.0561740000,116.3109060000);
+    List<LatLng> points = new ArrayList<>();
+    LatLng p1 = new LatLng(40.055428,116.307654);
+    LatLng p2 = new LatLng(40.058369,116.306486);
+    LatLng p3 = new LatLng(40.058987,116.309567);
+    LatLng p4 = new LatLng(40.056174,116.310906);
     // 自定义定位图标
     private BitmapDescriptor mIconLocation;
    private MyOrientationListener myOrientationListener;
     private float mCurrentX;
-    private BitmapDescriptor mMarker;
     private RelativeLayout mMarkerLy;
     // 定位相关
     private static List<LatLng> pointList = new ArrayList<LatLng>();
@@ -119,6 +127,8 @@ private boolean isRunning =false;
      * 打包周期（单位 : 秒）
      */
     private int packInterval = 15;
+    private Handler mHandler;
+
     private Handler handler = new Handler() {
         public void handleMessage(android.os.Message msg) {
             switch (msg.what) {
@@ -153,6 +163,10 @@ private boolean isRunning =false;
     private TextView tv_run_stop;
     // 普通折线，点击时改变宽度
     Polyline mPolyline;
+    private AutoCompleteTextView searchkey;
+    private Marker mMarker;
+    private BitmapDescriptor bdA;
+
     @Override
     public void setListener() {
         mLocationListener = new MyLocationListener();//定位成功以后的回调
@@ -257,15 +271,16 @@ private boolean isRunning =false;
 
     @Override
     protected void initView(View view, Bundle savedInstanceState) {
-        mMapView = (MapView) findViewById(R.id.run_baidu_map);
-        btn_mylocation = (Button)findViewById(R.id.btn_mylocation);
+        mMapView = findViewById(R.id.run_baidu_map);
+        btn_mylocation = findViewById(R.id.btn_mylocation);
         statellite = (RadioButton) view.findViewById(R.id.statellite);//卫星地图
         btn_stopTrace = (Button) view.findViewById(R.id.btn_stopTrace);
         tv_run_start = (TextView) view.findViewById(R.id.tv_run_start);
         ll_bottom = findViewById(R.id.ll_bottom);
-        tv_run_countinue = (TextView) findViewById(R.id.tv_run_countinue);
-        tv_run_stop = (TextView) findViewById(R.id.tv_run_stop);
-        tv_run_time = (Chronometer) findViewById(R.id.tv_run_time);
+        tv_run_countinue = findViewById(R.id.tv_run_countinue);
+        searchkey = findViewById(R.id.searchkey);
+        tv_run_stop = findViewById(R.id.tv_run_stop);
+        tv_run_time = findViewById(R.id.tv_run_time);
         mMapView.showZoomControls(false);//不缩放
         mBaiduMap = mMapView.getMap();
         drawline();
@@ -278,24 +293,154 @@ private boolean isRunning =false;
     }
 
     private void drawline() {
-        //定义覆盖物
-        //设置覆盖物数据
-        //添加覆盖物
-        //刷新
+        LatLng llA = new LatLng(40.033579,116.311027);
+        LatLng llB = new LatLng(39.942821, 116.369199);
+        LatLng llC = new LatLng(39.939723, 116.425541);
+        LatLng llD = new LatLng(39.906965, 116.401394);
+        bdA = BitmapDescriptorFactory
+                .fromResource(R.mipmap.d);
+        MarkerOptions ooA = new MarkerOptions().position(llA).icon(bdA)
+                .zIndex(9).draggable(true);
+        ooA.animateType(MarkerOptions.MarkerAnimateType.drop);
+        mMarker = (Marker) (mBaiduMap.addOverlay(ooA));
     }
 
     protected void initData() {
+        mBaiduMap.setOnPolylineClickListener(new BaiduMap.OnPolylineClickListener() {
+            @Override
+            public boolean onPolylineClick(Polyline polyline) {
+                if(polyline == mPolyline){
+                    Toast.makeText(getActivity(),"点击了线",Toast.LENGTH_SHORT).show();
+                    mHandler = new Handler(Looper.getMainLooper());
+                    moveLooper();
+                }
+                return false;
+            }
+        });
+        mBaiduMap.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                return false;
+            }
+        });
+        mBaiduMap.setOnMarkerDragListener(new BaiduMap.OnMarkerDragListener() {
+            @Override
+            public void onMarkerDrag(Marker marker) {
+
+            }
+
+            @Override
+            public void onMarkerDragEnd(Marker marker) {
+                Toast.makeText(
+                        getActivity(),
+                        "拖拽结束，新位置：" + marker.getPosition().latitude + ", "
+                                + marker.getPosition().longitude,
+                        Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onMarkerDragStart(Marker marker) {
+
+            }
+        });
         //开始运动
         tv_run_start.setOnClickListener(this);
         tv_run_countinue.setOnClickListener(this);
         tv_run_stop.setOnClickListener(this);
         statellite.setOnClickListener(this);
         btn_stopTrace.setOnClickListener(this);
+        searchkey.setOnClickListener(this);
         client = ((ToprunnerApplication) getActivity().getApplication()).getClient();
         setInterval();
         trace = ((ToprunnerApplication) getActivity().getApplication()).getTrace();
     }
-//发送消息
+//开始运动
+    private void moveLooper() {
+        new Thread() {
+
+            public void run() {
+
+                while (true) {
+
+                    for (int i = 0; i < points.size() - 1; i++) {
+
+
+                        final LatLng startPoint = points.get(i);
+                        final LatLng endPoint = points.get(i+1);
+                        mMoveMarker
+                                .setPosition(startPoint);
+
+                        mHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                // refresh marker's rotate
+                                if (mMapView == null) {
+                                    return;
+                                }
+                                mMoveMarker.setRotate((float) getAngle(startPoint,
+                                        endPoint));
+                            }
+                        });
+                        double slope = getSlope(startPoint, endPoint);
+                        // 是不是正向的标示
+                        boolean isReverse = (startPoint.latitude > endPoint.latitude);
+
+                        double intercept = getInterception(slope, startPoint);
+
+                        double xMoveDistance = isReverse ? getXMoveDistance(slope) : -1 * getXMoveDistance(slope);
+
+
+                        for (double j = startPoint.latitude; !((j > endPoint.latitude) ^ isReverse);
+                             j = j - xMoveDistance) {
+                            LatLng latLng = null;
+                            if (slope == Double.MAX_VALUE) {
+                                latLng = new LatLng(j, startPoint.longitude);
+                            } else {
+                                latLng = new LatLng(j, (j - intercept) / slope);
+                            }
+
+                            final LatLng finalLatLng = latLng;
+                            mHandler.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    if (mMapView == null) {
+                                        return;
+                                    }
+                                    mMoveMarker.setPosition(finalLatLng);
+                                }
+                            });
+                            try {
+                                Thread.sleep(TIME_INTERVAL);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+                    }
+                }
+            }
+
+        }.start();
+
+    }
+    /**
+     * 根据点和斜率算取截距
+     */
+    private double getInterception(double slope, LatLng point) {
+
+        double interception = point.latitude - slope * point.longitude;
+        return interception;
+    }
+    /**
+     * 计算x方向每次移动的距离
+     */
+    private double getXMoveDistance(double slope) {
+        if (slope == Double.MAX_VALUE) {
+            return DISTANCE;
+        }
+        return Math.abs((DISTANCE * slope) / Math.sqrt(1 + slope * slope));
+    }
+    //发送消息
     private void sendRequestLocation() {
         handler.sendEmptyMessage(REQUESTLOCATING);
     }
@@ -367,25 +512,15 @@ private boolean isRunning =false;
                     Toast.makeText(UIUtils.getContext(),"解析失败",Toast.LENGTH_SHORT).show();
                     return;
                 }
-                showRealtimeTrack(entityLocation);
             }
 
             @Override
             public void onReceiveLocation(TraceLocation traceLocation) {
                 super.onReceiveLocation(traceLocation);
-                showRealtimeTrack(traceLocation);
             }
         };
     }
-    /**
-     * 查询实体集合回调函数，此时调用实时轨迹方法
-     */
-    private void showRealtimeTrack(TraceLocation entityLocation) {
-        double latitude = entityLocation.getLatitude();
-        double longitude = entityLocation.getLongitude();
-        Toast.makeText(UIUtils.getContext(),""+latitude,Toast.LENGTH_SHORT).show();
 
-    }
 
 
     private void startMonitorService() {
@@ -395,22 +530,46 @@ private boolean isRunning =false;
     }
 
     private void initMarker() {
-        List<LatLng> points = new ArrayList<LatLng>();
         points.add(p1);
         points.add(p2);
         points.add(p3);
         points.add(p4);
         points.add(p1);
          int[] color = { 0xFFFBE01C, 0xFFE1E618, 0xFF7DFF00, 0xffDE2C00 };
-        List<Integer> colorList = new ArrayList<Integer>();
+        List<Integer> colorList = new ArrayList<>();
         for(int i=0;i<points.size();i++){
             colorList.add(color[i%4]);
         }
-        colorList.add(color[0]);
         OverlayOptions ooPolyline = new PolylineOptions().width(10)
                 .colorsValues(colorList).points(points);
         mPolyline = (Polyline) mBaiduMap.addOverlay(ooPolyline);
+        mPolyline.setDottedLine(true);//虚线
 
+        OverlayOptions   markerOptions = new MarkerOptions().flat(true).anchor(0.5f, 0.5f)
+                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.navi_map_gps_locked)).position(points.get(0))
+                .rotate((float) getAngle(0));
+        mMoveMarker = (Marker) mBaiduMap.addOverlay(markerOptions);
+        // 添加多边形
+        LatLng pt1 = new LatLng(39.93923, 116.357428);
+        LatLng pt2 = new LatLng(39.91923, 116.327428);
+        LatLng pt3 = new LatLng(39.89923, 116.347428);
+        LatLng pt4 = new LatLng(39.89923, 116.367428);
+        LatLng pt5 = new LatLng(39.91923, 116.387428);
+        List<LatLng> pts = new ArrayList<>();
+        pts.add(pt1);
+        pts.add(pt2);
+        pts.add(pt3);
+        pts.add(pt4);
+        pts.add(pt5);
+        OverlayOptions ooPolygon = new PolygonOptions().points(pts)
+                .stroke(new Stroke(5, 0xAA00FF00)).fillColor(0xAAFFFF00);
+        mBaiduMap.addOverlay(ooPolygon);
+        // 添加文字 公司名字
+        LatLng llText = new LatLng(40.0430120000,116.3177550000);
+        OverlayOptions ooText = new TextOptions().bgColor(0xAAFFFF00)
+                .fontSize(24).fontColor(0xFFFF00FF).text("优比交互")
+                .position(llText);
+        mBaiduMap.addOverlay(ooText);
     }
 
     private void initLocation() {
@@ -478,7 +637,53 @@ private boolean isRunning =false;
     public void onDestroy() {
         super.onDestroy();
         handler.removeCallbacksAndMessages(null);
+        bdA.recycle();
+        mMapView.onDestroy();
     }
+
+    /**
+     * 根据点获取图标转的角度
+     */
+    private double getAngle(int startIndex) {
+        if ((startIndex + 1) >= mPolyline.getPoints().size()) {
+            throw new RuntimeException("index out of bonds");
+        }
+        LatLng startPoint = mPolyline.getPoints().get(startIndex);
+        LatLng endPoint = mPolyline.getPoints().get(startIndex + 1);
+        return getAngle(startPoint, endPoint);
+    }
+    /**
+     * 根据两点算取图标转的角度
+     */
+    private double getAngle(LatLng fromPoint, LatLng toPoint) {
+        double slope = getSlope(fromPoint, toPoint);
+        if (slope == Double.MAX_VALUE) {
+            if (toPoint.latitude > fromPoint.latitude) {
+                return 0;
+            } else {
+                return 180;
+            }
+        }
+        float deltAngle = 0;
+        if ((toPoint.latitude - fromPoint.latitude) * slope < 0) {
+            deltAngle = 180;
+        }
+        double radio = Math.atan(slope);
+        double angle = 180 * (radio / Math.PI) + deltAngle - 90;
+        return angle;
+    }
+    /**
+     * 算斜率
+     */
+    private double getSlope(LatLng fromPoint, LatLng toPoint) {
+        if (toPoint.longitude == fromPoint.longitude) {
+            return Double.MAX_VALUE;
+        }
+        double slope = ((toPoint.latitude - fromPoint.latitude) / (toPoint.longitude - fromPoint.longitude));
+        return slope;
+
+    }
+
     private class MyLocationListener implements BDLocationListener {
 
         @Override
@@ -489,10 +694,7 @@ private boolean isRunning =false;
                     .latitude(bdLocation.getLatitude())//
                     .longitude(bdLocation.getLongitude())//
                     .build();
-
-
            mBaiduMap.setMyLocationData(data);
-
             // 更新经纬度
             mLatitude = bdLocation.getLatitude();
             mLongtitude = bdLocation.getLongitude();
@@ -503,7 +705,6 @@ private boolean isRunning =false;
             {
                 isFirstIn = false;
                 cebterToMyLocation();
-              ;
                 Toast.makeText(UIUtils.getContext(), bdLocation.getAddrStr(),
                         Toast.LENGTH_SHORT).show();
             }
@@ -520,48 +721,10 @@ private boolean isRunning =false;
                 mLongtitude);
         pointList.add(latLng);
         // 绘制实时点
-        drawRealtimePoint(latLng);
+
         MapStatusUpdate msu = MapStatusUpdateFactory.newLatLng(latLng);
         mBaiduMap.animateMapStatus(msu);
     }
 
-    private void drawRealtimePoint(LatLng latLng) {
-        if (null != overlay) {
-            overlay.remove();
-        }
 
-        if (pointList.size() >= 2 && pointList.size() <= 10000) {
-            // 添加路线（轨迹）
-            polyline = new PolylineOptions().width(10)
-                    .color(Color.RED).points(pointList);
-        }
-
-    }
-    /**
-     * 得到一个格式化的时间
-     *
-     * @param time
-     *            时间 毫秒
-     * @return 时：分：秒：毫秒
-     */
-    private String getFormatTime(long time) {
-        time = time / 1000;
-        long second = time % 60;
-        long minute = (time % 3600) / 60;
-        long hour = time / 3600;
-
-        // 毫秒秒显示两位
-        // String strMillisecond = "" + (millisecond / 10);
-        // 秒显示两位
-        String strSecond = ("00" + second)
-                .substring(("00" + second).length() - 2);
-        // 分显示两位
-        String strMinute = ("00" + minute)
-                .substring(("00" + minute).length() - 2);
-        // 时显示两位
-        String strHour = ("00" + hour).substring(("00" + hour).length() - 2);
-
-        return strHour + ":" + strMinute + ":" + strSecond;
-        // + strMillisecond;
-    }
 }

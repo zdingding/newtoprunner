@@ -8,6 +8,7 @@
     android:orientation="vertical"
   android:gravity="center_horizontal"
     tools:context="com.toprunner.ubii.toprunner.activivty.LoginActivity">
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

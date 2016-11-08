@@ -18,9 +18,8 @@
             android:layout_width="163dp"
             android:layout_height="50dp"
             android:inputType="textPersonName"
-
             android:ems="10"
-            android:id="@+id/passnametext"
+            android:id="@+id/et_username"
             android:layout_weight="1.42" />
     </LinearLayout>
     <LinearLayout
