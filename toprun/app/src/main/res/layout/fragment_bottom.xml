@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+              android:orientation="horizontal"
+    android:gravity="center_horizontal">
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@mipmap/iconcamera"/>
+    <ImageView
+        android:id="@+id/btn_trackUpload"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:src="@mipmap/iconeye"
+        android:text="@string/track_upload"/>
+        <ImageView
+            android:id="@+id/btn_trackQuery"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@mipmap/iconsetting"
+            android:text="@string/track_query"
+            />
+</LinearLayout>

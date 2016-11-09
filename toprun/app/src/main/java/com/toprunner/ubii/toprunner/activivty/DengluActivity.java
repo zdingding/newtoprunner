@@ -64,19 +64,6 @@ public class DengluActivity extends Activity {
                     String str = cs.getString(1);
                     TextView textview1 = (TextView) DialogView1.findViewById(R.id.name1);
                     textview1.setText(str);
-                  /*  Dialog dialog1 = new AlertDialog.Builder(denglu.this)
-                            .setTitle("登录框")
-                            .setView(DialogView1)
-                            .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-
-                                public void onClick(DialogInterface arg0, int arg1) {
-                                    Intent intent = new Intent();
-                                    intent.setClass(denglu.this, UserActivity.class);
-                                    startActivity(intent);
-                                    denglu.this.finish();
-                                }
-                            }).create();
-                    dialog1.show();*/
                     Intent intent = new Intent();
                     intent.setClass(DengluActivity.this, UserActivity.class);
                     startActivity(intent);

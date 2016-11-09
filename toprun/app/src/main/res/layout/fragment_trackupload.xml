@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+                android:background="#0A0A1E"
+    android:layout_height="200dp">
+
+    <LinearLayout
+        android:id="@+id/ll_timespeed"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@mipmap/runhengfu"
+        android:orientation="horizontal"
+        >
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+            <Chronometer
+                android:id="@+id/c_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:text="00:00:00"
+                android:textColor="#ffff"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="时长"
+                android:textColor="#5a6375"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+            <TextView
+                android:id="@+id/speed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:text="5 ' 30 ''"
+                android:gravity="center"
+                android:textColor="#ffff"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="配速"
+                android:textColor="#5a6375"
+                />
+        </LinearLayout>
+    </LinearLayout>
+
+    <Button
+        android:visibility="gone"
+        android:id="@+id/btn_operator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#0A0A1E"
+        android:text="@string/fence_operator"
+        android:textColor="#000000" />
+    <com.toprunner.ubii.toprunner.view.MiSportButton
+        android:id="@+id/mi_btn"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_alignParentBottom="true"
+></com.toprunner.ubii.toprunner.view.MiSportButton>
+</RelativeLayout>

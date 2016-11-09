@@ -211,7 +211,6 @@ private boolean isRunning =false;
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.tv_run_start://点击了開始跑步
-                Toast.makeText(getActivity(), "正在开启轨迹服务，请稍候", Toast.LENGTH_LONG).show();
                 //开启轨迹
                initfolling();
                 tv_run_time.setBase(SystemClock.elapsedRealtime());
@@ -565,10 +564,10 @@ private boolean isRunning =false;
                 .stroke(new Stroke(5, 0xAA00FF00)).fillColor(0xAAFFFF00);
         mBaiduMap.addOverlay(ooPolygon);
         // 添加文字 公司名字
-        LatLng llText = new LatLng(40.0430120000,116.3177550000);
+        LatLng ubii = new LatLng(40.0430120000,116.3177550000);
         OverlayOptions ooText = new TextOptions().bgColor(0xAAFFFF00)
                 .fontSize(24).fontColor(0xFFFF00FF).text("优比交互")
-                .position(llText);
+                .position(ubii);
         mBaiduMap.addOverlay(ooText);
     }
 

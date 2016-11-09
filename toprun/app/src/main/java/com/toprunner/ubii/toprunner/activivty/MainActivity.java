@@ -43,7 +43,6 @@ public class MainActivity extends Activity  {
         setContentView(R.layout.activity_main);
         Button denglu = (Button) findViewById(R.id.btn1);
         Button register = (Button) findViewById(R.id.zhuce);
-
         mysql = this.openOrCreateDatabase("student.db", MODE_PRIVATE, null);
         try                                                                               //防止第一次注册时不可以注册
         {

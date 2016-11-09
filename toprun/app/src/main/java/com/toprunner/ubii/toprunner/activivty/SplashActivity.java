@@ -54,7 +54,7 @@ public class SplashActivity extends BaseActivity {
 					GET_START_DATA);
 			if (result) {
 				Intent intent = new Intent(SplashActivity.this,
-						LoginActivity.class);
+						MainActivity.class);
 				startActivity(intent);
 				
 			} else {

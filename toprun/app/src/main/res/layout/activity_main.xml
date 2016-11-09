@@ -28,7 +28,8 @@
             android:textSize="28dp"
             android:textColor="#ffff"
             android:background="@mipmap/weixin"
-            android:layout_marginBottom="10dp" />
+            android:layout_marginBottom="10dp"
+            android:stateListAnimator="@drawable/state_list_animator_z"/>
 
         <Button
             android:layout_width="255dp"
@@ -38,6 +39,7 @@
             android:textSize="28dp"
             android:textColor="#ffff"
             android:background="@mipmap/denglu"
-            android:layout_marginBottom="25dp"/>
+            android:layout_marginBottom="25dp"
+            android:stateListAnimator="@drawable/state_list_animator_z"/>
     </LinearLayout>
 </RelativeLayout>

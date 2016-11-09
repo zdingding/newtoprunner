@@ -7,8 +7,8 @@
     <!--最中心的按钮-->
     <Button
         android:id="@+id/long_pressed_pause_tbn"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
         android:layout_centerInParent="true"
         android:background="@mipmap/long_press"
         android:text="开始"
@@ -18,8 +18,8 @@
     <!--完成按钮-->
     <Button
         android:id="@+id/finish_btn"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
         android:layout_centerInParent="true"
         android:layout_toLeftOf="@id/long_pressed_pause_tbn"
         android:background="@mipmap/finish_continue"
@@ -30,8 +30,8 @@
     <!--继续按钮-->
     <Button
         android:id="@+id/continue_btn"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
         android:layout_centerInParent="true"
         android:layout_toRightOf="@id/long_pressed_pause_tbn"
         android:background="@mipmap/finish_continue"

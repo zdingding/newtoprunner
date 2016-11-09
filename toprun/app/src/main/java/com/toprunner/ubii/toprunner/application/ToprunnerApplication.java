@@ -8,6 +8,7 @@ import android.telephony.TelephonyManager;
 import android.widget.Toast;
 
 import com.baidu.mapapi.SDKInitializer;
+import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.trace.LBSTraceClient;
 import com.baidu.trace.LocationMode;
@@ -29,6 +30,9 @@ public class ToprunnerApplication extends Application {
     private static int mainThreadId;
     private static Thread mainThread;
     private static  Context mContext = null;
+    private MapView bmapView = null;
+    private TrackHandler mHandler = null;
+    private BaiduMap mBaiduMap = null;
     /**
      * 轨迹服务
      */
@@ -89,21 +93,45 @@ public class ToprunnerApplication extends Application {
     public  static Trace getTrace() {
         return trace;
     }
+
     public static  LBSTraceClient getClient() {
         return client;
     }
+
     public static Handler getHandler() {
         return handler;
+    }
+    public Handler getmHandler() {
+        return mHandler;
     }
     public static Context getContext() {
         return mContext;
     }
+
     public static int getMainThreadId() {
         return mainThreadId;
     }
+
+    public int getServiceId() {
+        return serviceId;
+    }
+
+    public String getEntityName() {
+        return entityName;
+    }
+
     public static Thread getMainThread() {
         return mainThread;
     }
+
+    public MapView getBmapView() {
+        return bmapView;
+    }
+
+    public BaiduMap getmBaiduMap() {
+        return mBaiduMap;
+    }
+
     protected static String getImei(Context context) {
         String mImei = "NULL";
         try {
@@ -116,7 +144,11 @@ public class ToprunnerApplication extends Application {
         return mImei;
     }
 
-
+    public void initBmap(MapView bmapView) {
+        this.bmapView = bmapView;
+        this.mBaiduMap = bmapView.getMap();
+        this.bmapView.showZoomControls(false);
+    }
 
 
 
