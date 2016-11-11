@@ -22,14 +22,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
-                android:text="00:00:00"
+                android:text="@string/c_time"
                 android:textColor="#ffff"
                 />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
-                android:text="时长"
+                android:text="@string/tv_time"
                 android:textColor="#5a6375"
                 />
 
@@ -45,7 +45,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
-                android:text="5 ' 30 ''"
+                android:text="@string/speed"
                 android:gravity="center"
                 android:textColor="#ffff"
                 />
@@ -53,7 +53,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
-                android:text="配速"
+                android:text="@string/tv_speed"
                 android:textColor="#5a6375"
                 />
         </LinearLayout>

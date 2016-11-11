@@ -31,7 +31,6 @@ import com.toprunner.ubii.toprunner.utils.DateDialog;
 import com.toprunner.ubii.toprunner.utils.DateUtils;
 import com.toprunner.ubii.toprunner.utils.GsonService;
 import com.toprunner.ubii.toprunner.utils.HistoryTrackData;
-import com.toprunner.ubii.toprunner.utils.UIUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -85,7 +84,6 @@ public class TrackQueryFragment extends Fragment implements OnClickListener {
 
     private TextView tvDatetime = null;
 
-    private static int isProcessed = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -110,13 +108,11 @@ public class TrackQueryFragment extends Fragment implements OnClickListener {
         btnDate = (Button) view.findViewById(R.id.btn_date);
         btnProcessed = (Button) view.findViewById(R.id.btn_isprocessed);
         btnDistance = (Button) view.findViewById(R.id.btn_distance);
-
+        tvDatetime = (TextView) view.findViewById(R.id.tv_datetime);
+        tvDatetime.setText(" 当前日期 : " + DateUtils.getCurrentDate() + " ");
         btnDate.setOnClickListener(this);
         btnProcessed.setOnClickListener(this);
         btnDistance.setOnClickListener(this);
-
-        tvDatetime = (TextView) view.findViewById(R.id.tv_datetime);
-        tvDatetime.setText(" 当前日期 : " + DateUtils.getCurrentDate() + " ");
 
     }
 
@@ -143,7 +139,7 @@ public class TrackQueryFragment extends Fragment implements OnClickListener {
         // 分页索引
         int pageIndex = 1;
 
-        UIUtils.getClient().queryHistoryTrack(trackApp.getServiceId(), entityName, simpleReturn,
+        trackApp.getClient().queryHistoryTrack(trackApp.getServiceId(), entityName, simpleReturn,
                 isProcessed, processOption,
                 startTime, endTime,
                 pageSize,
@@ -172,7 +168,7 @@ public class TrackQueryFragment extends Fragment implements OnClickListener {
             endTime = (int) (System.currentTimeMillis() / 1000);
         }
 
-        UIUtils.getClient().queryDistance(trackApp.getServiceId(), entityName, isProcessed, processOption,
+        trackApp.getClient().queryDistance(trackApp.getServiceId(), entityName, isProcessed, processOption,
                 supplementMode, startTime, endTime, trackListener);
     }
 
@@ -221,14 +217,9 @@ public class TrackQueryFragment extends Fragment implements OnClickListener {
             public void execute() {
 
                 tvDatetime.setText(" 当前日期 : " + year + "-" + month + "-" + day + " ");
-                // 选择完日期，根据是否纠偏发送轨迹查询请求
-                if (0 == isProcessed) {
+                // 选择完日期，根据是否发送轨迹查询请求
                     Toast.makeText(getActivity(), "正在查询历史轨迹，请稍候", Toast.LENGTH_SHORT).show();
-                    queryHistoryTrack(0, null);
-                } else {
-                    Toast.makeText(getActivity(), "正在查询纠偏后的历史轨迹，请稍候", Toast.LENGTH_SHORT).show();
-                    queryHistoryTrack(1, "need_denoise=1,need_vacuate=1,need_mapmatch=1");
-                }
+                    queryHistoryTrack(1, "need_denoise=1,need_vacuate=1,need_mapmatch=1,transport_mode=3");
             }
         }, year, month, day, width, height, "选择日期", 1);
 
@@ -271,22 +262,15 @@ public class TrackQueryFragment extends Fragment implements OnClickListener {
                 break;
 
             case R.id.btn_isprocessed:
-                isProcessed = isProcessed ^ 1;
-                if (0 == isProcessed) {
-                    btnProcessed.setBackgroundColor(Color.rgb(0xff, 0xff, 0xff));
-                    btnProcessed.setTextColor(Color.rgb(0x00, 0x00, 0x00));
-                    Toast.makeText(getActivity(), "正在查询历史轨迹，请稍候", Toast.LENGTH_SHORT).show();
-                    queryHistoryTrack(0, null);
-                } else {
+
                     btnProcessed.setBackgroundColor(Color.rgb(0x99, 0xcc, 0xff));
                     btnProcessed.setTextColor(Color.rgb(0x00, 0x00, 0xd8));
-                    Toast.makeText(getActivity(), "正在查询纠偏后的历史轨迹，请稍候", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "正在查询历史轨迹，请稍候", Toast.LENGTH_SHORT).show();
                     queryHistoryTrack(1, "need_denoise=1,need_vacuate=1,need_mapmatch=1");
-                }
                 break;
 
             case R.id.btn_distance:
-                queryDistance(0, null);
+              // queryDistance(1, "need_denoise=1,need_vacuate=1,need_mapmatch=1");
                 break;
 
             default:
@@ -391,7 +375,7 @@ public class TrackQueryFragment extends Fragment implements OnClickListener {
             markerOptions.position(points.get(points.size() - 1));
 
             addMarker();
-
+            btnDistance.setText((int)distance+"");
             trackApp.getmHandler().obtainMessage(0, "当前轨迹里程为 : " + (int) distance + "米").sendToTarget();
 
         }

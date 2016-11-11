@@ -18,10 +18,16 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.toprunner.ubii.toprunner.R;
+import com.toprunner.ubii.toprunner.application.ToprunnerApplication;
+
+import org.xutils.DbManager;
+import org.xutils.view.annotation.ContentView;
+import org.xutils.x;
 
 /**
  * Created by ly on 2016/4/27.
  */
+@ContentView(value = R.id.denglu)
 public class DengluActivity extends Activity {
     ProgressDialog m_dlog;
     SQLiteDatabase mysql;
@@ -36,6 +42,7 @@ public class DengluActivity extends Activity {
             //透明导航栏
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
         }
+        DbManager db = x.getDb(((ToprunnerApplication)getApplicationContext()).getDaoConfig());
         button = (Button) findViewById(R.id.denglu);
         mysql=this.openOrCreateDatabase("student.db", MODE_PRIVATE,null);
         try

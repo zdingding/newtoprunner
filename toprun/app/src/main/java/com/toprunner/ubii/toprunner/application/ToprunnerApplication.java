@@ -14,6 +14,9 @@ import com.baidu.trace.LBSTraceClient;
 import com.baidu.trace.LocationMode;
 import com.baidu.trace.Trace;
 
+import org.xutils.DbManager;
+import org.xutils.x;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -33,6 +36,8 @@ public class ToprunnerApplication extends Application {
     private MapView bmapView = null;
     private TrackHandler mHandler = null;
     private BaiduMap mBaiduMap = null;
+
+    private DbManager.DaoConfig daoConfig;//数据库创建
     /**
      * 轨迹服务
      */
@@ -56,6 +61,7 @@ public class ToprunnerApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        x.Ext.init(this);
         mContext = getApplicationContext();
         ShareSDK.initSDK(mContext,"18880eaf53a64");
         SDKInitializer.initialize(mContext);
@@ -78,6 +84,15 @@ public class ToprunnerApplication extends Application {
         mainThreadId = android.os.Process.myTid();
         //主线程对象
         mainThread = Thread.currentThread();
+        daoConfig = new DbManager.DaoConfig().setDbName("baidu.db").setDbDir(new File("/sdcard")).setDbVersion(1).setDbUpgradeListener(new DbManager.DbUpgradeListener() {
+            @Override
+            public void onUpgrade(DbManager db, int oldVersion, int newVersion) {
+
+            }
+        });
+    }
+    public  DbManager.DaoConfig getDaoConfig() {
+        return daoConfig;
     }
     static class TrackHandler extends Handler {
         WeakReference<ToprunnerApplication> trackApp;

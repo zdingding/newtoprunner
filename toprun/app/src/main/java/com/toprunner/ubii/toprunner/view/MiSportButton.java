@@ -22,9 +22,9 @@ public class MiSportButton extends RelativeLayout {
 	private Button							mLongPressBtn;		// 长按暂停Btn
 	private miSportButtonClickListener		clickListener;
 	private miSportButtonLongClickListener	longclickListener;
-	private Animation						alpha, translateLeft, translateRight;
+	private final Animation				alpha, translateLeft, translateRight;
 	private int								moveWidth;								// 按钮移动的距离
-
+	boolean  isOnclick =true;
 	public MiSportButton(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		LayoutInflater.from(context).inflate(R.layout.mi_sport_btn_layout, this);
@@ -39,15 +39,17 @@ public class MiSportButton extends RelativeLayout {
 			public void onClick(View v) {
 				clickListener.startClick();
 				mLongPressBtn.setText("长按暂停");
+				 isOnclick =  false;
 			}
 		});
 		// 按钮监听
 		mLongPressBtn.setOnLongClickListener(new OnLongClickListener() {
 			@Override
 			public boolean onLongClick(View v) {
-				longclickListener.longPressClick();
-				mLongPressBtn.startAnimation(alpha);
-				return false;
+					longclickListener.longPressClick();
+					mLongPressBtn.startAnimation(alpha);
+					return isOnclick;
+
 			}
 		});
 		mFinishBtn.setOnClickListener(new OnClickListener() {

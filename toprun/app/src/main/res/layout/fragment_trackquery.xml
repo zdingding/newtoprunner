@@ -1,24 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="300dp" >
-
-    <TextView
-        android:id="@+id/tv_datetime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="5dip"
-        android:background="#FFFFFF"
-        android:textColor="#0000D8" />
+    android:layout_height="match_parent" >
 
     <Button
         android:id="@+id/btn_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/tv_datetime"
         android:layout_marginRight="15dp"
         android:layout_marginTop="5dip"
         android:background="#FFFFFF"
@@ -48,5 +37,12 @@
         android:background="#FFFFFF"
         android:text="@string/track_distance"
         android:textColor="#000000" />
-
-</RelativeLayout>
+    <TextView
+        android:id="@+id/tv_datetime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dip"
+        android:background="#FFFFFF"
+        android:layout_below="@+id/btn_distance"
+        android:textColor="#0000D8" />
+</LinearLayout>

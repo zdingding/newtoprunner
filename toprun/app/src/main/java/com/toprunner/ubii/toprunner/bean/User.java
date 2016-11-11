@@ -1,5 +1,9 @@
 package com.toprunner.ubii.toprunner.bean;
 
+import org.xutils.db.annotation.Column;
+import org.xutils.db.annotation.Table;
+
+@Table(name = "User")
 public class User {
 /*
 	 * id 用户ID userName 用户名 passWord 密码 avatar 头像 weight 体重 height 身高 age 年龄 sex
@@ -10,25 +14,24 @@ public class User {
 	 * 性别 save1 save2
 	 */
 
-//@ID(autoincrement = true)
 private int id;
-
+    @Column(name = "username",isId = true)
     private String userName;
-
+    @Column(name = "passWord")
     private String passWord;
-
+    @Column(name = "avatar")
     private String avatar;
-
+    @Column(name = "weight")
     private double weight;
-
+    @Column(name = "height")
     private double height;
-
+    @Column(name = "age")
     private int age;
-
+    @Column(name = "sex")
     private String sex;
-
+    @Column(name = "save1")
     private String save1;
-
+    @Column(name = "save2")
     private String save2;
     private int status; // 是否登陆 LOGIN 表示已经登陆了 OFF 表示没有登陆
 

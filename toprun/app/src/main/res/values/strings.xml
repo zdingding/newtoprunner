@@ -59,4 +59,12 @@
     <string name="confirm">确定</string>
     <string name="circular_fence_caption">请点击地图标记围栏圆心</string>
     <string name="vertexes_fence_caption">请按顺时针或逆时针方向点击地图</string>
+    <string name="font_type">微软雅黑</string>
+    <string name="starting_travel">正在开启请稍后。。</string>
+    <string name="starting_chenggong">开启成功</string>
+    <string name="starting_shibai">开启失败</string>
+    <string name="tv_speed">配速</string>
+    <string name="speed">5 \' 30 \'\'</string>
+    <string name="tv_time">时长</string>
+    <string name="c_time">00:00:00</string>
 </resources>

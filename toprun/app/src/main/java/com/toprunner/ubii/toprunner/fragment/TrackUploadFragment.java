@@ -40,6 +40,7 @@ import com.toprunner.ubii.toprunner.R;
 import com.toprunner.ubii.toprunner.application.ToprunnerApplication;
 import com.toprunner.ubii.toprunner.broadcastreceiver.TrackReceiver;
 import com.toprunner.ubii.toprunner.service.MonitorService;
+import com.toprunner.ubii.toprunner.utils.CommonUtils;
 import com.toprunner.ubii.toprunner.utils.DateUtils;
 import com.toprunner.ubii.toprunner.utils.UIUtils;
 import com.toprunner.ubii.toprunner.view.MiSportButton;
@@ -246,7 +247,7 @@ public class TrackUploadFragment extends Fragment {
      */
     private void startTrace() {
         // 通过轨迹服务客户端client开启轨迹服务
-        Toast.makeText(getActivity(), "正在开启，请稍候", Toast.LENGTH_LONG).show();
+        CommonUtils.toastShow(getActivity(), getString(R.string.starting_travel));
         if (!isRegister) {
             if (null == pm) {
                 pm = (PowerManager) trackApp.getSystemService(Context.POWER_SERVICE);
@@ -354,7 +355,15 @@ public class TrackUploadFragment extends Fragment {
             // 开启轨迹服务回调接口（arg0 : 消息编码，arg1 : 消息内容，详情查看类参考）
             public void onTraceCallback(int arg0, String arg1) {
                 // TODO Auto-generated method stub
-                mHandler.obtainMessage(arg0, "开启轨迹服务回调接口消息 [消息编码 : " + arg0 + "，消息内容 : " + arg1 + "]").sendToTarget();
+                 if(arg0==0){
+
+                     CommonUtils.toastShow(getActivity(), getString(R.string.starting_chenggong));
+
+                 }else{
+
+                     CommonUtils.toastShow(getActivity(), getString(R.string.starting_shibai));
+
+                 }
             }
 
             // 轨迹服务推送接口（用于接收服务端推送消息，arg0 : 消息类型，arg1 : 消息内容，详情查看类参考）
