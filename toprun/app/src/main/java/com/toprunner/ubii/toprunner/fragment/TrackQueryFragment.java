@@ -16,10 +16,13 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.baidu.mapapi.favorite.FavoriteManager;
+import com.baidu.mapapi.favorite.FavoritePoiInfo;
 import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
 import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
+import com.baidu.mapapi.map.Marker;
 import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.PolylineOptions;
 import com.baidu.mapapi.model.LatLng;
@@ -60,7 +63,10 @@ public class TrackQueryFragment extends Fragment implements OnClickListener {
     private int year = 0;
     private int month = 0;
     private int day = 0;
-
+    // 现实marker的图标
+    BitmapDescriptor bdA = BitmapDescriptorFactory
+            .fromResource(R.mipmap.d);
+    List<Marker> markers = new ArrayList<Marker>();
     // 起点图标
     private static BitmapDescriptor bmStart;
     // 终点图标
@@ -83,6 +89,7 @@ public class TrackQueryFragment extends Fragment implements OnClickListener {
     private MapStatusUpdate msUpdate = null;
 
     private TextView tvDatetime = null;
+    private Button btn_marker;
 
 
     @Override
@@ -106,6 +113,7 @@ public class TrackQueryFragment extends Fragment implements OnClickListener {
     private void init(final View view) {
 
         btnDate = (Button) view.findViewById(R.id.btn_date);
+        btn_marker = (Button) view.findViewById(R.id.btn_marker);
         btnProcessed = (Button) view.findViewById(R.id.btn_isprocessed);
         btnDistance = (Button) view.findViewById(R.id.btn_distance);
         tvDatetime = (TextView) view.findViewById(R.id.tv_datetime);
@@ -113,6 +121,7 @@ public class TrackQueryFragment extends Fragment implements OnClickListener {
         btnDate.setOnClickListener(this);
         btnProcessed.setOnClickListener(this);
         btnDistance.setOnClickListener(this);
+        btn_marker.setOnClickListener(this);
 
     }
 
@@ -260,6 +269,9 @@ public class TrackQueryFragment extends Fragment implements OnClickListener {
                 // 查询轨迹
                 queryTrack();
                 break;
+            case R.id.btn_marker:
+                querymarker();
+                break;
 
             case R.id.btn_isprocessed:
 
@@ -276,6 +288,23 @@ public class TrackQueryFragment extends Fragment implements OnClickListener {
             default:
                 break;
         }
+    }
+
+
+        private void querymarker() {
+            List<FavoritePoiInfo> list = FavoriteManager.getInstance().getAllFavPois();
+            if (list == null || list.size() == 0) {
+                Toast.makeText(getContext(), "没有收藏点", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            for (int i = 0; i < list.size(); i++) {
+                MarkerOptions option = new MarkerOptions().icon(bdA).position(list.get(i).getPt());
+                Bundle b = new Bundle();
+                b.putString("id", list.get(i).getID());
+                option.extraInfo(b);
+                trackApp.getmBaiduMap().addOverlay(option);
+            }
+
     }
 
     /**

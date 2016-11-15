@@ -76,15 +76,19 @@
         <activity
             android:name=".running.RunActivity"
             android:launchMode="singleTask"/>
+
         <activity android:name=".activivty.SportdetailsActivity">
+
         </activity>
         <activity android:name=".activivty.SplashActivity">
+
         </activity>
         <activity android:name=".activivty.Guide1Activity">
         </activity>
         <activity android:name=".activivty.GuideActivity2">
         </activity>
-        <activity android:name=".activivty.GuideActivity3">
+        <activity android:name=".activivty.GuideActivity3"/>
+        <activity android:name=".activivty.RegisterActivity">
         </activity>
         <activity android:name=".activivty.ClipActivity"/>
 
@@ -100,6 +104,7 @@
         <activity android:name=".activivty.ScanActivity">
         </activity>
         <activity android:name=".activivty.LoginActivity">
+
         </activity>
         <activity
             android:name=".activivty.SettingActivity"

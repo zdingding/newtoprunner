@@ -56,7 +56,7 @@ public class MainActivity extends Activity  {
                 Intent intent = new Intent();
                 intent.setClass(MainActivity.this, DengluActivity.class);//起始进入user界面
                 startActivity(intent);
-              //  MainActivity.this.finish();
+
             }
         });
         register.setOnClickListener(new View.OnClickListener() {
@@ -67,6 +67,7 @@ public class MainActivity extends Activity  {
                 View view = UIUtils.inflate(R.layout.register);
                 final EditText username = (EditText) view.findViewById(R.id.et_username);
                 final EditText userpass = (EditText) view.findViewById(R.id.passwordtext);
+                username.getText().toString().trim();
                 builder.setView(view);
                 builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override

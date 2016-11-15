@@ -10,6 +10,7 @@ import android.widget.Toast;
 import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.MapView;
+import com.baidu.mapapi.map.TextureMapView;
 import com.baidu.trace.LBSTraceClient;
 import com.baidu.trace.LocationMode;
 import com.baidu.trace.Trace;
@@ -33,7 +34,7 @@ public class ToprunnerApplication extends Application {
     private static int mainThreadId;
     private static Thread mainThread;
     private static  Context mContext = null;
-    private MapView bmapView = null;
+    private TextureMapView bmapView = null;
     private TrackHandler mHandler = null;
     private BaiduMap mBaiduMap = null;
 
@@ -84,7 +85,7 @@ public class ToprunnerApplication extends Application {
         mainThreadId = android.os.Process.myTid();
         //主线程对象
         mainThread = Thread.currentThread();
-        daoConfig = new DbManager.DaoConfig().setDbName("baidu.db").setDbDir(new File("/sdcard")).setDbVersion(1).setDbUpgradeListener(new DbManager.DbUpgradeListener() {
+        daoConfig = new DbManager.DaoConfig().setDbName("topruner.db").setDbDir(new File("/sdcard")).setDbVersion(1).setDbUpgradeListener(new DbManager.DbUpgradeListener() {
             @Override
             public void onUpgrade(DbManager db, int oldVersion, int newVersion) {
 
@@ -139,7 +140,7 @@ public class ToprunnerApplication extends Application {
         return mainThread;
     }
 
-    public MapView getBmapView() {
+    public TextureMapView getBmapView() {
         return bmapView;
     }
 
@@ -159,7 +160,7 @@ public class ToprunnerApplication extends Application {
         return mImei;
     }
 
-    public void initBmap(MapView bmapView) {
+    public void initBmap(TextureMapView bmapView) {
         this.bmapView = bmapView;
         this.mBaiduMap = bmapView.getMap();
         this.bmapView.showZoomControls(false);

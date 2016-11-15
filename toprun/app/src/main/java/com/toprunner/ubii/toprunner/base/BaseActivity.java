@@ -17,6 +17,8 @@ import android.widget.ViewFlipper;
 
 import com.toprunner.ubii.toprunner.R;
 
+import org.xutils.x;
+
 /**
  * Created by ${赵鼎} on 2016/9/27 0027.
  */
@@ -46,6 +48,7 @@ public class BaseActivity extends AppCompatActivity {
         super.setContentView(R.layout.layout_base);
         mContext = this;
         //初始化公共头部
+        x.view().inject(this);
         mContentView = (ViewFlipper) super.findViewById(R.id.layout_container);
         layout_head = (RelativeLayout) super.findViewById(R.id.layout_head);
         btn_left = (Button) super.findViewById(R.id.btn_left);

@@ -9,14 +9,21 @@ import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.view.View;
 
+import com.baidu.mapapi.map.BitmapDescriptor;
+import com.baidu.mapapi.map.BitmapDescriptorFactory;
+import com.baidu.mapapi.map.Marker;
 import com.baidu.trace.LBSTraceClient;
 import com.baidu.trace.Trace;
+import com.toprunner.ubii.toprunner.R;
 import com.toprunner.ubii.toprunner.application.ToprunnerApplication;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UIUtils {
+
 	//先将BaseApplication中提供出来的所有的变量提供相应的一种获取方式
 	public static Context getContext(){
 		return ToprunnerApplication.getContext();

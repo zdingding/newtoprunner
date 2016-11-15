@@ -1,17 +1,25 @@
 package com.toprunner.ubii.toprunner.activivty;
 
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
-import com.baidu.mapapi.map.MapView;
+import com.baidu.mapapi.favorite.FavoriteManager;
+import com.baidu.mapapi.favorite.FavoritePoiInfo;
+import com.baidu.mapapi.map.BaiduMap;
+import com.baidu.mapapi.map.TextureMapView;
+import com.baidu.mapapi.model.LatLng;
 import com.toprunner.ubii.toprunner.R;
 import com.toprunner.ubii.toprunner.application.ToprunnerApplication;
 import com.toprunner.ubii.toprunner.fragment.TrackQueryFragment;
@@ -19,7 +27,7 @@ import com.toprunner.ubii.toprunner.fragment.TrackUploadFragment;
 
 import butterknife.ButterKnife;
 
-public class RunningActivity extends AppCompatActivity implements OnClickListener {
+public class RunningActivity extends AppCompatActivity implements OnClickListener, BaiduMap.OnMapLongClickListener {
 
     private ToprunnerApplication trackApp = null;
 
@@ -47,6 +55,8 @@ public class RunningActivity extends AppCompatActivity implements OnClickListene
         }
         setContentView(R.layout.activity_running);
         ButterKnife.bind(this);
+        // 初始化收藏夹
+        FavoriteManager.getInstance().init();//本地收藏夹
         trackApp = (ToprunnerApplication) getApplicationContext();
         // 初始化组件
         initComponent();
@@ -74,7 +84,7 @@ public class RunningActivity extends AppCompatActivity implements OnClickListene
 
         fragmentManager = getSupportFragmentManager();
 
-        trackApp.initBmap((MapView) findViewById(R.id.bmapView));
+        trackApp.initBmap((TextureMapView) findViewById(R.id.bmapView));
 
     }
 
@@ -124,6 +134,7 @@ public class RunningActivity extends AppCompatActivity implements OnClickListene
                 mTrackQueryFragment.addMarker();
                 btnTrackQuery.setBackgroundColor(Color.rgb(0x99, 0xcc, 0xff));
                 trackApp.getmBaiduMap().setOnMapClickListener(null);
+                trackApp.getmBaiduMap().setOnMapLongClickListener(this);
                 break;
 
             case R.id.btn_trackUpload:
@@ -141,6 +152,7 @@ public class RunningActivity extends AppCompatActivity implements OnClickListene
                 mTrackUploadFragment.addMarker();
                 btnTrackUpload.setBackgroundColor(Color.rgb(0x99, 0xcc, 0xff));
                 trackApp.getmBaiduMap().setOnMapClickListener(null);
+                trackApp.getmBaiduMap().setOnMapLongClickListener(this);
                 break;
         }
         // 事务提交
@@ -191,7 +203,35 @@ public class RunningActivity extends AppCompatActivity implements OnClickListene
         super.onDestroy();
         trackApp.getClient().onDestroy();
         trackApp.getBmapView().onDestroy();
+        // 释放收藏夹功能资源
+        FavoriteManager.getInstance().destroy();
         android.os.Process.killProcess(android.os.Process.myPid());
     }
 
+    @Override
+    public void onMapLongClick(LatLng latLng) {
+        final FavoritePoiInfo info = new FavoritePoiInfo();//保存收藏的坐标点
+        final EditText editText = new EditText(this);
+        editText.setHint("名称不能重复");
+        info.pt(latLng);
+        new AlertDialog.Builder(this)
+                .setTitle("输入收藏位置的名称")
+                .setView(editText)
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String newName = editText.getText().toString();
+                        info.poiName(newName);
+                        if (FavoriteManager.getInstance().add(info) == 1) {
+                            Toast.makeText(RunningActivity.this, "添加成功", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(RunningActivity.this, "添加失败", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                })
+                .setNegativeButton("取消", null)
+                .show();
+
+
+    }
 }

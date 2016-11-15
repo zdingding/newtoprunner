@@ -13,6 +13,16 @@
         android:background="#FFFFFF"
         android:text="@string/select_date"
         android:textColor="#000000" />
+    <Button
+        android:id="@+id/btn_marker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="5dip"
+        android:background="#FFFFFF"
+        android:text="@string/makers"
+        android:textColor="#000000" />
 
     <Button
         android:id="@+id/btn_isprocessed"
