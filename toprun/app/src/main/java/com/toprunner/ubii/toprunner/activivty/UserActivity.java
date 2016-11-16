@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.toprunner.ubii.toprunner.R;
@@ -14,7 +16,6 @@ import com.toprunner.ubii.toprunner.base.BaseActivity;
 import com.toprunner.ubii.toprunner.base.BaseFragment;
 import com.toprunner.ubii.toprunner.fragment.DiscoverFragment;
 import com.toprunner.ubii.toprunner.fragment.Me_User;
-
 
 
 /**
@@ -28,16 +29,20 @@ public class UserActivity extends BaseActivity {
     private TextView start;
     private TextView dc;
     public static Bitmap bmap;//模糊处理需要的背景图是在this类里面完成的截屏
-
+    private FrameLayout id_bottom;
+    private ImageView jiantou;
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user);
-        me = (TextView) findViewById(R.id.ME);
+        me = (TextView) findViewById(R.id.wode);
+        start = (TextView) findViewById(R.id.start);
         start = (TextView) findViewById(R.id.start);
         dc = (TextView) findViewById(R.id.discover);
+        id_bottom = (FrameLayout) findViewById(R.id.id_bottom);
+        jiantou = (ImageView) findViewById(R.id.jiantou);
         setTabSelection(0);
         me.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,15 +56,23 @@ public class UserActivity extends BaseActivity {
             public void onClick(View v) {
                 setTabSelection(1);
                 Intent intent = new Intent();
-                intent.setClass(UserActivity.this, SportdetailsActivity.class);                   //起始进入user界面
+                intent.setClass(UserActivity.this, choose_run.class);                   //起始进入user界面
                 startActivityForResult(intent,SPORTDETAIL);
-                finish();
+
+            }
+        });
+        jiantou.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setTabSelection(1);
+                id_bottom.setVisibility(View.VISIBLE);
             }
         });
         dc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 setTabSelection(2);
+                id_bottom.setVisibility(View.GONE);
             }
         });
     }

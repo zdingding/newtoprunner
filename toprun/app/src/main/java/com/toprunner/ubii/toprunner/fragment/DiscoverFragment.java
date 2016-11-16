@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.PopupWindow;
@@ -59,6 +60,8 @@ public class DiscoverFragment extends BaseFragment implements View.OnClickListen
     private TextView tv_age;
     private TextView text_age;
     private TextView test_scan_qrcode;
+    private ImageView iv_nickname;
+    private ImageView sex_iv;
 
 
     @Override
@@ -68,6 +71,8 @@ public class DiscoverFragment extends BaseFragment implements View.OnClickListen
             sextext.setText(sex);
         }
         headimage.setOnClickListener(this);
+        iv_nickname.setOnClickListener(this);
+        sex_iv.setOnClickListener(this);
         nickname.setOnClickListener(this);
         sex_text.setOnClickListener(this);
         tv_mHeight.setOnClickListener(this);
@@ -84,8 +89,10 @@ public class DiscoverFragment extends BaseFragment implements View.OnClickListen
     @Override
     protected void initView(View view, Bundle savedInstanceState) {
         headimage = findViewById(R.id.headimage);
+        iv_nickname = findViewById(R.id.iv_nickname);
         nickname = findViewById(R.id.nickname);
-        nickname.setText(CacheUtils.getString(getActivity(),"name"));
+        sex_iv = findViewById(R.id.sex_iv);
+       //
         sex_text = findViewById(R.id.sex_text);
         sextext = findViewById(R.id.sextext);
         mHeight = findViewById(R.id.mHeight);
@@ -178,6 +185,7 @@ public class DiscoverFragment extends BaseFragment implements View.OnClickListen
 
                 break;
             case  R.id.sex_text:
+            case  R.id.sex_iv:
                 // 设置性别
                 final String[] sexlist = { "男", "女" };
                 new AlertDialog.Builder(getActivity()).setItems(sexlist, new DialogInterface.OnClickListener() {
@@ -193,6 +201,7 @@ public class DiscoverFragment extends BaseFragment implements View.OnClickListen
                 showPopupWindow(headimage);
             break;
             case  R.id.nickname:
+            case  R.id.iv_nickname:
                 final EditText editText = new EditText(getActivity());
                 editText.setHint(nickname.getText().toString());
                 new AlertDialog.Builder(getActivity())

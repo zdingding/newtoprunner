@@ -59,7 +59,7 @@ public class SplashActivity extends BaseActivity {
 				
 			} else {
 				Intent intent = new Intent(SplashActivity.this,
-						GuideActivity3.class);
+						Guide1Activity.class);
 				startActivity(intent);
 
 			}

@@ -2,26 +2,30 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+              android:background="#0A0A1E"
               android:orientation="horizontal"
     android:gravity="center_horizontal">
         <ImageView
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="36dp"
             android:layout_weight="1"
+            android:background="#0A0A1E"
             android:src="@mipmap/iconcamera"/>
     <ImageView
         android:id="@+id/btn_trackUpload"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="36dp"
         android:layout_weight="1"
         android:src="@mipmap/iconeye"
+        android:background="#0A0A1E"
         android:text="@string/track_upload"/>
-        <ImageView
+    <ImageView
             android:id="@+id/btn_trackQuery"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="36dp"
             android:layout_weight="1"
             android:src="@mipmap/iconsetting"
+            android:background="#0A0A1E"
             android:text="@string/track_query"
             />
 </LinearLayout>

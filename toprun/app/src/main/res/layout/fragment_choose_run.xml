@@ -1,12 +1,181 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/choose_run"
-    tools:context=".activivty.choose_run">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="正在跑"/>
-</RelativeLayout>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:id="@+id/choose_run"
+             tools:context=".activivty.choose_run">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/image_bg"
+    />
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="233dp"
+        android:layout_gravity="center_horizontal|bottom">
+
+        <RelativeLayout
+            android:layout_width="84dp"
+            android:layout_height="84dp"
+            android:id="@+id/relativeLayout"
+            android:layout_marginRight="39dp"
+            android:layout_marginEnd="39dp"
+            android:layout_above="@+id/textView15"
+            android:layout_toLeftOf="@+id/button_back"
+            android:layout_toStartOf="@+id/button_back">
+            <RelativeLayout
+                android:layout_width="84dp"
+                android:layout_height="84dp"
+                android:layout_centerInParent="true" >
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/quwei4"
+                    android:src="@mipmap/circlel01"
+                    android:layout_centerInParent="true" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="150px"
+                android:layout_height="150px"
+                android:layout_centerInParent="true" >
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/quwei3"
+                    android:src="@mipmap/circlel02"
+                    android:layout_centerInParent="true"
+                />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="116px"
+                android:layout_height="116px"
+                android:layout_centerInParent="true" >
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/quwei2"
+                    android:src="@mipmap/circlel03"
+                    android:layout_centerInParent="true"
+                />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="144px"
+                android:layout_height="144px"
+                android:layout_centerInParent="true" >
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/quwei1"
+                    android:src="@mipmap/circlel04"
+                    android:layout_centerInParent="true" />
+            </RelativeLayout>
+
+            <Button
+                android:layout_width="56px"
+                android:layout_height="80px"
+                android:id="@+id/leftquweipao"
+                android:background="@mipmap/circlelcenter"
+                android:layout_centerInParent="true"
+            />
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="168px"
+            android:layout_height="168px"
+            android:layout_gravity="right|top"
+            android:id="@+id/relativeLayout2"
+            android:layout_marginRight="60dp"
+            android:layout_marginEnd="60dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true">
+            <RelativeLayout
+                android:layout_width="168px"
+                android:layout_height="168px"
+                android:layout_centerInParent="true" >
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/circler01"
+                    android:id="@+id/shiwai1"
+                    android:layout_centerInParent="true" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="150px"
+                android:layout_height="150px"
+                android:layout_centerInParent="true" >
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/circler02"
+                    android:id="@+id/shiwai2"
+                    android:layout_centerInParent="true" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="116px"
+                android:layout_height="116px"
+                android:layout_centerInParent="true" >
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/circler03"
+                    android:id="@+id/shiwai3"
+                    android:layout_centerInParent="true"
+                />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:layout_centerInParent="true" >
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/circler04"
+                    android:id="@+id/shiwai4"
+                    android:layout_centerInParent="true" />
+            </RelativeLayout>
+            <Button
+                android:layout_width="37dp"
+                android:layout_height="33dp"
+                android:id="@+id/rightshiwaipao"
+                android:background="@mipmap/circlercenter"
+                android:layout_centerInParent="true" />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="趣味跑"
+            android:textSize="28sp"
+            android:textColor="#ffff"
+            android:layout_gravity="left|center_vertical"
+            android:layout_below="@+id/relativeLayout"
+            android:layout_alignLeft="@+id/relativeLayout"
+            android:layout_alignStart="@+id/relativeLayout"
+            android:layout_marginLeft="24dp"
+            android:layout_marginStart="24dp"
+            android:id="@+id/textView31" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="室外跑"
+            android:textSize="48px"
+            android:textColor="#ffff"
+            android:layout_marginRight="24dp"
+            android:layout_marginEnd="24dp"
+            android:id="@+id/textView15"
+            android:layout_below="@+id/relativeLayout2"
+            android:layout_alignRight="@+id/relativeLayout2"
+            android:layout_alignEnd="@+id/relativeLayout2" />
+        <Button
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:background="@mipmap/iconclose"
+            android:id="@+id/button_back"
+            android:layout_below="@+id/textView31"
+            android:layout_centerHorizontal="true" />
+    </RelativeLayout>
+
+
+</FrameLayout>

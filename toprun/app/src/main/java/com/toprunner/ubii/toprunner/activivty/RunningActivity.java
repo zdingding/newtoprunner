@@ -18,6 +18,9 @@ import android.widget.Toast;
 import com.baidu.mapapi.favorite.FavoriteManager;
 import com.baidu.mapapi.favorite.FavoritePoiInfo;
 import com.baidu.mapapi.map.BaiduMap;
+import com.baidu.mapapi.map.BitmapDescriptor;
+import com.baidu.mapapi.map.BitmapDescriptorFactory;
+import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.TextureMapView;
 import com.baidu.mapapi.model.LatLng;
 import com.toprunner.ubii.toprunner.R;
@@ -27,8 +30,9 @@ import com.toprunner.ubii.toprunner.fragment.TrackUploadFragment;
 
 import butterknife.ButterKnife;
 
-public class RunningActivity extends AppCompatActivity implements OnClickListener, BaiduMap.OnMapLongClickListener {
-
+public class RunningActivity extends AppCompatActivity implements OnClickListener, BaiduMap.OnMapLongClickListener{
+    BitmapDescriptor bdA = BitmapDescriptorFactory
+            .fromResource(R.mipmap.d);
     private ToprunnerApplication trackApp = null;
 
     private ImageView btnTrackUpload;
@@ -81,7 +85,6 @@ public class RunningActivity extends AppCompatActivity implements OnClickListene
 
         btnTrackUpload.setOnClickListener(this);
         btnTrackQuery.setOnClickListener(this);
-
         fragmentManager = getSupportFragmentManager();
 
         trackApp.initBmap((TextureMapView) findViewById(R.id.bmapView));
@@ -210,6 +213,8 @@ public class RunningActivity extends AppCompatActivity implements OnClickListene
 
     @Override
     public void onMapLongClick(LatLng latLng) {
+        MarkerOptions option = new MarkerOptions().icon(bdA).position(latLng);
+        trackApp.getmBaiduMap().addOverlay(option);
         final FavoritePoiInfo info = new FavoritePoiInfo();//保存收藏的坐标点
         final EditText editText = new EditText(this);
         editText.setHint("名称不能重复");
@@ -234,4 +239,6 @@ public class RunningActivity extends AppCompatActivity implements OnClickListene
 
 
     }
+
+
 }

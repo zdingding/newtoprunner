@@ -64,7 +64,7 @@ public class CircleAdapter extends BaseRecycleViewAdapter  {
         if(getItemViewType(position)==TYPE_HEAD){
             HeaderViewHolder holder = (HeaderViewHolder) viewHolder;
             holder.pathlenght.setText("0");
-            Glide.with(context).load(R.mipmap.jiantou).diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.headimage);
+            Glide.with(context).load(R.mipmap.ren).diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.headimage);
         }else {
             final int circlePosition = position - HEADVIEW_SIZE;
             CircleViewHolder holder = (CircleViewHolder) viewHolder;

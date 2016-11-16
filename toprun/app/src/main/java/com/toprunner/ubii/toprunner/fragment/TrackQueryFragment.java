@@ -18,8 +18,10 @@ import android.widget.Toast;
 
 import com.baidu.mapapi.favorite.FavoriteManager;
 import com.baidu.mapapi.favorite.FavoritePoiInfo;
+import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
+import com.baidu.mapapi.map.InfoWindow;
 import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.Marker;
@@ -34,6 +36,7 @@ import com.toprunner.ubii.toprunner.utils.DateDialog;
 import com.toprunner.ubii.toprunner.utils.DateUtils;
 import com.toprunner.ubii.toprunner.utils.GsonService;
 import com.toprunner.ubii.toprunner.utils.HistoryTrackData;
+import com.toprunner.ubii.toprunner.utils.UIUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -47,7 +50,7 @@ import java.util.Map;
  * 轨迹查询
  */
 @SuppressLint("NewApi")
-public class TrackQueryFragment extends Fragment implements OnClickListener {
+public class TrackQueryFragment extends Fragment implements OnClickListener, BaiduMap.OnMarkerClickListener {
 
     private ToprunnerApplication trackApp = null;
 
@@ -106,12 +109,12 @@ public class TrackQueryFragment extends Fragment implements OnClickListener {
 
         return view;
     }
-
+    private View mPop;
     /**
      * 初始化
      */
     private void init(final View view) {
-
+        mPop = UIUtils.inflate(R.layout.activity_favorite_infowindow);
         btnDate = (Button) view.findViewById(R.id.btn_date);
         btn_marker = (Button) view.findViewById(R.id.btn_marker);
         btnProcessed = (Button) view.findViewById(R.id.btn_isprocessed);
@@ -122,7 +125,7 @@ public class TrackQueryFragment extends Fragment implements OnClickListener {
         btnProcessed.setOnClickListener(this);
         btnDistance.setOnClickListener(this);
         btn_marker.setOnClickListener(this);
-
+        trackApp.getmBaiduMap().setOnMarkerClickListener(this);
     }
 
     /**
@@ -449,5 +452,18 @@ public class TrackQueryFragment extends Fragment implements OnClickListener {
         return fragment;
     }
 
-
+    // 保存点中的点id
+    private String currentID;
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+        if (marker == null) {
+            return false;
+        }
+        InfoWindow mInfoWindow = new InfoWindow(mPop, marker.getPosition(), -47);
+       trackApp.getmBaiduMap().showInfoWindow(mInfoWindow);
+        MapStatusUpdate update = MapStatusUpdateFactory.newLatLng(marker.getPosition());
+        trackApp.getmBaiduMap().setMapStatus(update);
+        currentID = marker.getExtraInfo().getString("id");
+        return true;
+    }
 }

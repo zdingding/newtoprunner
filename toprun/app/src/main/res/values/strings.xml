@@ -68,4 +68,10 @@
     <string name="tv_time">时长</string>
     <string name="c_time">00:00:00</string>
     <string name="makers">收藏</string>
+    <string name="daohang">导航</string>
+    <string name="isopendaohang">是否打开导航</string>
+    <string name="guiji">轨迹</string>
+    <string name="isguiji">是否上传轨迹</string>
+    <string name="gaimima">修改密码</string>
+    <string name="nickname">昵称</string>
 </resources>

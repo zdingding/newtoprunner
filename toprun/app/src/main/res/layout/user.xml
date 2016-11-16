@@ -13,18 +13,19 @@
         android:layout_width="match_parent"
         android:minHeight="?attr/actionBarSize">
         <ImageView
+            android:id="@+id/jiantou"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="left"
             android:background="@mipmap/jiantou"/>
-        <TextView
+        <RadioButton
+            android:id="@+id/zhinanzhen"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="用户"
-            android:layout_gravity="center"
-            android:textSize="20dp"
-            android:textColor="#f4f4f4"
-            android:id="@+id/toolbar_title" />
-
+            android:layout_gravity="right"
+            android:layout_marginRight="16dp"
+            android:button="@null"
+            android:background="@drawable/zhinanzhen_bg"/>
     </android.support.v7.widget.Toolbar>
     <FrameLayout
         android:layout_width="match_parent"
@@ -63,7 +64,7 @@
             <Button
                 android:layout_width="36dp"
                 android:layout_height="36dp"
-                android:id="@+id/ME"
+                android:id="@+id/wode"
                 android:background="@mipmap/wo01"
                 android:layout_gravity="left|bottom"
                 android:layout_marginBottom="5dp"
@@ -80,7 +81,6 @@
                 android:background="@mipmap/start01"/>
         </FrameLayout>
     </FrameLayout>
-
 
 
 </LinearLayout>

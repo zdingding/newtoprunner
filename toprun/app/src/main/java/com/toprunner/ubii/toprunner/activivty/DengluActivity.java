@@ -24,6 +24,7 @@ import org.xutils.DbManager;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.x;
 
+
 /**
  * Created by ly on 2016/4/27.
  */
@@ -74,7 +75,7 @@ public class DengluActivity extends Activity {
                     Intent intent = new Intent();
                     intent.setClass(DengluActivity.this, UserActivity.class);
                     startActivity(intent);
-                    DengluActivity.this.finish();
+                    finish();
                 } else {
                     Dialog dialog1 = new AlertDialog.Builder(DengluActivity.this)
                             .setTitle("信息框")

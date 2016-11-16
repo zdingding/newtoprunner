@@ -14,6 +14,7 @@ import com.baidu.mapapi.map.TextureMapView;
 import com.baidu.trace.LBSTraceClient;
 import com.baidu.trace.LocationMode;
 import com.baidu.trace.Trace;
+import com.toprunner.ubii.toprunner.utils.ConfigUtil;
 
 import org.xutils.DbManager;
 import org.xutils.x;
@@ -50,7 +51,7 @@ public class ToprunnerApplication extends Application {
     /**
      * 鹰眼服务ID，开发者创建的鹰眼服务对应的服务ID
      */
-    private int serviceId =126470;
+    private int serviceId = ConfigUtil.YINGYAN_SERVICE_ID;
     /**
      * entity标识
      */

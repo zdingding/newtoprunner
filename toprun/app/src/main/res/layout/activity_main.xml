@@ -4,14 +4,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@mipmap/photo">
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="145dp"
-        android:src="@mipmap/logo"
-        android:layout_marginTop="10dp"
-        android:id="@+id/imageView11"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"/>
 
 
     <LinearLayout
@@ -42,4 +34,10 @@
             android:layout_marginBottom="25dp"
             android:stateListAnimator="@drawable/state_list_animator_z"/>
     </LinearLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="145dp"
+        android:src="@mipmap/logo"
+        android:id="@+id/imageView11"
+        android:layout_alignParentTop="true" android:layout_alignParentStart="true"/>
 </RelativeLayout>
