@@ -25,7 +25,7 @@ public abstract class BaseFragment extends Fragment {
     }
 
     @Override
-    final public void onCreate(Bundle savedInstanceState) {
+     public void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
     }

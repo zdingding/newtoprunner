@@ -57,6 +57,28 @@
         <item name="android:textSize">@dimen/text_tips_size</item>
         <item name="android:textColor">@color/base_grey_moderate</item>
     </style>
+    <style name="rl_style_tag">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_marginTop">10dp</item>
+    </style>
+    <style name="tv_style_discover">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:layout_centerInParent">true</item>
+
+    </style>
+    <style name="gaidongbi_discover">
+        <item name="android:layout_height">20dp</item>
+        <item name="android:layout_width">23dp</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_marginRight">20dp</item>
+    </style>
 
 
     <dimen name="text_tips_size">12.0sp</dimen>

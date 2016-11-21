@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.toprunner.ubii.toprunner.R;
@@ -31,6 +32,7 @@ public class UserActivity extends BaseActivity {
     public static Bitmap bmap;//模糊处理需要的背景图是在this类里面完成的截屏
     private FrameLayout id_bottom;
     private ImageView jiantou;
+    private RadioButton zhinanzhen;
 
 
     @Override
@@ -39,7 +41,7 @@ public class UserActivity extends BaseActivity {
         setContentView(R.layout.user);
         me = (TextView) findViewById(R.id.wode);
         start = (TextView) findViewById(R.id.start);
-        start = (TextView) findViewById(R.id.start);
+        zhinanzhen = (RadioButton) findViewById(R.id.zhinanzhen);
         dc = (TextView) findViewById(R.id.discover);
         id_bottom = (FrameLayout) findViewById(R.id.id_bottom);
         jiantou = (ImageView) findViewById(R.id.jiantou);
@@ -49,6 +51,13 @@ public class UserActivity extends BaseActivity {
             public void onClick(View v) {
                 setTabSelection(0);
 
+            }
+        });
+        zhinanzhen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Intent(UserActivity.this,SportdetailsActivity.class);
+                    startActivity(intent);
             }
         });
         start.setOnClickListener(new View.OnClickListener() {
@@ -92,7 +101,7 @@ public class UserActivity extends BaseActivity {
         switch (index) {
             case 0:
                 // 当点击了消息tab时，改变控件的图片
-                me.setBackgroundResource(R.mipmap.wo02);
+                me.setBackgroundResource(R.mipmap.mine);
                 if (Me_User == null) {
                     // 如果me_user为空，则创建一个并添加到界面上
                     Me_User = new Me_User();
@@ -134,7 +143,7 @@ public class UserActivity extends BaseActivity {
      * 清除掉所有的选中状态。
      */
     private void clearSelection() {
-        me.setBackgroundResource(R.mipmap.wo01);
+        me.setBackgroundResource(R.mipmap.mine);
         start.setBackgroundResource(R.mipmap.start01);
     }
 

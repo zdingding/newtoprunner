@@ -39,13 +39,12 @@
                />
         <ImageView
             android:id="@+id/iv_nickname"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/nickname"
+            android:layout_width="23dp"
+            android:layout_height="20dp"
             android:layout_marginLeft="16dp"
-            android:layout_centerVertical="true"
-            android:src="@mipmap/gaidongbi"/>
-        </RelativeLayout>
+            android:src="@mipmap/gaidongbi" android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/nickname" android:layout_marginStart="16dp"/>
+    </RelativeLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -55,20 +54,12 @@
         android:layout_alignParentBottom="true" android:layout_alignParentStart="true">
 
         <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_marginTop="10dp"
+            style="@style/rl_style_tag"
             android:layout_above="@id/rl_nickname">
             <TextView
                 android:id="@+id/sextext"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:layout_centerVertical="true"
-                android:textSize="18sp"
                 android:text="男"
-                android:textColor="#FFFFFF"
-                android:layout_centerInParent="true"
+                style="@style/tv_style_discover"
             />
             <ImageView
                 android:id="@+id/iv_gx"
@@ -80,54 +71,38 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"/>
             <TextView
+                style="@style/tv_style_discover"
                 android:id="@+id/sex_text"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:textSize="18sp"
                 android:text="性别"
-                android:textColor="#FFFFFF"
                 android:layout_marginLeft="18dp"
                 android:layout_marginStart="18dp"
                 android:layout_toRightOf="@id/iv_gx"
-                android:layout_centerInParent="true"
             />
             <ImageView
                 android:id="@+id/sex_iv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
                 android:background="@mipmap/gaidongbi"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="16dp"/>
+                style="@style/gaidongbi_discover"
+                android:layout_marginRight="20dp" />
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_marginTop="10dp">
+            style="@style/rl_style_tag">
 
             <TextView
                 android:id="@+id/mHeight"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:layout_centerVertical="true"
-                android:textSize="18sp"
                 android:text="170"
-                android:textColor="#FFFFFF"
-                android:layout_centerInParent="true"
+                style="@style/tv_style_discover"
                />
             <TextView
                 android:id="@+id/tv_mHeight"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:textSize="16sp"
                 android:text="身高"
-                android:textColor="#FFFFFF"
+                style="@style/tv_style_discover"
                 android:layout_marginLeft="18dp"
                 android:layout_marginStart="18dp"
                 android:layout_toRightOf="@+id/iv_shengao"
-                android:layout_centerInParent="true"
               />
             <ImageView
                 android:id="@+id/iv_shengao"
@@ -138,18 +113,14 @@
                 android:layout_marginLeft="18dp"
                 android:layout_alignParentStart="true"/>
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
+                android:id="@+id/mHeight_iv"
                 android:background="@mipmap/gaidongbi"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="16dp"/>
+                style="@style/gaidongbi_discover"
+                android:layout_marginRight="20dp" android:layout_alignTop="@+id/mHeight"
+                android:layout_alignParentEnd="true" android:layout_marginEnd="20dp"/>
         </RelativeLayout>
         <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_marginTop="10dp">
+            style="@style/rl_style_tag">
             <ImageView
                 android:id="@+id/iv_tizhong"
                 android:layout_height="wrap_content"
@@ -161,20 +132,14 @@
                 android:layout_alignParentStart="true"/>
             <TextView
                 android:id="@+id/num_weight"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
                 android:layout_centerVertical="true"
-                android:textSize="18sp"
-                android:textColor="#FFFFFF"
-             android:layout_centerInParent="true"
+                style="@style/tv_style_discover"
                 android:text="50"/>
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
+                android:id="@+id/weight_iv"
                 android:background="@mipmap/gaidongbi"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="16dp"/>
+                style="@style/gaidongbi_discover"
+                android:layout_marginRight="20dp" />
             <TextView
                 android:id="@+id/tv_weight"
                 android:layout_height="wrap_content"
@@ -187,10 +152,7 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_marginTop="10dp">
+            style="@style/rl_style_tag">
             <ImageView
                 android:id="@+id/iv_nianling"
                 android:layout_height="wrap_content"
@@ -219,18 +181,13 @@
                 android:layout_centerInParent="true"
                 android:text="18"/>
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
+                android:id="@+id/age_iv"
                 android:background="@mipmap/gaidongbi"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="16dp"/>
+                style="@style/gaidongbi_discover"
+                android:layout_marginRight="20dp" />
         </RelativeLayout>
         <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_marginTop="10dp">
+            style="@style/rl_style_tag">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -240,8 +197,8 @@
                 android:text="@string/gaimima"
                 android:layout_centerVertical="true" />
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="23dp"
+                android:layout_height="20dp"
                 android:layout_toLeftOf="@id/test_scan_qrcode"
                 android:layout_marginLeft="16dp"
                 android:layout_centerVertical="true"
@@ -251,7 +208,7 @@
             <RelativeLayout
                 android:layout_alignParentRight="true"
                 android:layout_width="48dp"
-                android:layout_marginRight="16dp"
+                android:layout_marginRight="20dp"
                             android:layout_height="48dp"
                             android:layout_centerVertical="true"
                             android:background="#000000">

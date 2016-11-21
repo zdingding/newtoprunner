@@ -1,72 +1,85 @@
 package com.toprunner.ubii.toprunner.activivty;
 
-import android.app.ActivityOptions;
-import android.content.Intent;
-import android.os.Build;
+
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v7.widget.CardView;
-import android.transition.Explode;
+
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.toprunner.ubii.toprunner.R;
 import com.toprunner.ubii.toprunner.base.BaseActivity;
+import com.toprunner.ubii.toprunner.view.LoginView;
 
-import org.xutils.view.annotation.ViewInject;
-import org.xutils.x;
+public class LoginActivity extends BaseActivity  {
 
-import static com.toprunner.ubii.toprunner.R.id.bt_go;
+    private ImageView btn_login;
 
-public class LoginActivity extends BaseActivity implements View.OnClickListener {
-    @ViewInject(R.id.et_username)
-    private  EditText etUsername;
-    @ViewInject(R.id.et_password)
-    private  EditText etPassword;
-    @ViewInject(bt_go)
-    private  Button btGo;
-    @ViewInject(R.id.cv)
-    private  CardView cv;
-    @ViewInject(R.id.fab)
-    private  FloatingActionButton fab;
+    private   View view_mask;
+
+    private   LoginView mLoginView;
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_login);
+            initView();
+        }
+
+    private void initView() {
+        mLoginView = (LoginView)findViewById(R.id.mLoginView);
+        view_mask = (View)findViewById(R.id.view_mask);
+        btn_login = (ImageView)findViewById(R.id.btn_login);
+        mLoginView.setEnabled(true);
+        //设置遮罩阴影层点击消失该界面
+        view_mask.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                if(mLoginView.isShow()){
+                    mLoginView.dismiss();
+                }
+            }
+        });
+        //设置登录界面状态监听
+        mLoginView.setOnStatusListener(new LoginView.onStatusListener() {
+
+            @Override
+            public void onShow() {
+                //显示
+                view_mask.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onDismiss() {
+                //隐藏
+                view_mask.setVisibility(View.GONE);
+            }
+        });
+        btn_login.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                if(mLoginView.isShow()){
+                    mLoginView.dismiss();
+                }else{
+                    mLoginView.show();
+                }
+            }
+        });
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-        x.view().inject(this);
-        fab.setOnClickListener(this);
-        btGo.setOnClickListener(this);
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.fab:
-                getWindow().setExitTransition(null);
-                getWindow().setEnterTransition(null);
-
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    ActivityOptions options =
-                            ActivityOptions.makeSceneTransitionAnimation(this, fab, fab.getTransitionName());
-                    startActivity(new Intent(this, RegisterActivity.class), options.toBundle());
-                } else {
-                    startActivity(new Intent(this, RegisterActivity.class));
-                }
-                break;
-            case bt_go:
-                Explode explode = new Explode();
-                explode.setDuration(500);
-
-                getWindow().setExitTransition(explode);
-                getWindow().setEnterTransition(explode);
-                ActivityOptionsCompat oc2 = ActivityOptionsCompat.makeSceneTransitionAnimation(this);
-                Intent i2 = new Intent(this,UserActivity.class);
-                startActivity(i2, oc2.toBundle());
-                break;
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode ==  KeyEvent.KEYCODE_BACK){
+            if(mLoginView.isShow()){
+                mLoginView.dismiss();
+                return true;
+            }
         }
+        return super.onKeyDown(keyCode, event);
     }
+
 }

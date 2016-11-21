@@ -21,4 +21,9 @@
     <color name="setting_logout_pressed">@color/base_grey_white</color>
     <color name="public_divide_heavy_line">#ffc6c6c6</color>
     <color name="public_app_bg">#ffffffff</color>
+    <color name="yellow">#fd9c06</color>
+    <color name="grey">#BDBDBD</color>
+    <color name="color_one">#FDE4BB</color>
+    <color name="color_two">#FCD2A1</color>
+    <color name="color_three">#EF8273</color>
 </resources>

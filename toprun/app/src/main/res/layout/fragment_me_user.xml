@@ -210,7 +210,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
-                android:text="325次 >"
+                android:text="0次 >"
                 android:textColor="#f4f4f4"
                 android:layout_alignTop="@+id/textView10"
                 android:layout_alignParentRight="true"
@@ -221,7 +221,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="36px"
+                android:textSize="18sp"
                 android:text="本月跑量"
                 android:textColor="#f4f4f4"
                 android:layout_centerVertical="true"
@@ -231,8 +231,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="36px"
-                android:text="123.54KM >"
+                android:textSize="18sp"
+                android:text="0.00KM >"
                 android:textColor="#f4f4f4"
                 android:layout_centerVertical="true"
                 android:layout_alignRight="@+id/textView11"
@@ -250,6 +250,7 @@
                 android:layout_marginBottom="10dp"
                 android:id="@+id/textView13" />
             <TextView
+                android:id="@+id/tv_lanya"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"

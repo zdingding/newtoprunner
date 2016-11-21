@@ -51,9 +51,9 @@ public class DiscoverFragment extends BaseFragment implements View.OnClickListen
     private String sex;
     private TextView mHeight;
     private NumberPicker numberPicker;
-    private float height;//身高
-    private float weight;//体重
-    private int age;//年龄
+    private String height;//身高
+    private String weight;//体重
+    private String age;//年龄
     private TextView tv_mHeight;
     private TextView tv_weight;
     private TextView num_weight;
@@ -62,13 +62,32 @@ public class DiscoverFragment extends BaseFragment implements View.OnClickListen
     private TextView test_scan_qrcode;
     private ImageView iv_nickname;
     private ImageView sex_iv;
+    private ImageView weight_iv;
+    private ImageView mHeight_iv;
+    private ImageView age_iv;
 
 
     @Override
     protected void initData() {
           sex = CacheUtils.getString(getActivity(), "sex");
-        if(null!=sex){
+        if(!sex.equals("")){
             sextext.setText(sex);
+        }
+       String _nickname = CacheUtils.getString(getActivity(), "name");
+        if(!_nickname.equals("")){
+            nickname.setText(_nickname);
+        }
+        height = CacheUtils.getString(getActivity(), "height");
+        if(!height.equals("")){
+            mHeight.setText(height);
+        }
+        age = CacheUtils.getString(getActivity(), "age");
+        if(!age.equals("")){
+            text_age.setText(age);
+        }
+        weight = CacheUtils.getString(getActivity(), "weight");
+        if(!weight.equals("")){
+            num_weight.setText(weight);
         }
         headimage.setOnClickListener(this);
         iv_nickname.setOnClickListener(this);
@@ -79,6 +98,9 @@ public class DiscoverFragment extends BaseFragment implements View.OnClickListen
         tv_weight.setOnClickListener(this);
         tv_age.setOnClickListener(this);
         test_scan_qrcode.setOnClickListener(this);
+        weight_iv.setOnClickListener(this);
+        mHeight_iv.setOnClickListener(this);
+        age_iv.setOnClickListener(this);
 
     }
     @Override
@@ -92,15 +114,18 @@ public class DiscoverFragment extends BaseFragment implements View.OnClickListen
         iv_nickname = findViewById(R.id.iv_nickname);
         nickname = findViewById(R.id.nickname);
         sex_iv = findViewById(R.id.sex_iv);
+        weight_iv = findViewById(R.id.weight_iv);
        //
         sex_text = findViewById(R.id.sex_text);
         sextext = findViewById(R.id.sextext);
         mHeight = findViewById(R.id.mHeight);
+        mHeight_iv = findViewById(R.id.mHeight_iv);
         tv_mHeight = findViewById(R.id.tv_mHeight);
         tv_weight = findViewById(R.id.tv_weight);
         num_weight = findViewById(R.id.num_weight);
         tv_age = findViewById(R.id.tv_age);
         text_age = findViewById(R.id.text_age);
+        age_iv = findViewById(R.id.age_iv);
         test_scan_qrcode = findViewById(R.id.test_scan_qrcode);
 
     }
@@ -118,6 +143,7 @@ public class DiscoverFragment extends BaseFragment implements View.OnClickListen
                 startActivity(new Intent(getActivity(), ScanActivity.class));
                 break;
             case  R.id.tv_age:
+            case  R.id.age_iv:
                 // 设置年龄
                 numberPicker = new NumberPicker(getActivity());
                 numberPicker.setFocusable(true);
@@ -133,13 +159,14 @@ public class DiscoverFragment extends BaseFragment implements View.OnClickListen
                                     @Override
                                     public void onClick(DialogInterface arg0, int arg1) {
                                         text_age.setText(numberPicker.getValue() + "");
-                                        age = numberPicker.getValue();
+                                        age = numberPicker.getValue()+ "";
                                         savePersonalData();
                                     }
                                 }).show();
 
 
                 break;
+            case  R.id.weight_iv:
             case  R.id.tv_weight:
                 numberPicker = new NumberPicker(getActivity());
                 numberPicker.setFocusable(true);
@@ -155,13 +182,14 @@ public class DiscoverFragment extends BaseFragment implements View.OnClickListen
                                     @Override
                                     public void onClick(DialogInterface arg0, int arg1) {
                                         num_weight.setText(numberPicker.getValue() + "");
-                                        weight = numberPicker.getValue();
+                                        weight = numberPicker.getValue()+"";
                                         savePersonalData();
                                     }
                                 }).show();
 
                 break;
             case  R.id.tv_mHeight:
+            case  R.id.mHeight_iv:
                 numberPicker = new NumberPicker(getActivity());
                 numberPicker.setFocusable(true);
                 numberPicker.setFocusableInTouchMode(true);
@@ -177,7 +205,7 @@ public class DiscoverFragment extends BaseFragment implements View.OnClickListen
                                     @Override
                                     public void onClick(DialogInterface arg0, int arg1) {
                                         mHeight.setText(numberPicker.getValue() + "");
-                                        height = numberPicker.getValue();
+                                        height = numberPicker.getValue()+"";
                                         savePersonalData();
                                     }
                                 }).show();
@@ -227,6 +255,9 @@ public class DiscoverFragment extends BaseFragment implements View.OnClickListen
 
     private void savePersonalData() {
         CacheUtils.putString(getActivity(),"sex",sex);//保存性别
+        CacheUtils.putString(getActivity(),"height",height);//保存性别
+        CacheUtils.putString(getActivity(),"age",age);//保存性别
+        CacheUtils.putString(getActivity(),"weight",weight);//保存性别
     }
 
     private void showPopupWindow(View parent) {

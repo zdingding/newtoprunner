@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name">领跑者</string>
 
     <!-- TODO: Remove or change this placeholder text -->
@@ -74,4 +74,29 @@
     <string name="isguiji">是否上传轨迹</string>
     <string name="gaimima">修改密码</string>
     <string name="nickname">昵称</string>
+    <string name="km">Km</string>
+    <string name="run_data_distance">累计跑步距离</string>
+    <string name="time_h">H</string>
+    <string name="data_time">累计跑步时间</string>
+    <string name="count">次</string>
+    <string name="run_count">跑步次数</string>
+    <string name="ble_not">不支持蓝牙</string>
+    <string name="send">发送</string>
+    <string name="not_connected">你没有连接到一个设备</string>
+    <string name="connecting">正在连接</string>
+    <string name="not_connect">没有连接</string>
+    <string name="title_paired_devices">配对的设备</string>
+    <string name="title_other_devices">其他可用的设备</string>
+    <string name="button_scan">扫描设备</string>
+    <string name="scanning">扫描设备...</string>
+    <string name="select_device">选择一个设备连接</string>
+    <string name="none_found">没有发现设备</string>
+    <string name="none_paired">没有配对的设备</string>
+    <!--  BluetoothChat -->
+    <string name="bt_not_enabled_leaving">蓝牙不启用。离开蓝牙聊天。</string>
+    <string name="title_connecting">连接...</string>
+    <string name="title_connected_to">连接到
+        <xliff:g id="device_name">%1$s</xliff:g>
+    </string>
+    <string name="title_not_connected">没有连接</string>
 </resources>
