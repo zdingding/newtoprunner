@@ -30,12 +30,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="北京"
-                android:textSize="13sp"
+                android:textSize="12sp"
                 android:textColor="#ffffff"
                 android:id="@+id/textView"
                 android:layout_below="@+id/headimage"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="15dp" />
+                android:layout_marginTop="12dp" />
             <com.toprunner.ubii.toprunner.view.MTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -87,13 +87,13 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="12sp"
+                    android:textSize="16sp"
                     android:text="24小时"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="12sp"
+                    android:textSize="16sp"
                     android:text="累计时长"
                     />
             </LinearLayout>
@@ -106,13 +106,13 @@
                 <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="15sp"
+                android:textSize="16sp"
                 android:text="42次"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="12sp"
+                    android:textSize="16sp"
                     android:text="全马次数"/>
                 </LinearLayout>
             </LinearLayout>
@@ -122,6 +122,7 @@
                 android:layout_height="48dp"
                 android:src="@mipmap/massage"
                 android:id="@+id/massage"
+                android:layout_marginLeft="20dp"
                 android:layout_alignBottom="@+id/headimage"
                 android:layout_toRightOf="@+id/headimage"
                 android:layout_toEndOf="@+id/headimage"/>
@@ -132,10 +133,8 @@
                 android:src="@mipmap/setting"
                 android:id="@+id/setting"
                 android:layout_marginRight="20dp"
-                android:layout_marginEnd="20dp"
                 android:layout_alignBottom="@+id/headimage"
-                android:layout_toLeftOf="@+id/headimage"
-                android:layout_toStartOf="@+id/headimage"/>
+                android:layout_toStartOf="@+id/headimage" />
         </RelativeLayout>
 
         <RelativeLayout

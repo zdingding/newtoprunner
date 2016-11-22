@@ -99,4 +99,5 @@
         <xliff:g id="device_name">%1$s</xliff:g>
     </string>
     <string name="title_not_connected">没有连接</string>
+    <string name="start">开始</string>
 </resources>

@@ -85,7 +85,10 @@
         <activity android:name=".activivty.SportdetailsActivity">
         </activity>
         <activity android:name=".activivty.SplashActivity">
-
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
         <activity android:name=".activivty.Guide1Activity">
         </activity>
@@ -108,10 +111,7 @@
         <activity android:name=".activivty.ScanActivity">
         </activity>
         <activity android:name=".activivty.LoginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
+
         </activity>
         <activity
             android:name=".activivty.SettingActivity"

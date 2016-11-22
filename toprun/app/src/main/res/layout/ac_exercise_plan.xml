@@ -64,13 +64,12 @@
         </FrameLayout>
 <ImageView
     android:layout_width="match_parent"
-    android:src="@mipmap/sport"
     android:scaleType="centerCrop"
     android:layout_height="wrap_content" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="8dp"
             android:background="#ffffff"
             android:gravity="center_vertical"
             android:orientation="vertical">
@@ -79,7 +78,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="50px">
+                android:padding="30dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -88,7 +87,7 @@
                     android:gravity="center_vertical"
                     android:text="每日锻炼步数"
                     android:textColor="#000000"
-                    android:textSize="50px" />
+                    android:textSize="18sp" />
 
                 <EditText
                     android:id="@+id/tv_step_number"
@@ -99,19 +98,19 @@
                     android:gravity="center_vertical|right"
                     android:text="7000"
                     android:textColor="#000000"
-                    android:textSize="50px" />
+                    android:textSize="18sp" />
             </LinearLayout>
 
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="1px"
+                android:layout_height="2dp"
                 android:background="#999999" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="50px">
+                android:padding="30dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -120,7 +119,7 @@
                     android:gravity="center_vertical"
                     android:text="提醒"
                     android:textColor="#000000"
-                    android:textSize="50px" />
+                    android:textSize="18sp" />
 
                 <CheckBox
                     android:id="@+id/cb_remind"
@@ -131,19 +130,19 @@
                     android:checked="true"
                     android:gravity="center_vertical"
                     android:textColor="#000000"
-                    android:textSize="25sp" />
+                    android:textSize="18sp" />
             </LinearLayout>
 
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="1px"
+                android:layout_height="2dp"
                 android:background="#999999" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="50px">
+                android:padding="30dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -159,7 +158,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical|right"
-                    android:minWidth="300px"
+                    android:minWidth="120dp"
                     android:text="21:00"
                     android:textColor="#000000"
                     android:textSize="50px" />
@@ -171,18 +170,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="235px"
+            android:layout_marginTop="120dp"
             android:background="@mipmap/btn_submit_bg"
             android:text="保存"
             android:textColor="#ffffff"
-            android:textSize="55px" />
+            android:textSize="18sp" />
 
         <WebView
             android:id="@+id/wv"
             android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="100px">
-
+            android:layout_marginTop="48dp">
         </WebView>
     </LinearLayout>

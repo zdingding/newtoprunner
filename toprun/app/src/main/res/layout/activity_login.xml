@@ -6,6 +6,93 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/bg"
                 tools:context=".activivty.LoginActivity">
+    <dym.unique.com.springinglayoutlibrary.viewgroup.SpringingLinearLayout
+        android:id="@+id/sll_mainContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <LinearLayout
+            android:id="@+id/ll_account"
+            android:orientation="horizontal"
+            android:layout_gravity="center_horizontal"
+            android:visibility="invisible"
+            android:layout_marginTop="20dp"
+            android:layout_width="250dp"
+            android:layout_height="50dp">
+            <dym.unique.com.springinglayoutlibrary.view.SpringingTextView
+                android:id="@+id/stv_accountLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:layout_gravity="center_vertical"
+                android:textColor="#666666"
+                android:text="账号"/>
+            <dym.unique.com.springinglayoutlibrary.view.SpringingEditText
+                android:id="@+id/sedt_account"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_gravity="center_vertical"
+                android:inputType="number"
+                android:textSize="18sp"
+                android:hint="请输入账号"
+                android:textColor="#666666"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_password"
+            android:orientation="horizontal"
+            android:layout_gravity="center_horizontal"
+            android:visibility="invisible"
+            android:layout_width="250dp"
+            android:layout_height="50dp">
+            <dym.unique.com.springinglayoutlibrary.view.SpringingTextView
+                android:id="@+id/stv_passwordLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:layout_gravity="center_vertical"
+                android:textColor="#666666"
+                android:text="密码"/>
+            <dym.unique.com.springinglayoutlibrary.view.SpringingEditText
+                android:id="@+id/sedt_password"
+                android:inputType="textPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_gravity="center_vertical"
+                android:textSize="18sp"
+                android:hint="请输入密码"
+                android:textColor="#666666"/>
+        </LinearLayout>
+
+        <dym.unique.com.springinglayoutlibrary.view.SpringingTextView
+            android:id="@+id/stv_regist"
+            android:layout_width="250dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_horizontal"
+            android:visibility="invisible"
+            android:layout_marginTop="20dp"
+            android:text="注册"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:gravity="center"
+          />
+
+        <dym.unique.com.springinglayoutlibrary.view.SpringingTextView
+            android:id="@+id/stv_login"
+            android:layout_width="250dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_horizontal"
+            android:visibility="invisible"
+            android:layout_marginTop="20dp"
+            android:text="@string/login"
+            android:textColor="#c13a6d"
+            android:textSize="18sp"
+            android:gravity="center"
+           />
+
+    </dym.unique.com.springinglayoutlibrary.viewgroup.SpringingLinearLayout>
     <ImageView
         android:id="@+id/btn_login"
         android:layout_width="wrap_content"
@@ -16,8 +103,8 @@
         android:src="@mipmap/ren"  />
     <View
         android:id="@+id/view_mask"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:background="#55000000"
         android:orientation="vertical"
         android:visibility="gone" />

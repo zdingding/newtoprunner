@@ -38,7 +38,7 @@ import java.util.List;
  * 计步代码
  */
 public class StepService extends Service implements SensorEventListener {
-    //默认为30秒进行一次存储
+    //默认为5秒进行一次存储
     private static int duration = 5000;
     private static String CURRENTDATE = "";
     private SensorManager sensorManager;
