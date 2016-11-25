@@ -11,8 +11,8 @@
         android:layout_height="wrap_content" android:id="@+id/ll_headimage"
         android:layout_alignParentTop="true" android:layout_centerHorizontal="true">
         <com.toprunner.ubii.toprunner.view.CircleImageView
-            android:layout_width="96dp"
-            android:layout_height="96dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:id="@+id/headimage"
             android:src="@mipmap/yuan"
             android:layout_alignParentTop="true" android:layout_centerHorizontal="true"/>
@@ -45,13 +45,15 @@
             android:src="@mipmap/gaidongbi" android:layout_centerVertical="true"
             android:layout_toEndOf="@+id/nickname" android:layout_marginStart="16dp"/>
     </RelativeLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/ll_text"
         android:background="@mipmap/kapian"
         android:orientation="vertical"
-        android:layout_alignParentBottom="true" android:layout_alignParentStart="true">
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true">
 
         <RelativeLayout
             style="@style/rl_style_tag"
@@ -84,10 +86,11 @@
                 style="@style/gaidongbi_discover"
                 android:layout_marginRight="20dp" />
         </RelativeLayout>
-
+    <View
+      style="@style/me_user_line"/>
         <RelativeLayout
+        android:background="#80494D69"
             style="@style/rl_style_tag">
-
             <TextView
                 android:id="@+id/mHeight"
                 android:layout_height="wrap_content"
@@ -100,9 +103,9 @@
                 android:id="@+id/tv_mHeight"
                 android:text="身高"
                 style="@style/tv_style_discover"
-                android:layout_marginLeft="18dp"
-                android:layout_marginStart="18dp"
                 android:layout_toRightOf="@+id/iv_shengao"
+                android:layout_marginLeft="18dp"
+                android:layout_toEndOf="@+id/iv_shengao" android:layout_marginStart="15dp"
               />
             <ImageView
                 android:id="@+id/iv_shengao"
@@ -119,8 +122,12 @@
                 android:layout_marginRight="20dp" android:layout_alignTop="@+id/mHeight"
                 android:layout_alignParentEnd="true" android:layout_marginEnd="20dp"/>
         </RelativeLayout>
+        <View
+            style="@style/me_user_line"/>
         <RelativeLayout
+            android:background="#60494D69"
             style="@style/rl_style_tag">
+
             <ImageView
                 android:id="@+id/iv_tizhong"
                 android:layout_height="wrap_content"
@@ -142,16 +149,16 @@
                 android:layout_marginRight="20dp" />
             <TextView
                 android:id="@+id/tv_weight"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:textSize="18sp"
+                style="@style/tv_style_discover"
                 android:textColor="#FFFFFF"
                 android:text="体重(kg)"
-                android:layout_marginLeft="18dp" android:layout_alignTop="@+id/iv_tizhong"
-                android:layout_toEndOf="@+id/iv_tizhong" android:layout_marginStart="15dp"/>
+                android:layout_marginLeft="18dp"
+                android:layout_toRightOf="@id/iv_tizhong"/>
         </RelativeLayout>
-
+        <View
+            style="@style/me_user_line"/>
         <RelativeLayout
+            android:background="#40494D69"
             style="@style/rl_style_tag">
             <ImageView
                 android:id="@+id/iv_nianling"
@@ -164,13 +171,9 @@
                 android:layout_alignParentStart="true"/>
             <TextView
                 android:id="@+id/tv_age"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:textSize="18sp"
-                android:textColor="#FFFFFF"
+                style="@style/tv_style_discover"
                 android:text="年龄"
-                android:layout_marginLeft="18dp" android:layout_alignTop="@+id/iv_nianling"
-                android:layout_toEndOf="@+id/iv_nianling" android:layout_marginStart="15dp"/>
+                android:layout_marginLeft="18dp" android:layout_toRightOf="@id/iv_nianling"/>
             <TextView
                 android:id="@+id/text_age"
                 android:layout_height="wrap_content"
@@ -186,7 +189,11 @@
                 style="@style/gaidongbi_discover"
                 android:layout_marginRight="20dp" />
         </RelativeLayout>
+        <View
+            style="@style/me_user_line"/>
+
         <RelativeLayout
+
             style="@style/rl_style_tag">
             <TextView
                 android:layout_width="wrap_content"
@@ -206,6 +213,7 @@
 
 
             <RelativeLayout
+
                 android:layout_alignParentRight="true"
                 android:layout_width="48dp"
                 android:layout_marginRight="20dp"

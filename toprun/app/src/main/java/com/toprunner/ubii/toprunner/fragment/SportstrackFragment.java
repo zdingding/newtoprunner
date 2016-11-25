@@ -163,7 +163,6 @@ private boolean isRunning =false;
     private TextView tv_run_stop;
     // 普通折线，点击时改变宽度
     Polyline mPolyline;
-    private AutoCompleteTextView searchkey;
     private Marker mMarker;
     private BitmapDescriptor bdA;
 
@@ -277,7 +276,6 @@ private boolean isRunning =false;
         tv_run_start = (TextView) view.findViewById(R.id.tv_run_start);
         ll_bottom = findViewById(R.id.ll_bottom);
         tv_run_countinue = findViewById(R.id.tv_run_countinue);
-        searchkey = findViewById(R.id.searchkey);
         tv_run_stop = findViewById(R.id.tv_run_stop);
         tv_run_time = findViewById(R.id.tv_run_time);
         mMapView.showZoomControls(false);//不缩放
@@ -348,7 +346,6 @@ private boolean isRunning =false;
         tv_run_stop.setOnClickListener(this);
         statellite.setOnClickListener(this);
         btn_stopTrace.setOnClickListener(this);
-        searchkey.setOnClickListener(this);
         client = ((ToprunnerApplication) getActivity().getApplication()).getClient();
         setInterval();
         trace = ((ToprunnerApplication) getActivity().getApplication()).getTrace();

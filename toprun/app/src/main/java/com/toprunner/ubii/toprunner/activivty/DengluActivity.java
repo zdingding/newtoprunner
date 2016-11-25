@@ -43,7 +43,6 @@ public class DengluActivity extends Activity {
             //透明导航栏
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
         }
-        DbManager db = x.getDb(((ToprunnerApplication)getApplicationContext()).getDaoConfig());
         button = (Button) findViewById(R.id.denglu);
         mysql=this.openOrCreateDatabase("student.db", MODE_PRIVATE,null);
         try

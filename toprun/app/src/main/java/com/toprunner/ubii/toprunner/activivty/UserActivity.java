@@ -30,7 +30,7 @@ public class UserActivity extends BaseActivity {
     private TextView start;
     private TextView dc;
     public static Bitmap bmap;//模糊处理需要的背景图是在this类里面完成的截屏
-    private FrameLayout id_bottom;
+
     private ImageView jiantou;
     private RadioButton zhinanzhen;
 
@@ -43,7 +43,7 @@ public class UserActivity extends BaseActivity {
         start = (TextView) findViewById(R.id.start);
         zhinanzhen = (RadioButton) findViewById(R.id.zhinanzhen);
         dc = (TextView) findViewById(R.id.discover);
-        id_bottom = (FrameLayout) findViewById(R.id.id_bottom);
+
         jiantou = (ImageView) findViewById(R.id.jiantou);
         setTabSelection(0);
         me.setOnClickListener(new View.OnClickListener() {
@@ -74,14 +74,14 @@ public class UserActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 setTabSelection(1);
-                id_bottom.setVisibility(View.VISIBLE);
+
             }
         });
         dc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 setTabSelection(2);
-                id_bottom.setVisibility(View.GONE);
+
             }
         });
     }
@@ -101,7 +101,6 @@ public class UserActivity extends BaseActivity {
         switch (index) {
             case 0:
                 // 当点击了消息tab时，改变控件的图片
-                me.setBackgroundResource(R.mipmap.mine);
                 if (Me_User == null) {
                     // 如果me_user为空，则创建一个并添加到界面上
                     Me_User = new Me_User();
@@ -143,7 +142,6 @@ public class UserActivity extends BaseActivity {
      * 清除掉所有的选中状态。
      */
     private void clearSelection() {
-        me.setBackgroundResource(R.mipmap.mine);
         start.setBackgroundResource(R.mipmap.start01);
     }
 
@@ -171,16 +169,8 @@ public class UserActivity extends BaseActivity {
 
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-    }
 
-    @Override
-    public void onStop() {
-        super.onStop();
 
-    }
 
     /**
      * 真~截屏函数

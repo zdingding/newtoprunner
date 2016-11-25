@@ -83,6 +83,7 @@
             android:name=".running.RunActivity"
             android:launchMode="singleTask"/>
         <activity android:name=".activivty.SportdetailsActivity">
+
         </activity>
         <activity android:name=".activivty.SplashActivity">
             <intent-filter>

@@ -115,7 +115,6 @@ public class DiscoverFragment extends BaseFragment implements View.OnClickListen
         nickname = findViewById(R.id.nickname);
         sex_iv = findViewById(R.id.sex_iv);
         weight_iv = findViewById(R.id.weight_iv);
-       //
         sex_text = findViewById(R.id.sex_text);
         sextext = findViewById(R.id.sextext);
         mHeight = findViewById(R.id.mHeight);

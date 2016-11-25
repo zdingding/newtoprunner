@@ -25,6 +25,42 @@
         <item name="android:background">@android:color/transparent</item>
         <item name="android:button">@android:color/transparent</item>
     </style>
+    <style name="me_user_textsmall">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+    <style name="me_user_line">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">2dp</item>
+        <item name="android:background">@color/white</item>
+        <item name="android:visibility">gone</item>
+    </style>
+    <style name="sportstrack_vertical_line">
+        <item name="android:layout_width">2dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@color/white</item>
+    </style>
+    <style name="me_user_llge">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+    <style name="me_user_ll">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+    <style name="me_user_texttierce">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
 
     <style name="TitleAndContentTextStyle"><item name="android:textSize">14sp</item>
         <item name="android:textColor">#ff333333</item></style>
@@ -61,7 +97,8 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">0dp</item>
         <item name="android:layout_weight">1</item>
-        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingBottom">8dp</item>
     </style>
     <style name="tv_style_discover">
         <item name="android:layout_height">wrap_content</item>
@@ -70,7 +107,14 @@
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">#FFFFFF</item>
         <item name="android:layout_centerInParent">true</item>
+        <item name="android:layout_margin">2dp</item>
 
+    </style>
+    <style name="Sportstrack_llv">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
     </style>
     <style name="gaidongbi_discover">
         <item name="android:layout_height">20dp</item>

@@ -143,21 +143,6 @@ android:orientation="vertical"  >
                 android:text="0千卡" />
         </LinearLayout>
     </LinearLayout>
-
-
-    <AutoCompleteTextView
-        android:id="@+id/searchkey"
-        android:layout_width="match_parent"
-        android:layout_height="36dp"
-        android:layout_margin="10dp"
-        android:background="@drawable/merchants_service_comment_edit_bg"
-        android:drawableLeft="@mipmap/circle_icon_box"
-        android:imeOptions="actionSearch"
-        android:drawablePadding="5dp"
-        android:gravity="center_vertical"
-        android:hint="搜索"
-        android:padding="5dp"
-        android:textSize="16sp" />
     <com.baidu.mapapi.map.MapView
         android:id="@+id/run_baidu_map"
         android:layout_width="match_parent"

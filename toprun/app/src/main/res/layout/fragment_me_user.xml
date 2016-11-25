@@ -1,22 +1,48 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
              xmlns:app="http://schemas.android.com/apk/res-auto"
              android:background="#21242E"
              android:id="@+id/me_user"
+    android:orientation="vertical"
              tools:context=".fragment.Me_User">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:background="@mipmap/touxiang_bg">
-
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="48dp"
+                android:layout_gravity="center_horizontal|top">
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+                    <ImageView
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:src="@mipmap/massage"
+                    android:id="@+id/massage"
+               android:layout_centerInParent="true"
+                    /></RelativeLayout>
+           <RelativeLayout
+               android:layout_width="0dp"
+               android:layout_height="wrap_content"
+               android:layout_weight="1">
+               <ImageView
+                   android:layout_width="36dp"
+                   android:layout_height="36dp"
+                   android:src="@mipmap/setting"
+                   android:id="@+id/setting"
+                   android:layout_centerInParent="true"
+                   />
+           </RelativeLayout>
+            </LinearLayout>
             <com.toprunner.ubii.toprunner.view.CircleImageView
             android:layout_width="96dp"
             android:layout_height="96dp"
@@ -30,8 +56,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="北京"
-                android:textSize="12sp"
-                android:textColor="#ffffff"
+                android:textSize="14sp"
+                android:textColor="@color/white"
                 android:id="@+id/textView"
                 android:layout_below="@+id/headimage"
                 android:layout_centerHorizontal="true"
@@ -44,102 +70,56 @@
                 android:layout_below="@+id/textView"
                 android:marqueeRepeatLimit="marquee_forever"
                 android:scrollHorizontally="true"
-                android:singleLine="true"
-                android:textColor="#ffffff"
+                android:textColor="@color/white"
+                android:maxLines="1"
                 android:layout_centerHorizontal="true"
-                android:text="站得更高才可以看的更远，懂得的越多就会得到的越多，所以唯有不断的兖实自己，让自己能像巨人一样拥有强大的体魄，像阿凡提拥有过人的智慧，才能让自己处于不败之地。" />
+                android:text="@string/qianming" />
 
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:gravity="center_horizontal"
+                android:layout_height="48dp"
+                android:gravity="center_horizontal|center_vertical"
                 android:orientation="horizontal"
                 android:background="@mipmap/hengfu"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true">
+                android:layout_alignParentBottom="true">
                 <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_weight="1"
-                android:gravity="center_horizontal"
-                    android:orientation="vertical">
+                    style="@style/me_user_ll">
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="16sp"
-                        android:text="3292公里"
+                    style="@style/me_user_texttierce"
+                        android:text="0公里"
                         />
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="16sp"
+                        style="@style/me_user_textsmall"
                         android:text="累计跑量"/>
             </LinearLayout>
                 <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:gravity="center_horizontal"
-                android:layout_weight="1"
-                android:orientation="vertical">
+              style="@style/me_user_ll">
+                <TextView
+                    style="@style/me_user_texttierce"
+                    android:text="0小时"/>
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:text="24小时"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="16sp"
+                 style="@style/me_user_textsmall"
                     android:text="累计时长"
                     />
             </LinearLayout>
                 <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:orientation="vertical">
+                    style="@style/me_user_ll">
                 <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:text="42次"/>
-
+                    style="@style/me_user_texttierce"
+                android:text="0次"/>
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="16sp"
+                    style="@style/me_user_textsmall"
                     android:text="全马次数"/>
                 </LinearLayout>
             </LinearLayout>
 
-            <ImageView
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:src="@mipmap/massage"
-                android:id="@+id/massage"
-                android:layout_marginLeft="20dp"
-                android:layout_alignBottom="@+id/headimage"
-                android:layout_toRightOf="@+id/headimage"
-                android:layout_toEndOf="@+id/headimage"/>
-
-            <ImageView
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:src="@mipmap/setting"
-                android:id="@+id/setting"
-                android:layout_marginRight="20dp"
-                android:layout_alignBottom="@+id/headimage"
-                android:layout_toStartOf="@+id/headimage" />
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp">
+            android:layout_height="180dp">
            <LinearLayout
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
@@ -188,79 +168,73 @@
                    />
            </LinearLayout>
         </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="130dp"
-            android:background="@mipmap/xian">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="36px"
-                android:text="跑步记录"
-                android:textColor="#f4f4f4"
-                android:layout_marginLeft="22dp"
-                android:layout_marginStart="22dp"
-                android:layout_marginTop="15dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:id="@+id/textView10" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:text="0次 >"
-                android:textColor="#f4f4f4"
-                android:layout_alignTop="@+id/textView10"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginRight="40dp"
-                android:layout_marginEnd="40dp"
-                android:id="@+id/textView11" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:text="本月跑量"
-                android:textColor="#f4f4f4"
-                android:layout_centerVertical="true"
-                android:layout_alignLeft="@+id/textView10"
-                android:layout_alignStart="@+id/textView10"
-                android:id="@+id/textView12" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:text="0.00KM >"
-                android:textColor="#f4f4f4"
-                android:layout_centerVertical="true"
-                android:layout_alignRight="@+id/textView11"
-                android:layout_alignEnd="@+id/textView11"
-                android:id="@+id/textView14" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:text="5公里最快"
-                android:textColor="#f4f4f4"
-                android:layout_alignParentBottom="true"
-                android:layout_alignLeft="@+id/textView12"
-                android:layout_alignStart="@+id/textView12"
-                android:layout_marginBottom="10dp"
-                android:id="@+id/textView13" />
-            <TextView
-                android:id="@+id/tv_lanya"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:text="3'19'' >"
-                android:textColor="#f4f4f4"
-                android:layout_alignTop="@+id/textView13"
-                android:layout_alignRight="@+id/textView14"
-                android:layout_alignEnd="@+id/textView14" />
 
-        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+            <View
+                style="@style/me_user_line" />
+            <RelativeLayout
+                style="@style/me_user_llge">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:text="跑步记录"
+                    android:textColor="#f4f4f4"
+                    android:id="@+id/paobu"
+                    android:layout_alignParentLeft="true"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:text="0次 >"
+                    android:textColor="#f4f4f4"
+               android:layout_alignParentRight="true"
+                    />
+            </RelativeLayout>
+            <View
+                style="@style/me_user_line" />
+            <RelativeLayout
+                style="@style/me_user_llge">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:text="本月跑量"
+                    android:textColor="#f4f4f4"
+               android:layout_alignParentLeft="true" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:text="0.00KM >"
+                    android:textColor="#f4f4f4"
+             android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true" />
+            </RelativeLayout>
+            <View
+               style="@style/me_user_line"/>
+            <RelativeLayout
+                style="@style/me_user_llge">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:text="5公里最快"
+                    android:textColor="#f4f4f4"
+        android:layout_alignParentLeft="true" />
+                <TextView
+                    android:id="@+id/tv_lanya"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:text="3'19'' >"
+                    android:textColor="#f4f4f4"
+                  android:layout_alignParentRight="true"/>
+            </RelativeLayout>
+        </LinearLayout>
     </LinearLayout>
 
-
-</FrameLayout>
