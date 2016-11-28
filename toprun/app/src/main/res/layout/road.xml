@@ -1,8 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent"
+    android:background="#21242e">
+    <RelativeLayout
+        android:id="@+id/rl_biao"
+        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textColor="@color/white"
+            android:text="配速表"/>
+    </RelativeLayout>
+    <LinearLayout
+        android:id="@+id/llfenzhonggongli"
+        android:layout_below="@id/rl_biao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:text="分钟/公里"/>
+
+    </LinearLayout>
 <com.toprunner.ubii.toprunner.view.PercentageBar
+    android:layout_below="@+id/llfenzhonggongli"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/bargraph"

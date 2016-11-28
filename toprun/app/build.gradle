@@ -57,4 +57,8 @@ dependencies {
     compile 'com.android.support:design:25.0.0'
     compile files('libs/lite-orm-1.7.0.jar')
     compile files('libs/SpringingLayout.jar')
+    compile files('libs/Android_Map3D_SDK_V4.1.2_20161104.jar')
+    compile files('libs/AMapNavi_1.9.3_AMapLocation_3.0.0_20161014.jar')
+    compile files('libs/AMap_Location_V3.1.0_20161027.jar')
+    compile 'com.amap.api:search:3.6.1'
 }

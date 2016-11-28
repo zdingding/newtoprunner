@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.toprunner.ubii.toprunner.R;
+import com.toprunner.ubii.toprunner.running.Run;
 import com.toprunner.ubii.toprunner.running.RunActivity;
 import com.toprunner.ubii.toprunner.utils.FastBlur;
 
@@ -69,7 +70,7 @@ public class choose_run extends Activity implements View.OnClickListener {
                     @Override
                     public void run() {
                         Intent intent = new Intent();
-                        intent.setClass(choose_run.this, RunningActivity.class);//起始进入user界面
+                        intent.setClass(choose_run.this, Run.class);//起始进入user界面
                         startActivity(intent);
                         //关闭两个动画
                         v1.clearAnimation();

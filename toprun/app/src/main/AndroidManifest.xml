@@ -1,46 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.toprunner.ubii.toprunner"
-          xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.toprunner.ubii.toprunner">
 
-    <uses-permission android:name="android.permission.GET_TASKS"/>
-    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS"/>
-    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <!-- 蓝牙分享所需的权限 -->
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.READ_LOGS"/>
-    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"/>
-    <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT"/>
-    <uses-permission android:name="android.permission.VIBRATE"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS"/>
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
-    <uses-permission android:name="android.permission.BLUETOOTH"/>
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
-    <!--计歩-->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_LOGS" />
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+    <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <!-- 计歩 -->
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+
     <uses-feature android:name="android.hardware.sensor.accelerometer" />
+
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+
     <uses-feature
         android:name="android.hardware.sensor.stepcounter"
         android:required="true" />
     <uses-feature
         android:name="android.hardware.sensor.stepdetector"
         android:required="true" />
+
     <receiver android:name=".BluetoothConnectActivityReceiver">
         <intent-filter>
-            <action android:name="android.bluetooth.device.action.PAIRING_REQUEST"/>
+            <action android:name="android.bluetooth.device.action.PAIRING_REQUEST" />
         </intent-filter>
     </receiver>
 
@@ -51,76 +55,75 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="ee65dd2d962aac7a637b5097305eade1" />
         <!-- BaiduSDK Key -->
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="CCaHFOCoGojLBnLTxLuE39cFNNobGTwG"/>
+            android:value="CCaHFOCoGojLBnLTxLuE39cFNNobGTwG" />
 
         <!-- 定位服务 -->
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
-            android:process=":remote"/>
+            android:process=":remote" />
+        <activity android:name=".activivty.RouteActivity">
 
+        </activity>
+<activity android:name=".route.WalkRouteActivity">
+
+</activity>
         <activity
             android:name=".activivty.MainActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:windowSoftInputMode="adjustPan|stateHidden">
-        </activity>
-        <activity android:name=".activivty.DengluActivity"/>
+            android:windowSoftInputMode="adjustPan|stateHidden"></activity>
+        <activity android:name=".activivty.DengluActivity" />
         <activity
             android:name=".activivty.UserActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:windowSoftInputMode="adjustPan|stateHidden">
-        </activity>
+            android:windowSoftInputMode="adjustPan|stateHidden"></activity>
         <activity
             android:name=".activivty.choose_run"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
-        <activity android:name=".activivty.RunningActivity">
-        </activity>
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity android:name=".activivty.RunningActivity"></activity>
         <activity
             android:name=".running.RunActivity"
-            android:launchMode="singleTask"/>
-        <activity android:name=".activivty.SportdetailsActivity">
+            android:launchMode="singleTask" />
+        <activity android:name=".running.Run">
 
+        </activity>
+        <activity android:name=".activivty.SportdetailsActivity">
         </activity>
         <activity android:name=".activivty.SplashActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activivty.Guide1Activity">
-        </activity>
-        <activity android:name=".activivty.GuideActivity2">
-        </activity>
-        <activity android:name=".activivty.GuideActivity3"/>
-        <activity android:name=".activivty.RegisterActivity">
-        </activity>
-        <activity android:name=".activivty.ClipActivity"/>
+        <activity android:name=".activivty.Guide1Activity"></activity>
+        <activity android:name=".activivty.GuideActivity2"></activity>
+        <activity android:name=".activivty.GuideActivity3" />
+        <activity android:name=".activivty.RegisterActivity"></activity>
+        <activity android:name=".activivty.ClipActivity" />
 
         <service
             android:name="com.baidu.trace.LBSTraceService"
             android:enabled="true"
-            android:exported="true"/>
+            android:exported="true" />
 
         <meta-data
             android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version"/>
+            android:value="@integer/google_play_services_version" />
 
-        <activity android:name=".activivty.ScanActivity">
-        </activity>
-        <activity android:name=".activivty.LoginActivity">
-
-        </activity>
+        <activity android:name=".activivty.ScanActivity"></activity>
+        <activity android:name=".activivty.LoginActivity"></activity>
         <activity
             android:name=".activivty.SettingActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:windowSoftInputMode="adjustPan|stateHidden">
-        </activity>
-        <activity android:name=".activivty.QuanActivity">
-        </activity>
+            android:windowSoftInputMode="adjustPan|stateHidden"></activity>
+        <activity android:name=".activivty.QuanActivity"></activity>
         <activity
             android:name="com.mob.tools.MobUIShell"
             android:configChanges="keyboardHidden|orientation|screenSize"
@@ -130,51 +133,48 @@
 
             <!-- QQ和QQ空间分享 QQ登录的回调必须要配置的 -->
             <intent-filter>
-                <data android:scheme="tencent100371282"/>
+                <data android:scheme="tencent100371282" />
 
-                <action android:name="android.intent.action.VIEW"/>
+                <action android:name="android.intent.action.VIEW" />
 
-                <category android:name="android.intent.category.BROWSABLE"/>
-                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
 
             <!-- 新浪微博客户端分享回调必须配置 -->
             <intent-filter>
-                <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY"/>
+                <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY" />
 
-                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
             android:name=".activivty.MultiMapAcitivity"
             android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"></activity>
 
-        <uses-sdk
-            xmlns:tools="http://schemas.android.com/tools"
-            tools:node="replace"/>
+        <uses-sdk xmlns:tools="http://schemas.android.com/tools"
+            tools:node="replace" />
 
-        <activity android:name=".activivty.BluetoothActivity">
+        <activity android:name=".activivty.BluetoothActivity"></activity>
+        <activity android:name=".activivty.SrartrunActivity"></activity>
+        <activity android:name=".activivty.KaishiActivity"></activity>
+        <activity android:name=".activivty.DeviceListActivity"></activity>
+        <activity android:name=".activivty.JibuActivity"></activity>
+        <activity
+            android:name=".activivty.SetPlanActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".activivty.HistoryActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
-        </activity>
-        <activity android:name=".activivty.SrartrunActivity">
-        </activity>
-        <activity android:name=".activivty.KaishiActivity">
-        </activity>
-        <activity android:name=".activivty.DeviceListActivity">
-        </activity>
-        <activity android:name=".activivty.JibuActivity">
-
-        </activity>
-        <activity android:name=".activivty.SetPlanActivity" android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
-        <activity android:name=".activivty.HistoryActivity" android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <service
             android:name=".service.StepService"
             android:priority="1000"
             android:process="cn.bluemobi.dylan.step.service">
             <intent-filter>
-                <!-- 系统启动完成后会调用-->
+
+                <!-- 系统启动完成后会调用 -->
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.DATE_CHANGED" />
                 <action android:name="android.intent.action.MEDIA_MOUNTED" />
@@ -183,6 +183,11 @@
                 <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
                 <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
             </intent-filter>
+        </service>
+
+        <activity android:name=".QixingActivity"></activity>
+        <!-- 定位需要的服务 使用2.0的定位需要加上这个 -->
+        <service android:name="com.amap.api.location.APSService" >
         </service>
     </application>
 

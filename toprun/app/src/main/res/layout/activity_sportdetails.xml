@@ -9,10 +9,10 @@
     tools:context="com.toprunner.ubii.toprunner.activivty.SportdetailsActivity">
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar_top"
-        android:layout_height="48dp"
         android:layout_width="match_parent"
-        android:background="@color/bg_gray"
-                android:paddingTop="12dp"
+        android:layout_height="48dp"
+        android:background="#21242e"
+        android:paddingTop="16dp"
         android:minHeight="?attr/actionBarSize">
         <ImageView
             android:id="@+id/jiantou"

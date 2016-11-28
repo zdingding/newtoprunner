@@ -66,8 +66,8 @@ public class ToprunnerApplication extends Application {
         x.Ext.init(this);
         mContext = getApplicationContext();
         ShareSDK.initSDK(mContext,"18880eaf53a64");
-        SDKInitializer.initialize(mContext);
-        MapView.setMapCustomEnable(true);
+       // SDKInitializer.initialize(mContext);
+        //MapView.setMapCustomEnable(true);
         setMapCustomFile(mContext);//设置地图颜色 在文件中修改
         // 初始化轨迹服务
         client = new LBSTraceClient(mContext);

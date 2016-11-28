@@ -19,11 +19,11 @@ import com.toprunner.ubii.toprunner.utils.UIUtils;
 public class MyGridAdapter extends BaseAdapter {
     private Context mContext;
 
-    public String[] img_text = {"全程距离：公里", "配速：分钟/公里", "全程耗时", "消耗大卡", "步频：分钟", "总步数"};
-    public String[] img_text2 = {"5公里", "07:01", CacheUtils.getString(UIUtils.getContext(),"time"), "374", "172", "81"};
-    public int[] imgs = {R.mipmap.ren, R.mipmap.peisu,
-            R.mipmap.daohang, R.mipmap.reliang,
-            R.mipmap.bushu, R.mipmap.bupin
+    public String[] img_text = {"全程距离：Km", "配速：Min/Km", "全程耗时", "消耗大卡", "步频：分钟", "总步数"};
+    public String[] img_text2 = {"5Km", "07:01", CacheUtils.getString(UIUtils.getContext(),"time"), "374", "172", "81"};
+    public int[] imgs = {R.mipmap.renpao, R.mipmap.sudubiao,
+            R.mipmap.zhongbiao, R.mipmap.huoyan,
+            R.mipmap.shuangjiaoyin, R.mipmap.jiaoyin
     };
 
     public MyGridAdapter(Context mContext) {

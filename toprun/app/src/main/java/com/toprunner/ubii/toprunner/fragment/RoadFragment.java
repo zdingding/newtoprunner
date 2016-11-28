@@ -47,7 +47,7 @@ public class RoadFragment extends BaseFragment implements View.OnClickListener {
         mBarGraph.setRespectTargetNum(respectTarget);
         mBarGraph.setRespectName(respName);
         mBarGraph.setTotalBarNum(7);
-        mBarGraph.setMax(40);
+        mBarGraph.setMax(50);
         mBarGraph.setBarWidth(50);
         mBarGraph.setVerticalLineNum(4);
         mBarGraph.setUnit("");

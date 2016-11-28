@@ -26,4 +26,7 @@
     <color name="color_one">#FDE4BB</color>
     <color name="color_two">#FCD2A1</color>
     <color name="color_three">#EF8273</color>
+<!--amap颜色-->
+    <color name="act_background">#efefef</color>
+    <color name="gary">#898989</color>
 </resources>

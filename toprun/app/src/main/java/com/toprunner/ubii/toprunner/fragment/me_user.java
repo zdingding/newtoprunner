@@ -47,7 +47,7 @@ public class Me_User extends BaseFragment implements View.OnClickListener {
         massage = findViewById(R.id.massage);
         tv_lanya = findViewById(R.id.tv_lanya);
 
-        sudu.setCurrentValues(77);//速度
+        sudu.setCurrentValues(50);//速度
         bushu.setCurrentValues(0);//步数
         bushu.setOnClickListener(this);
     }

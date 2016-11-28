@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -28,6 +29,7 @@ public class SportdetailsActivity extends BaseActivity {
     private int mCurrentPageIndex;
     private RadioGroup rg_content_fragment;
     private ToprunnerApplication trackApp = null;
+    private ImageView  jiantou;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +43,13 @@ public class SportdetailsActivity extends BaseActivity {
         trackApp = (ToprunnerApplication) getApplicationContext();
         viewpager = (NoScrollViewPager) findViewById(R.id.viewpager);
         rg_content_fragment = (RadioGroup) findViewById(R.id.rg_content_fragment);
+       jiantou = (ImageView) findViewById(R.id.jiantou);
+        jiantou.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         initTabLine();
         initView();
     }

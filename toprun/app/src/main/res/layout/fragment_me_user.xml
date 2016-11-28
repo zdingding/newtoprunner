@@ -71,7 +71,7 @@
                 android:marqueeRepeatLimit="marquee_forever"
                 android:scrollHorizontally="true"
                 android:textColor="@color/white"
-                android:maxLines="1"
+              android:singleLine="true"
                 android:layout_centerHorizontal="true"
                 android:text="@string/qianming" />
 
