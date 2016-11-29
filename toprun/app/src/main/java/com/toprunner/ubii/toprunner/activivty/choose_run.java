@@ -22,6 +22,7 @@ import android.widget.ImageView;
 import com.toprunner.ubii.toprunner.R;
 import com.toprunner.ubii.toprunner.running.Run;
 import com.toprunner.ubii.toprunner.running.RunActivity;
+import com.toprunner.ubii.toprunner.trace.TraceActivity;
 import com.toprunner.ubii.toprunner.utils.FastBlur;
 
 
@@ -70,7 +71,7 @@ public class choose_run extends Activity implements View.OnClickListener {
                     @Override
                     public void run() {
                         Intent intent = new Intent();
-                        intent.setClass(choose_run.this, Run.class);//起始进入user界面
+                        intent.setClass(choose_run.this, SrartrunActivity.class);//起始进入user界面
                         startActivity(intent);
                         //关闭两个动画
                         v1.clearAnimation();
@@ -96,7 +97,7 @@ public class choose_run extends Activity implements View.OnClickListener {
                     @Override
                     public void run() {
                         Intent intent = new Intent();
-                        intent.setClass(choose_run.this, RunActivity.class);//起始进入user界面
+                        intent.setClass(choose_run.this, TraceActivity.class);//起始进入user界面
                         startActivity(intent);
                         //关闭两个动画
                         s1.clearAnimation();

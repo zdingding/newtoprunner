@@ -105,4 +105,16 @@
     <string name="time">时间</string>
     <string name="pingjunpeisu">平均配速</string>
     <string name="juli">距离</string>
+    <!-- 轨迹纠偏 -->
+    <string name="trace_demo">轨迹纠偏功能</string>
+    <string name="hud_demo">HUD 导航</string>
+    <string name="trace_description">将轨迹平滑的绘制在地图上</string>
+    <string name="hudview">直观展示了导航信息，是一种安全简洁的导航模式</string>
+    <string name="distance">"总距离："</string>
+    <string name="stop_time">"等   待："</string>
+    <string name="draw_lines">轨迹纠偏</string>
+    <string name="clean_finished_overlay_status">清除已完成线路</string>
+    <string name="radiobutton_gaode">高德坐标</string>
+    <string name="radiobutton_gps">GPS坐标</string>
+    <string name="radiobutton_baidu">百度坐标</string>
 </resources>

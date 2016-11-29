@@ -170,6 +170,12 @@ public class TrackUploadFragment extends Fragment {
         c_time = (Chronometer) view.findViewById(R.id.c_time);
         speed = (TextView) view.findViewById(R.id.speed);
         btnOperator = (Button) view.findViewById(R.id.btn_operator);
+        if(!ischeck){
+            startTrace();
+            ischeck =true;
+            c_time.setBase(SystemClock.elapsedRealtime());
+            c_time.start();
+        }
         mBtn.setMiSportBtnLongClickListener(new MiSportButton.miSportButtonLongClickListener() {
 
 
@@ -201,16 +207,7 @@ public class TrackUploadFragment extends Fragment {
                 c_time.start();
             }
 
-            @Override
-            public void startClick() {
 
-                if(!ischeck){
-                    startTrace();
-                    ischeck =true;
-                    c_time.setBase(SystemClock.elapsedRealtime());
-                    c_time.start();
-                }
-            }
         });
 
 

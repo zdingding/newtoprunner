@@ -8,73 +8,157 @@
     android:orientation="vertical"
     android:background="#21242E"
     tools:context="com.toprunner.ubii.toprunner.activivty.SrartrunActivity">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_top"
+        android:layout_height="50dp"
+        android:layout_width="match_parent"
+        android:minHeight="?attr/actionBarSize"
+        android:background="#21242E">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:background="@mipmap/jiantou"
+            android:id="@+id/myback"
+            android:gravity="center_horizontal"
+            android:layout_gravity="left"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="运动中"
+            android:textSize="24sp"
+            android:textColor="#f4f4f4"
+            android:id="@+id/toolbar_title"
+            android:gravity="center_horizontal"
+            android:layout_gravity="center"
+            android:layout_alignBaseline="@+id/myback"
+            android:layout_alignBottom="@+id/myback"
+            />
+        <Button
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:background="@mipmap/iconshare"
+            android:id="@+id/share"
+            android:layout_gravity="right"
+            android:layout_alignWithParentIfMissing="false"
+            android:layout_alignBottom="@+id/toolbar_title"
+            />
+    </android.support.v7.widget.Toolbar>
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/item_height">
-        <TextView
-            android:id="@+id/tv_daohang"
-            style="@style/TitleAndContentTextStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/spacing_eight"
-            android:text="@string/daohang"
-            android:textSize="18sp"
-            android:textColor="#ffffff" />
-        <TextView
-            android:id="@+id/is_daohang"
-            style="@style/TipsOrModerateTextStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_daohang"
-            android:layout_marginLeft="@dimen/spacing_eight"
-            android:text="@string/isopendaohang"
-            android:textColor="#ffffff" />
+        android:layout_height="260dp" >
+        <com.amap.api.maps.MapView
+            android:id="@+id/map"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+        </com.amap.api.maps.MapView>
 
-        <com.toprunner.ubii.toprunner.view.SlideButton
-            android:id="@+id/sb_daohang"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/spacing_eight"
-            android:clickable="true"
-        />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="@mipmap/runhengfu"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0 ' 30 ''"
+                android:textSize="18sp"
+                android:textColor="#ffff" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:text="平均配速"
+                android:textColor="#ffff" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="00:00:00"
+                android:textSize="18sp"
+                android:textColor="#ffff" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:text="时长"
+                android:textColor="#ffff" />
+        </LinearLayout>
+        </LinearLayout>
     </RelativeLayout>
-    <RelativeLayout
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+ >
+    <ImageView
+        android:id="@+id/iconeye"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/iconeye"
+        android:layout_centerHorizontal="true"
+        />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/iconsetting"
+        android:layout_above="@+id/textView19"
+      android:layout_alignParentRight="true" />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/iconcamera"
+   android:layout_alignParentLeft="true"
+       />
+    <TextView
+        android:id="@+id/juli"
+        android:layout_below="@+id/iconeye"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="22sp"
+        android:text="0.0 KM"
+        android:textColor="#ffff"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:text="距离"
+        android:textColor="#ffff"
+        android:layout_below="@+id/juli"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp" />
+</RelativeLayout>
+    <TextView
+        android:id="@+id/location_errInfo_text"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/item_height">
-        <TextView
-            android:id="@+id/tv_guiji"
-            style="@style/TitleAndContentTextStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/spacing_eight"
-            android:text="@string/guiji"
-            android:textSize="18sp"
-            android:textColor="#ffffff" />
-        <TextView
-            android:id="@+id/tv_desc"
-            style="@style/TipsOrModerateTextStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_guiji"
-            android:layout_marginLeft="@dimen/spacing_eight"
-            android:text="@string/isguiji"
-            android:textColor="#ffffff" />
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|left"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:background="@color/red"
+        android:textColor="@color/white"
+        android:text="TextView"
+        android:visibility="gone"/>
+    <com.toprunner.ubii.toprunner.view.MiSportButton
+        android:id="@+id/mi_btn"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+        android:layout_weight="1"
+    />
 
-        <com.toprunner.ubii.toprunner.view.SlideButton
-            android:id="@+id/sb_guiji"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/spacing_eight"
-            android:clickable="true"
-        />
-    </RelativeLayout>
-    <Button
-        android:id="@+id/go"
-        android:text="Go"
-        android:layout_width="match_parent"
-        android:layout_height="50dp" />
 </LinearLayout>

@@ -30,9 +30,13 @@ import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.maps.model.MyLocationStyle;
+import com.amap.api.maps.model.PolylineOptions;
 import com.toprunner.ubii.toprunner.R;
 import com.toprunner.ubii.toprunner.base.BaseFragment;
 import com.toprunner.ubii.toprunner.utils.SensorEventHelper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by ${赵鼎} on 2016/9/27 0027.
@@ -54,6 +58,11 @@ public class SportstrackFragment extends BaseFragment implements AMap.OnMapClick
     private Circle mCircle;
     private Marker mLocMarker;
     public static final String LOCATION_MARKER_FLAG = "mylocation";
+    //以前的定位点
+    private LatLng oldLatLng;
+    //用一个数组来存放颜色，渐变色，四个点需要设置四个颜色
+    List<Integer> colorList = new ArrayList<Integer>();
+    List<LatLng> positionsList; // 保存绘制折线各点
     @Override
     protected void initData() {
 
@@ -99,7 +108,21 @@ public class SportstrackFragment extends BaseFragment implements AMap.OnMapClick
         aMap.setMyLocationEnabled(true);
         aMap.setMyLocationType(AMap.LOCATION_TYPE_LOCATE);
     }
+    /**绘制两个坐标点之间的线段,从以前位置到现在位置*/
+    private void setUpMap(LatLng oldData,LatLng newData ) {
+        positionsList = new ArrayList<>();//将轨迹点添加到集合中
+        positionsList.add(oldData);//保存
+        colorList.add(Color.RED);
+        colorList.add(Color.YELLOW);
+        colorList.add(Color.GREEN);
+        colorList.add(Color.BLACK);//如果第四个颜色不添加，那么最后一段将显示上一段的颜色
+        // 绘制一个大地曲线
+        aMap.addPolyline((new PolylineOptions())
+                .add(oldData, newData)
+                .geodesic(true).colorValues(colorList).useGradient(true));
 
+
+    }
 
     @Override
     public int getLayoutId() {
@@ -206,14 +229,21 @@ public class SportstrackFragment extends BaseFragment implements AMap.OnMapClick
         if (mListener != null && aMapLocation != null) {
             if (aMapLocation != null
                     && aMapLocation.getErrorCode() == 0) {
-               // aMap.moveCamera(CameraUpdateFactory.zoomTo(18));
+
                 LatLng location = new LatLng(aMapLocation.getLatitude(), aMapLocation.getLongitude());
                 if (!mFirstFix) {
                     mFirstFix = true;
                     addCircle(location, aMapLocation.getAccuracy());//添加定位精度圆
                     addMarker(location);//添加定位图标
                     mSensorHelper.setCurrentMarker(mLocMarker);//定位图标旋转
+                    oldLatLng = location;
                 } else {
+                    if(oldLatLng != location){
+                        Log.e("Amap", aMapLocation.getLatitude() + "," + aMapLocation.getLongitude());
+                        setUpMap(oldLatLng,location);
+
+                        oldLatLng = location;
+                    }
                     mCircle.setCenter(location);
                     mCircle.setRadius(aMapLocation.getAccuracy());
                     mLocMarker.setPosition(location);
@@ -242,7 +272,6 @@ public class SportstrackFragment extends BaseFragment implements AMap.OnMapClick
                 R.mipmap.navi_gps_locked);
         BitmapDescriptor des = BitmapDescriptorFactory.fromBitmap(bMap);
 
-//		BitmapDescriptor des = BitmapDescriptorFactory.fromResource(R.drawable.navi_map_gps_locked);
         MarkerOptions options = new MarkerOptions();
         options.icon(des);
         options.anchor(0.5f, 0.5f);

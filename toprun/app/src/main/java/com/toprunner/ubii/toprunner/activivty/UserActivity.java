@@ -17,6 +17,7 @@ import com.toprunner.ubii.toprunner.base.BaseActivity;
 import com.toprunner.ubii.toprunner.base.BaseFragment;
 import com.toprunner.ubii.toprunner.fragment.DiscoverFragment;
 import com.toprunner.ubii.toprunner.fragment.Me_User;
+import com.toprunner.ubii.toprunner.running.Run;
 
 
 /**

@@ -13,7 +13,7 @@ import android.widget.RelativeLayout;
 import com.toprunner.ubii.toprunner.R;
 
 /**
- *
+ * Created by Kevin on 2015/10/28.
  */
 public class MiSportButton extends RelativeLayout {
 
@@ -22,9 +22,9 @@ public class MiSportButton extends RelativeLayout {
 	private Button							mLongPressBtn;		// 长按暂停Btn
 	private miSportButtonClickListener		clickListener;
 	private miSportButtonLongClickListener	longclickListener;
-	private final Animation				alpha, translateLeft, translateRight;
+	private Animation						alpha, translateLeft, translateRight;
 	private int								moveWidth;								// 按钮移动的距离
-	boolean  isOnclick =true;
+
 	public MiSportButton(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		LayoutInflater.from(context).inflate(R.layout.mi_sport_btn_layout, this);
@@ -34,29 +34,20 @@ public class MiSportButton extends RelativeLayout {
 
 		LayoutParams btnPara = (LayoutParams) mLongPressBtn.getLayoutParams();
 		moveWidth = btnPara.width;// 按钮移动的距离可自己定
-		mLongPressBtn.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				clickListener.startClick();
-				mLongPressBtn.setText("长按暂停");
-				 isOnclick =  false;
-			}
-		});
+
 		// 按钮监听
 		mLongPressBtn.setOnLongClickListener(new OnLongClickListener() {
 			@Override
 			public boolean onLongClick(View v) {
-					longclickListener.longPressClick();
-					mLongPressBtn.startAnimation(alpha);
-					return isOnclick;
-
+				longclickListener.longPressClick();
+				mLongPressBtn.startAnimation(alpha);
+				return false;
 			}
 		});
 		mFinishBtn.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				clickListener.finishClick();
-				mLongPressBtn.setText("开始");
 				mFinishBtn.setVisibility(View.INVISIBLE);
 				mContinueBtn.setVisibility(View.INVISIBLE);
 				mLongPressBtn.setVisibility(View.VISIBLE);
@@ -151,8 +142,6 @@ public class MiSportButton extends RelativeLayout {
 		public void finishClick();
 
 		public void continueClick();
-
-		public	void startClick();
 	}
 
 	public interface miSportButtonLongClickListener {

@@ -79,10 +79,7 @@ public class Run extends AppCompatActivity implements twobutton.onTestListener {
     Handler handler;
     TextView tvTimer, tvspeed;
     public String run_time, run_speed, _run_distance;
-    /**
-     * Local Bluetooth adapter
-     */
-    private BluetoothAdapter mBluetoothAdapter = null;
+
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -136,10 +133,7 @@ public class Run extends AppCompatActivity implements twobutton.onTestListener {
         SDKInitializer.initialize(UIUtils.getContext());
 
         setContentView(R.layout.fragment_run);
-        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        if (mBluetoothAdapter == null) {
-            Toast.makeText(Run.this, "没有蓝牙", Toast.LENGTH_SHORT).show();
-        }
+
         Message msg = new Message();
         msg.what = 2;
         Bundle bundle = new Bundle();
@@ -265,8 +259,6 @@ public class Run extends AppCompatActivity implements twobutton.onTestListener {
         log4j = new Log4j();
         log4j.configLog();
         logger = log4j.logger;
-        logger.debug("——————————————————————————————————————————————————————————————————");
-        logger.debug("日志系统初始化完毕");
     }
 
 
@@ -501,8 +493,6 @@ public class Run extends AppCompatActivity implements twobutton.onTestListener {
                 //
                 String debugString = String.format("prePosition:(%f, %f)\npreDis:%.2fm\nDistance:%.3f km",
                         prePosition.latitude, prePosition.longitude, preDis, distanceComplete);
-                // tvTitle.setText(debugString);
-
                 tvTitle.setText(String.format("%.3f KM", distanceComplete));
                 _run_distance = String.format("%.3f KM", distanceComplete);
                 logger.trace(debugString);
@@ -512,21 +502,17 @@ public class Run extends AppCompatActivity implements twobutton.onTestListener {
 
 
     private void startDrawTrace() {
-        //startTime = System.currentTimeMillis();
         distanceComplete = 0f;
-        // randomDistance = new Random(startTime);
         prePosition = null;
         isDrawingTrace = true;
         locationClient.startLocate();
         startTimer();
-        logger.debug("开始定位，绘制Trace。");
     }
 
     private void stopDrawTrace() {
         isDrawingTrace = false;
         stopTimer();
         // locationClient.stopLocate();
-        logger.debug("停止定位，绘制Trace。");
     }
 
  /*   @Override
@@ -541,7 +527,7 @@ public class Run extends AppCompatActivity implements twobutton.onTestListener {
         FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) baidumap.getLayoutParams();
         layoutParams.bottomMargin = 0;
         baidumap.setLayoutParams(layoutParams);
-        System.out.println("params=0+++++++++++++++++++++++++++++++++++++++");
+        System.out.println("params=0+++++++++++++++");
         Share myshare = new Share();
         getFragmentManager()
                 .beginTransaction()
@@ -561,7 +547,6 @@ public class Run extends AppCompatActivity implements twobutton.onTestListener {
         FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) baidumap.getLayoutParams();
         layoutParams.bottomMargin = 1000;
         baidumap.setLayoutParams(layoutParams);
-        System.out.println("params=1000+++++++++++++++++++++++++++++++++++++++");
         RelativeLayout xiangxishuju;
         xiangxishuju = (RelativeLayout) findViewById(R.id.xiangxishuju);
         xiangxishuju.setVisibility(View.VISIBLE);
@@ -585,7 +570,6 @@ public class Run extends AppCompatActivity implements twobutton.onTestListener {
     public void onTest() {
         startDrawTrace();
         suspended = true;
-        System.out.println("调用了接口方法!");
     }
 
     @Override
@@ -593,27 +577,24 @@ public class Run extends AppCompatActivity implements twobutton.onTestListener {
         try {
             stopTimer();
         } catch (Exception e) {
-            logger.error(e);
         }
         super.onDestroy();
         mMapView.onDestroy();
         mMapView = null;
         locationClient.stopLocate();
-        logger.debug("OnDestroy");
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         mMapView.onResume();
-        logger.debug("OnResume");
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         mMapView.onPause();
-        logger.debug("OnPause");
     }
 
     @Override

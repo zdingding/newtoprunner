@@ -22,7 +22,7 @@ import com.toprunner.ubii.toprunner.utils.ScreenUtils;
 import com.toprunner.ubii.toprunner.utils.UIUtils;
 import com.toprunner.ubii.toprunner.view.NoScrollViewPager;
 
-public class SportdetailsActivity extends BaseActivity {
+    public class SportdetailsActivity extends AppCompatActivity {
     private NoScrollViewPager viewpager;
     private ImageView mTabline;//指示线
     private int mScreen1_4;//屏幕的1/4
